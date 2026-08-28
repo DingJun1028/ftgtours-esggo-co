@@ -6,10 +6,12 @@ on:
   pull_request:
     branches: [main, master]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,16 +28,13 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: build
           path: dist/
-          retention-days: 7
 
   lint:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -54,7 +53,6 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -76,41 +74,15 @@ jobs:
 
   deploy:
     needs: [build, lint, test]
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
-      contents: write
       pages: write
-
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-          path: dist/
-
       - name: Deploy to GitHub Pages
-        if: github.event_name == 'push'
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/
-
-      # Alternative: Deploy to Vercel
-      # - name: Deploy to Vercel
-      #   if: github.event_name == 'push'
-      #   uses: amondnet/vercel-action@v25
-      #   with:
-      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
-      #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-      #     vercel-args: '--prod'
-
-      # Alternative: Deploy to Netlify
-      # - name: Deploy to Netlify
-      #   if: github.event_name == 'push'
-      #   uses: nwtgck/actions-netlify@v2
-      #   with:
-      #     publish-dir: './dist'
-      #     production-branch: main
-      #   netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #   netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
+        id: deployment
+        uses: actions/deploy-pages@v4
