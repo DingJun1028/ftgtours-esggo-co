@@ -1,38 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ftg.esggo.co/</loc>
+    <loc>https://ftgtours.esggo.co/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://ftg.esggo.co/corporate-travel</loc>
+    <loc>https://ftgtours.esggo.co/#/corporate-travel</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ftg.esggo.co/family-day</loc>
+    <loc>https://ftgtours.esggo.co/#/family-day</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ftg.esggo.co/esg-team-day</loc>
+    <loc>https://ftgtours.esggo.co/#/esg-team-day</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ftg.esggo.co/wellbeing-retreat</loc>
+    <loc>https://ftgtours.esggo.co/#/wellbeing-retreat</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ftg.esggo.co/executive-retreat</loc>
+    <loc>https://ftgtours.esggo.co/#/executive-retreat</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ftg.esggo.co/esg-impact-note</loc>
+    <loc>https://ftgtours.esggo.co/#/esg-impact-note</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ftgtours.esggo.co/#/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

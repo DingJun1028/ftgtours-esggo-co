@@ -300,6 +300,11 @@ export const translations = {
       disclaimerTitle: '注意說明',
       disclaimer: 'ESG Impact Note 是企業活動成果摘要與 ESG 溝通素材，不取代正式永續報告、第三方查證、碳盤查或醫療心理評估。',
       audience: 'HR：員工福祉、活動成果 · 福委會：年度活動成果摘要 · ESG／CSR 部門：員工 ESG 參與、永續報告參考 · 品牌／公關部門：雇主品牌、企業故事',
+      notFound: {
+        title: '找不到這個頁面',
+        desc: '您要找的旅程頁面可能已移動或網址有誤。',
+        back: '返回首頁',
+      },
       ctaBtn: '立即洽詢 ESG Impact Note 專案',
     },
   },
@@ -602,6 +607,11 @@ export const translations = {
       disclaimerTitle: 'Note',
       disclaimer: 'ESG Impact Note is an activity outcome summary and ESG communication material; it does not replace a formal sustainability report, third-party verification, carbon inventory or medical/psychological assessment.',
       audience: 'HR: employee wellbeing, activity outcomes · Welfare Committee: annual activity outcome summary · ESG/CSR Dept: employee ESG participation, sustainability report reference · Brand/PR Dept',
+      notFound: {
+        title: 'Page not found',
+        desc: 'The journey page you are looking for may have moved or the URL is incorrect.',
+        back: 'Back to home',
+      },
       ctaBtn: 'Contact Us for ESG Impact Note Project',
     },
   },

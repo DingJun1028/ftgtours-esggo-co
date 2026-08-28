@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /private/
-Host: https://ftg.esggo.co/
-Sitemap: https://ftg.esggo.co/sitemap.xml
-Crawl-delay: 1
+
+Sitemap: https://ftgtours.esggo.co/sitemap.xml
