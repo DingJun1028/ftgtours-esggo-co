@@ -6,7 +6,10 @@ const DEFAULT_TITLE = '墾趣旅遊 FTG TOURS | ESG Outdoor Wellbeing Travel';
 const DEFAULT_DESCRIPTION =
   '台灣最懂戶外健康與永續行動的旅行解方品牌。提供企業員工旅遊、家庭日、ESG Team Day、Wellbeing Retreat、ESG Impact Note 等客製方案。';
 
-const canonical = (path = '') => `${SITE_URL.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+const canonical = (path = '') =>
+  path
+    ? `${SITE_URL.replace(/\/$/, '')}/#/${path.replace(/^\//, '')}`
+    : `${SITE_URL.replace(/\/$/, '')}/`;
 
 export const usePageSeo = ({ title, description, path = '', keywords = [] }) => {
   useEffect(() => {
