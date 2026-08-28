@@ -53,7 +53,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-          <p>&copy; 2024 FTG TOURS 墾趣旅遊. All Rights Reserved.</p>
+          <p>&copy; 2026 FTG TOURS 墾趣旅遊. All Rights Reserved.</p>
           <div className="mt-2 space-x-4">
             <a href="#/" className="hover:text-white">隱私政策</a>
             <a href="#/" className="hover:text-white">服務條款</a>
