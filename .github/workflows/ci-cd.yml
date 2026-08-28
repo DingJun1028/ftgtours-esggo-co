@@ -77,6 +77,9 @@ jobs:
   deploy:
     needs: [build, lint, test]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
 
     steps:
       - name: Download build artifacts
