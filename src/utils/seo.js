@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 
 const SITE_URL = 'https://ftgtours.esggo.co';
 const BRAND = 'FTG TOURS 墾趣旅遊';
-const DEFAULT_TITLE = '墾趣旅遊 FTG TOURS | ESG Outdoor Wellbeing Travel';
+const DEFAULT_TITLE = '墾趣旅遊 FTG TOURS | ESG 戶外健康旅遊方案';
 const DEFAULT_DESCRIPTION =
-  '台灣最懂戶外健康與永續行動的旅行解方品牌。提供企業員工旅遊、家庭日、ESG Team Day、Wellbeing Retreat、ESG Impact Note 等客製方案。';
+  '台灣最懂戶外健康與永續行動的旅行解方品牌。提供企業員工旅遊、家庭日、ESG 戶外團隊日、員工身心平衡旅程、高階主管共識營、ESG Impact Note 等客製方案。';
 
 const canonical = (path = '') =>
   path

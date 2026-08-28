@@ -90,10 +90,10 @@ export default function Home() {
             {[
               { title: '企業員工旅遊', desc: '把傳統員工旅遊升級為戶外健康、地方文化與團隊互動體驗。', link: '/corporate-travel' },
               { title: '企業家庭日', desc: '讓家庭日成為親子自然教育、家庭關懷與品牌雇主活動。', link: '/family-day' },
-              { title: 'ESG Outdoor Team Day', desc: '讓 ESG 變成員工一天內可親身參與的戶外永續行動。', link: '/esg-team-day' },
-              { title: 'Employee Wellbeing Retreat', desc: '從高壓工作中恢復能量，團隊在自然場域重新連結。', link: '/wellbeing-retreat' },
+              { title: 'ESG 戶外團隊日', desc: '讓 ESG 變成員工一天內可親身參與的戶外永續行動。', link: '/esg-team-day' },
+              { title: '員工身心平衡旅程', desc: '從高壓工作中恢復能量，團隊在自然場域重新連結。', link: '/wellbeing-retreat' },
               { title: '高階主管共識營', desc: '在自然場域中重新對齊使命、文化與永續轉型方向。', link: '/executive-retreat' },
-              { title: 'ESG Impact Note', desc: '把活動成果整理成 HR、ESG、品牌部皆可用的成果素材。', link: '/esg-impact-note' },
+              { title: 'ESG Impact Note 專案', desc: '把活動成果整理成 HR、ESG、品牌部皆可用的成果素材。', link: '/esg-impact-note' },
             ].map((product, i) => (
               <Link key={i} to={product.link} className="group bg-ftg-cream rounded-2xl p-8 hover:shadow-xl transition-all duration-300">
                 <div className="flex items-center justify-center w-12 h-12 bg-ftg-green text-white rounded-full font-bold text-lg mb-4 group-hover:scale-110 transition-transform">

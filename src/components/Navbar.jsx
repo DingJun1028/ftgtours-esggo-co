@@ -8,10 +8,10 @@ export default function Navbar() {
   const productLinks = [
     { path: '/corporate-travel', label: '企業員工旅遊' },
     { path: '/family-day', label: '企業家庭日' },
-    { path: '/esg-team-day', label: 'ESG Outdoor Team Day' },
-    { path: '/wellbeing-retreat', label: 'Employee Wellbeing Retreat' },
+    { path: '/esg-team-day', label: 'ESG 戶外團隊日' },
+    { path: '/wellbeing-retreat', label: '員工身心平衡旅程' },
     { path: '/executive-retreat', label: '高階主管共識營' },
-    { path: '/esg-impact-note', label: 'ESG Impact Note' },
+    { path: '/esg-impact-note', label: 'ESG Impact Note 專案' },
   ];
 
   return (

@@ -30,7 +30,7 @@ function PhotoCard({ src, title, desc }) {
 
 export default function WellbeingRetreat() {
   usePageSeo({
-    title: 'Employee Wellbeing Retreat',
+    title: '員工身心平衡旅程',
     description:
       '為企業設計二日或三日員工福祉 Retreat，協助團隊在自然場域恢復能量、重建連結與對話節奏。',
     path: '/wellbeing-retreat',
@@ -41,7 +41,7 @@ export default function WellbeingRetreat() {
       <section className="relative py-20 bg-ftg-sand">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/" className="text-ftg-green hover:underline mb-4 inline-block">← 返回首頁</Link>
-          <h1 className="section-title">Employee Wellbeing Retreat</h1>
+          <h1 className="section-title">員工身心平衡旅程</h1>
           <p className="section-subtitle">
             為企業設計二日或三日的員工身心平衡活動，協助員工從高壓工作中恢復能量。
           </p>
@@ -90,7 +90,7 @@ export default function WellbeingRetreat() {
             <h3 className="text-2xl font-bold mb-4">適合對象</h3>
             <p className="text-gray-100 mb-6">HR：員工福祉、壓力舒緩、人才留任 · 中高階主管：團隊修復 · ESG／CSR 部門：員工關懷 · 高壓產業團隊：科技、金融、醫療</p>
             <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors">
-              立即洽詢 Employee Wellbeing Retreat
+              立即洽詢 員工身心平衡旅程
             </Link>
           </div>
         </div>

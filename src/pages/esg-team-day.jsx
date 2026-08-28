@@ -31,7 +31,7 @@ function PhotoCard({ src, title, desc }) {
 
 export default function EsgTeamDay() {
   usePageSeo({
-    title: 'ESG Outdoor Team Day',
+    title: 'ESG 戶外團隊日',
     description:
       '讓員工在一天內親身參與永續行動的 Team Day，結合安全設計、團隊凝聚、ESG 學習與地方共益。',
     path: '/esg-team-day',
@@ -42,7 +42,7 @@ export default function EsgTeamDay() {
       <section className="relative py-20 bg-ftg-sand">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/" className="text-ftg-green hover:underline mb-4 inline-block">← 返回首頁</Link>
-          <h1 className="section-title">ESG Outdoor Team Day</h1>
+          <h1 className="section-title">ESG 戶外團隊日</h1>
           <p className="section-subtitle">
             讓 ESG 不只是報告文字，而是員工可以親身參與的一日戶外永續行動。
           </p>
@@ -102,7 +102,7 @@ export default function EsgTeamDay() {
             <h3 className="text-2xl font-bold mb-4">適合對象</h3>
             <p className="text-gray-100 mb-6">HR：員工健康日、團隊凝聚 · 福委會：一日員工活動 · ESG／CSR 部門：員工 ESG 參與 · 高階主管：企業文化、品牌雇主形象</p>
             <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors">
-              立即洽詢 ESG Outdoor Team Day
+              立即洽詢 ESG 戶外團隊日
             </Link>
           </div>
         </div>

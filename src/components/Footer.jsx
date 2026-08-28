@@ -23,8 +23,8 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li><a href="#/corporate-travel" className="text-gray-300 hover:text-white">企業員工旅遊</a></li>
               <li><a href="#/family-day" className="text-gray-300 hover:text-white">企業家庭日</a></li>
-              <li><a href="#/esg-team-day" className="text-gray-300 hover:text-white">ESG Outdoor Team Day</a></li>
-              <li><a href="#/wellbeing-retreat" className="text-gray-300 hover:text-white">Employee Wellbeing Retreat</a></li>
+              <li><a href="#/esg-team-day" className="text-gray-300 hover:text-white">ESG 戶外團隊日</a></li>
+              <li><a href="#/wellbeing-retreat" className="text-gray-300 hover:text-white">員工身心平衡旅程</a></li>
             </ul>
           </div>
 

@@ -34,7 +34,7 @@ function PhotoCard({ src, title, desc }) {
 
 export default function EsgImpactNote() {
   usePageSeo({
-    title: 'ESG Impact Note',
+    title: 'ESG Impact Note 專案',
     description:
       '把企業戶外活動成果整理成 HR、ESG、品牌部門皆可使用的 Impact Note 與溝通素材。',
     path: '/esg-impact-note',
@@ -103,7 +103,7 @@ export default function EsgImpactNote() {
             <h3 className="text-2xl font-bold mb-4">適合對象</h3>
             <p className="text-gray-100 mb-6">HR：員工福祉、活動成果 · 福委會：年度活動成果摘要 · ESG／CSR 部門：員工 ESG 參與、永續報告參考 · 品牌／公關部門：雇主品牌、企業故事</p>
             <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors">
-              立即洽詢 ESG Impact Note
+              立即洽詢 ESG Impact Note 專案
             </Link>
           </div>
         </div>
