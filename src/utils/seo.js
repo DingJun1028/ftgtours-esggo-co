@@ -4,7 +4,7 @@ const SITE_URL = 'https://ftgtours.esggo.co';
 const BRAND = 'FTG TOURS 墾趣旅遊';
 const DEFAULT_TITLE = '墾趣旅遊 FTG TOURS | ESG 戶外健康旅遊方案';
 const DEFAULT_DESCRIPTION =
-  '台灣最懂戶外健康與永續行動的旅行解方品牌。提供企業員工旅遊、家庭日、ESG 戶外團隊日、員工身心平衡旅程、高階主管共識營、ESG Impact Note 等客製方案。';
+  '墾趣結合戶外導覽、旅行服務與在地連結，為企業設計兼顧員工身心健康、團隊連結、環境友善與地方價值的旅程。';
 
 const canonical = (path = '') =>
   path

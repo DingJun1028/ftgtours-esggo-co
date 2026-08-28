@@ -6,8 +6,7 @@ export default function Home() {
   const { t } = useLanguage();
   usePageSeo({
     title: t('home.h1') || 'ESG 戶外健康旅遊方案',
-    description:
-      'FTG TOURS 墾趣旅遊提供企業 ESG 戶外團隊日、員工旅遊、家庭日與身心平衡旅程等戶外健康旅遊方案，讓企業福祉與永續行動兼得。',
+    description: t('home.metaDesc'),
     path: '/',
     keywords: ['ESG 旅遊', '企業員工旅遊', '團隊日', '家庭日', '身心平衡旅程'],
   });
