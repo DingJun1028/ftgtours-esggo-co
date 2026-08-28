@@ -26,7 +26,7 @@ export default function Home() {
       <section className="relative h-screen flex items-center justify-center bg-ftg-forest overflow-hidden">
         {/* 橫幅大圖 (LCP 優化: 不 lazy + fetchpriority high) */}
         <img
-          src="/images/corporate-travel/企業員工旅遊-頁首大橫幅.png"
+          src="/images/hero-banner.png"
           alt="FTG TOURS 墾趣旅遊 企業員工旅遊戶外旅程橫幅"
           className="absolute inset-0 w-full h-full object-cover"
           fetchpriority="high"
