@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+import './index.css'
 import { organizationJsonLd, localBusinessJsonLd, webSiteJsonLd } from './utils/seo.js'
 
 const injectJsonLd = (item) => {
