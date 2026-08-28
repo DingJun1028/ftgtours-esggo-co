@@ -50,7 +50,7 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
-            <a href="#contact" className="bg-ftg-orange text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-orange-600 transition-colors">
+            <a href="#/contact" className="bg-ftg-orange text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-orange-600 transition-colors">
               立即洽詢
             </a>
           </div>
@@ -79,7 +79,7 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <a href="#contact" className="block mx-3 mt-3 bg-ftg-orange text-white px-6 py-2 rounded-full text-sm font-medium text-center" onClick={() => setMobileOpen(false)}>
+            <a href="#/contact" className="block mx-3 mt-3 bg-ftg-orange text-white px-6 py-2 rounded-full text-sm font-medium text-center" onClick={() => setMobileOpen(false)}>
               立即洽詢
             </a>
           </div>

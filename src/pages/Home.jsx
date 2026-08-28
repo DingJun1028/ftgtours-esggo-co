@@ -124,7 +124,7 @@ export default function Home() {
           <p className="text-xl text-gray-100 mb-8">
             從需求訪談到成果交付，我們協助企業把每一次戶外活動，轉化為員工福祉、團隊凝聚與永續行動的解方。
           </p>
-          <a href="#contact" className="inline-block bg-ftg-orange text-white px-10 py-4 rounded-full font-semibold text-lg hover:bg-orange-600 transition-colors">
+          <a href="#/contact" className="inline-block bg-ftg-orange text-white px-10 py-4 rounded-full font-semibold text-lg hover:bg-orange-600 transition-colors">
             立即洽詢企業方案
           </a>
         </div>

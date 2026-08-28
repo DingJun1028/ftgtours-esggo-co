@@ -8,6 +8,7 @@ import EsgTeamDay from './pages/esg-team-day';
 import WellbeingRetreat from './pages/wellbeing-retreat';
 import ExecutiveRetreat from './pages/executive-retreat';
 import EsgImpactNote from './pages/esg-impact-note';
+import Contact from './pages/contact';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/wellbeing-retreat" element={<WellbeingRetreat />} />
             <Route path="/executive-retreat" element={<ExecutiveRetreat />} />
             <Route path="/esg-impact-note" element={<EsgImpactNote />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
         <Footer />
