@@ -5,7 +5,7 @@ export default function Home() {
   usePageSeo({
     title: 'ESG 戶外健康旅遊方案',
     description:
-      'FTG TOURS 望趣旅遊提供企業 ESG Team Day、員工旅遊、家庭日與 Retreat 等戶外健康旅遊方案，讓企業福祉與永續行動兼得。',
+      'FTG TOURS 墾趣旅遊提供企業 ESG Team Day、員工旅遊、家庭日與 Retreat 等戶外健康旅遊方案，讓企業福祉與永續行動兼得。',
     path: '/',
     keywords: ['ESG 旅遊', '企業員工旅遊', 'Team Day', '家庭日', 'Retreat'],
   });
@@ -19,16 +19,14 @@ export default function Home() {
             走進自然，創造更有意義的旅程
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-gray-100 max-w-3xl mx-auto leading-relaxed">
-            台灣最懂戶外健康與永續行動的旅行解方品牌。
-            <br />
-            從森林健走、部落文化到企業福祉，每一趟旅行都值得被記住。
+            墾趣結合戶外導覽、旅行服務與在地連結，為企業設計兼顧員工身心健康、團隊連結、環境友善與地方價值的旅程。
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/corporate-travel" className="bg-ftg-orange text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-orange-600 transition-colors">
               探索企業方案
             </Link>
             <a href="#esg-section" className="bg-white/10 backdrop-blur-sm text-white border-2 border-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/20 transition-colors">
-              了解塑趣旅程設計
+              了解墾趣旅程設計
             </a>
           </div>
         </div>
