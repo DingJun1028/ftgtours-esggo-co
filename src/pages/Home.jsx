@@ -28,19 +28,19 @@ export default function Home() {
               探索企業方案
             </Link>
             <a href="#esg-section" className="bg-white/10 backdrop-blur-sm text-white border-2 border-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/20 transition-colors">
-              了解 ESG 理念
+              了解塑趣旅程設計
             </a>
           </div>
         </div>
       </section>
 
-      {/* ESG Section */}
+      {/* Three Values Section */}
       <section id="esg-section" className="py-20 bg-ftg-sand">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="section-title">ESG Outdoor Wellbeing Travel</h2>
+            <h2 className="section-title">一趟旅程，可以創造三種價值</h2>
             <p className="section-subtitle">
-              不只是旅遊，而是把每一次戶外體驗升級為可衡量、可回購、可被企業採購的永續健康產品系統。
+              結合戶外導覽、旅行服務與在地連結，為企業設計兼顧員工身心健康、團隊連結、環境友善與地方價值的旅程。
             </p>
           </div>
 
@@ -49,9 +49,9 @@ export default function Home() {
               <div className="w-16 h-16 bg-ftg-green/10 rounded-full flex items-center justify-center mb-6">
                 <span className="text-3xl">🌲</span>
               </div>
-              <h3 className="text-2xl font-bold text-ftg-forest mb-4">環境友善</h3>
+              <h3 className="text-2xl font-bold text-ftg-forest mb-4">親近自然</h3>
               <p className="text-gray-600 leading-relaxed">
-                低碳交通、無痕山林、生態保育、垃圾減量。每一趟旅程都經過 ESG 檢核，降低對自然環境的干擾。
+                走進山林與海岸，放慢腳步、感受自然，讓身心回到平衡。
               </p>
             </div>
 
@@ -59,19 +59,19 @@ export default function Home() {
               <div className="w-16 h-16 bg-ftg-green/10 rounded-full flex items-center justify-center mb-6">
                 <span className="text-3xl">🤝</span>
               </div>
-              <h3 className="text-2xl font-bold text-ftg-forest mb-4">社會共益</h3>
+              <h3 className="text-2xl font-bold text-ftg-forest mb-4">連結地方</h3>
               <p className="text-gray-600 leading-relaxed">
-                在地採購、部落文化尊重、地方餐桌、社區合作。讓每一次旅行都成為支持地方生活的機會。
+                走入在地、認識文化，支持地方產業，創造正向的影響力。
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-8 shadow-lg">
               <div className="w-16 h-16 bg-ftg-green/10 rounded-full flex items-center justify-center mb-6">
-                <span className="text-3xl">📊</span>
+                <span className="text-3xl">💚</span>
               </div>
-              <h3 className="text-2xl font-bold text-ftg-forest mb-4">企業治理</h3>
+              <h3 className="text-2xl font-bold text-ftg-forest mb-4">照顧員工與團隊</h3>
               <p className="text-gray-600 leading-relaxed">
-                安全 SOP、體能分級、成果報告、Impact Note。讓企業活動能被衡量、被記錄、被溝通。
+                建立信任與共識，提升幸福感與向心力，團隊更有力量。
               </p>
             </div>
           </div>
