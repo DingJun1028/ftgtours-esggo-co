@@ -38,6 +38,7 @@ export default function Contact() {
   const [form, setForm] = useState({
     company: '', contact_name: '', email: '', phone: '',
     participants: '', activity_type: '', preferred_date: '', message: '',
+    hp: '', // honeypot：bot 填則擋
   });
   const [status, setStatus] = useState('idle'); // idle | sending | success | error
   const [errorMsg, setErrorMsg] = useState('');
@@ -51,6 +52,13 @@ export default function Contact() {
     e.preventDefault();
     setStatus('sending');
     setErrorMsg('');
+
+    // honeypot：隱藏欄位被填表示 bot，直接擋（不送後端）
+    if (form.hp) {
+      console.warn('honeypot triggered, likely bot');
+      setStatus('success'); // 偽裝成功，不讓 bot 知被擋
+      return;
+    }
 
     // reCAPTCHA v3：取得 token 附在表單（後端 ftgtours-api Worker 可加驗證）
     let recaptchaToken = '';
@@ -129,6 +137,20 @@ export default function Contact() {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* honeypot 防垃圾：視覺隱藏，bot 自動填寫會被擋 */}
+              <div className="absolute left-[-9999px] top-[-9999px] w-px h-px overflow-hidden" aria-hidden="true">
+                <label htmlFor="hp-field">請勿填寫此欄</label>
+                <input
+                  id="hp-field"
+                  name="hp"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.hp}
+                  onChange={handleChange}
+                />
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className={labelCls}>{t('contact.company')}</label>
