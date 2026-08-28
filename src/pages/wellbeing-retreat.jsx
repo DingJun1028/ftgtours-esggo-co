@@ -60,10 +60,10 @@ export default function WellbeingRetreat() {
               <p className="text-gray-600 mb-4 leading-relaxed">企業自己可以訂飯店與交通，但不一定能把戶外活動設計成安全、有節奏、有身心恢復、有團隊對話、有 ESG 成果的員工福祉專案。</p>
             </div>
             <div className="bg-ftg-cream rounded-2xl p-8">
-              <h3 className="text-xl font-bold text-ftg-forest mb-4">常見挑戰</h3>
+              <h3 className="text-xl font-bold text-ftg-forest mb-4">我們能夠提供什麼</h3>
               <ul className="space-y-3">
-                {['企業能訂飯店，但不一定能設計恢復節奏', '戶外安全、體能差異與天候備案不易掌握', '團隊對話與員工福祉成效缺少方法', '缺少可交付的成果素材'].map((item, i) => (
-                  <li key={i} className="flex items-start"><span className="text-red-500 mr-2">✕</span><span className="text-gray-700">{item}</span></li>
+                {['從需求訪談開始，為企業設計有恢復節奏的戶外專案', '專業戶外引導與天候備案，安全與體能差異都顧及', '以引導式團隊對話，讓員工福祉成效可被看見', '交付照片、問卷與 Impact Note 等可留下來的成果素材'].map((item, i) => (
+                  <li key={i} className="flex items-start"><span className="text-ftg-green mr-2">✓</span><span className="text-gray-700">{item}</span></li>
                 ))}
               </ul>
             </div>

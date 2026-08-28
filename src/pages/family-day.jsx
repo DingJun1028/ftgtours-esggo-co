@@ -65,11 +65,11 @@ export default function FamilyDay() {
               </p>
             </div>
             <div className="bg-ftg-cream rounded-2xl p-8">
-              <h3 className="text-xl font-bold text-ftg-forest mb-4">常見挑戰</h3>
+              <h3 className="text-xl font-bold text-ftg-forest mb-4">我們能夠提供什麼</h3>
               <ul className="space-y-3">
-                {['家庭日常流於吃喝玩樂，價值感不明顯', '親子分流、安全與動線管理複雜', 'HR／福委會難以兼顧教育性與現場執行', '缺少品牌 Employer 素材與後續傳播'].map((item, i) => (
+                {['把家庭日設計成兼具親子安全與自然教育的活動', '完整現場執行：動線、分流、餐食與安全管理', '結合教育性與趣味性，讓 HR／福委會省力', '產出品牌雇主素材與後續傳播內容'].map((item, i) => (
                   <li key={i} className="flex items-start">
-                    <span className="text-red-500 mr-2">✕</span>
+                    <span className="text-ftg-green mr-2">✓</span>
                     <span className="text-gray-700">{item}</span>
                   </li>
                 ))}

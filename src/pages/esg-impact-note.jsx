@@ -64,10 +64,10 @@ export default function EsgImpactNote() {
               <p className="text-gray-600 mb-4 leading-relaxed">企業自己可以拍照或寫活動紀錄，但不一定能把一場活動整理成 HR、永續部、品牌部與高階主管都能使用的成果素材。</p>
             </div>
             <div className="bg-ftg-cream rounded-2xl p-8">
-              <h3 className="text-xl font-bold text-ftg-forest mb-4">常見挑戰</h3>
+              <h3 className="text-xl font-bold text-ftg-forest mb-4">我們能夠提供什麼</h3>
               <ul className="space-y-3">
-                {['企業活動後常只有照片與花絮', '永續部門難以把活動轉成 ESG 語言', '素材分散，缺少可回報主管與內外溝通的格式', '活動成果在活動結束後就歸檔消失'].map((item, i) => (
-                  <li key={i} className="flex items-start"><span className="text-red-500 mr-2">✕</span><span className="text-gray-700">{item}</span></li>
+                {['把活動整理成 HR、永續部、品牌部都能用的成果素材', '將活動轉譯為 ESG 語言與可回報指標', '統整分散素材，產出一致溝通格式', '讓活動成果持續發揮價值，不隨活動結束歸檔'].map((item, i) => (
+                  <li key={i} className="flex items-start"><span className="text-ftg-green mr-2">✓</span><span className="text-gray-700">{item}</span></li>
                 ))}
               </ul>
             </div>

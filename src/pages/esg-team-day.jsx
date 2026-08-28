@@ -63,11 +63,11 @@ export default function EsgTeamDay() {
               </p>
             </div>
             <div className="bg-ftg-cream rounded-2xl p-8">
-              <h3 className="text-xl font-bold text-ftg-forest mb-4">常見挑戰</h3>
+              <h3 className="text-xl font-bold text-ftg-forest mb-4">我們能夠提供什麼</h3>
               <ul className="space-y-3">
-                {['ESG 太抽象，員工無感', '一般 Team Building 容易制式或尷尬', '企業缺少安全、活動設計與成果整理能力', '活動結束後只有照片，缺乏可溝通的成果'].map((item, i) => (
+                {['把一日活動設計成安全、有凝聚力且有趣的 ESG 行動', '專業引導讓 ESG 從抽象變成員工親身參與', '完整活動設計與成果整理，企業不需從零開始', '產出可對內外溝通的照片、故事與 Basic Impact Note'].map((item, i) => (
                   <li key={i} className="flex items-start">
-                    <span className="text-red-500 mr-2">✕</span>
+                    <span className="text-ftg-green mr-2">✓</span>
                     <span className="text-gray-700">{item}</span>
                   </li>
                 ))}

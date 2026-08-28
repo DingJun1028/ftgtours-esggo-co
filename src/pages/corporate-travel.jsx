@@ -73,11 +73,11 @@ export default function CorporateTravel() {
               </p>
             </div>
             <div className="bg-ftg-cream rounded-2xl p-8">
-              <h3 className="text-xl font-bold text-ftg-forest mb-4">企業自己辦的常見挑戰</h3>
+              <h3 className="text-xl font-bold text-ftg-forest mb-4">我們能夠提供什麼</h3>
               <ul className="space-y-3">
-                {['一般旅遊容易同質化、被比價', '福委會／HR 規劃與現場負擔重', '活動結束後缺少成果與延伸素材', '安全與節奏容易漏', '缺乏專業戶外引導'].map((item, i) => (
+                {['把員工旅遊設計成獨特、難被比價的戶外體驗', '專業規劃與現場執行，減輕福委會／HR 負擔', '活動後交付成果與延伸素材，價值延續', '專業戶外引導把安全與節奏安排妥當'].map((item, i) => (
                   <li key={i} className="flex items-start">
-                    <span className="text-red-500 mr-2">✕</span>
+                    <span className="text-ftg-green mr-2">✓</span>
                     <span className="text-gray-700">{item}</span>
                   </li>
                 ))}

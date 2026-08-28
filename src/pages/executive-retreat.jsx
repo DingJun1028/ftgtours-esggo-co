@@ -62,10 +62,10 @@ export default function ExecutiveRetreat() {
               <p className="text-gray-600 mb-4 leading-relaxed">企業自己可以訂飯店、開會或找講師，但不一定能把自然場域、永續趨勢、策略對話、團隊共識、戶外慢行與後續行動報告整合成真正有效的高階主管 Retreat。</p>
             </div>
             <div className="bg-ftg-cream rounded-2xl p-8">
-              <h3 className="text-xl font-bold text-ftg-forest mb-4">常見挑戰</h3>
+              <h3 className="text-xl font-bold text-ftg-forest mb-4">我們能夠提供什麼</h3>
               <ul className="space-y-3">
-                {['難以跳出日常會議慣性', '高階主管對 ESG、文化與轉型共識不一致', '內部引導容易受部門立場與權力關係限制', '缺少後續行動路線與Opportunity Map'].map((item, i) => (
-                  <li key={i} className="flex items-start"><span className="text-red-500 mr-2">✕</span><span className="text-gray-700">{item}</span></li>
+                {['把自然場域、永續趨勢與策略對話整合成有效 Retreat', '專業外部引導，跳脫日常會議慣性', '中立引導收斂共識，不受內部立場干擾', '產出 Opportunity Map 與後續行動路線報告'].map((item, i) => (
+                  <li key={i} className="flex items-start"><span className="text-ftg-green mr-2">✓</span><span className="text-gray-700">{item}</span></li>
                 ))}
               </ul>
             </div>
