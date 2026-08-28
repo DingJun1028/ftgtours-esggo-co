@@ -1,6 +1,7 @@
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import CorporateTravel from './pages/corporate-travel';
 import FamilyDay from './pages/family-day';
@@ -13,6 +14,7 @@ import Contact from './pages/contact';
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-1">
