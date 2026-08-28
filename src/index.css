@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Serif+TC:wght@400;600;700&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply text-gray-800 bg-white antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-ftg-green text-white px-8 py-3 rounded-full font-medium hover:bg-ftg-forest transition-colors duration-300;
+  }
+  .btn-secondary {
+    @apply border-2 border-ftg-green text-ftg-green px-8 py-3 rounded-full font-medium hover:bg-ftg-green hover:text-white transition-colors duration-300;
+  }
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-ftg-forest mb-4;
+  }
+  .section-subtitle {
+    @apply text-lg text-gray-600 mb-12 max-w-3xl mx-auto;
+  }
+}
