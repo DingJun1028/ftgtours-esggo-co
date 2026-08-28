@@ -32,9 +32,9 @@ export default function WellbeingRetreat() {
   usePageSeo({
     title: '員工身心平衡旅程',
     description:
-      '為企業設計二日或三日員工福祉 Retreat，協助團隊在自然場域恢復能量、重建連結與對話節奏。',
+      '為企業設計二日或三日員工身心平衡旅程，協助團隊在自然場域恢復能量、重建連結與對話節奏。',
     path: '/wellbeing-retreat',
-    keywords: ['Wellbeing Retreat', '員工福祉', '高壓紓壓', '團隊對話', '自然休養'],
+    keywords: ['員工身心平衡旅程', '員工福祉', '高壓紓壓', '團隊對話', '自然休養'],
   });
   return (
     <div>

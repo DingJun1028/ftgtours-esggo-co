@@ -36,7 +36,7 @@ export default function ExecutiveRetreat() {
     description:
       '結合自然場域、永續趨勢與策略對話，協助經營團隊重新對齊使命、文化與永續轉型方向。',
     path: '/executive-retreat',
-    keywords: ['共識營', '高階主管', '永續轉型', '策略對話', 'Executive Retreat'],
+    keywords: ['共識營', '高階主管', '永續轉型', '策略對話', '主管共識旅程'],
   });
   return (
     <div>
@@ -59,12 +59,12 @@ export default function ExecutiveRetreat() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <div>
               <h2 className="text-3xl font-bold text-ftg-forest mb-6">為什麼企業需要墾趣？</h2>
-              <p className="text-gray-600 mb-4 leading-relaxed">企業自己可以訂飯店、開會或找講師，但不一定能把自然場域、永續趨勢、策略對話、團隊共識、戶外慢行與後續行動報告整合成真正有效的高階主管 Retreat。</p>
+              <p className="text-gray-600 mb-4 leading-relaxed">企業自己可以訂飯店、開會或找講師，但不一定能把自然場域、永續趨勢、策略對話、團隊共識、戶外慢行與後續行動報告整合成真正有效的高階主管共識旅程。</p>
             </div>
             <div className="bg-ftg-cream rounded-2xl p-8">
               <h3 className="text-xl font-bold text-ftg-forest mb-4">我們能夠提供什麼</h3>
               <ul className="space-y-3">
-                {['把自然場域、永續趨勢與策略對話整合成有效 Retreat', '專業外部引導，跳脫日常會議慣性', '中立引導收斂共識，不受內部立場干擾', '產出 Opportunity Map 與後續行動路線報告'].map((item, i) => (
+                {['把自然場域、永續趨勢與策略對話整合成有效共識旅程', '專業外部引導，跳脫日常會議慣性', '中立引導收斂共識，不受內部立場干擾', '產出 Opportunity Map 與後續行動路線報告'].map((item, i) => (
                   <li key={i} className="flex items-start"><span className="text-ftg-green mr-2">✓</span><span className="text-gray-700">{item}</span></li>
                 ))}
               </ul>
@@ -83,7 +83,7 @@ export default function ExecutiveRetreat() {
 
           <h2 className="text-3xl font-bold text-ftg-forest mb-8 text-center">六大服務模組</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {['會前診斷：董事長／主管訪談、議題盤點', '場域設計：自然場域、住宿、交通、慢行路線', '趨勢導入：ESG、永續轉型、創價型 ESG', '策略對話：圓桌對話、工作坊、分組討論', '行動收斂：Opportunity Map、Roadmap、優先順序', '成果報告：Executive Retreat Report'].map((item, i) => (
+            {['會前診斷：董事長／主管訪談、議題盤點', '場域設計：自然場域、住宿、交通、慢行路線', '趨勢導入：ESG、永續轉型、創價型 ESG', '策略對話：圓桌對話、工作坊、分組討論', '行動收斂：Opportunity Map、Roadmap、優先順序', '成果報告：高階主管共識營報告'].map((item, i) => (
               <div key={i} className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
                 <div className="flex items-center mb-3">
                   <span className="w-8 h-8 bg-ftg-green text-white rounded-full flex items-center justify-center font-bold mr-3">{i + 1}</span>

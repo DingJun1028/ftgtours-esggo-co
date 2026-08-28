@@ -5,7 +5,7 @@ import { usePageSeo } from '../utils/seo';
 const ACTIVITY_TYPES = [
   '企業員工旅遊',
   '企業家庭日',
-  'ESG Outdoor Team Day',
+  'ESG 戶外團隊日',
   '員工身心平衡旅程',
   '高階主管共識營',
   'ESG Impact Note',

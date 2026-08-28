@@ -9,10 +9,10 @@ const travelImages = [
 ];
 
 const valueImages = [
-  { src: '/images/corporate-travel/可延伸加值服務-串接 Team Day／Wellbeing Retreat.png', title: '串接 Team Day／Wellbeing Retreat', desc: '一次規劃，延伸為系列活動。' },
+  { src: '/images/corporate-travel/可延伸加值服務-串接 Team Day／Wellbeing Retreat.png', title: '串接 ESG 戶外團隊日／員工身心平衡旅程', desc: '一次規劃，延伸為系列活動。' },
   { src: '/images/corporate-travel/可延伸加值服務-年度企業活動規劃.png', title: '年度企業活動規劃', desc: '協助企業編排全年活動節奏。' },
-  { src: '/images/corporate-travel/可延伸的加值服務-Basic Impact Summary.png', title: 'Basic Impact Summary', desc: '基礎影響力摘要，便於內部溝通。' },
-  { src: '/images/corporate-travel/可延伸的加值服務-ESG Impact Note.png', title: 'ESG Impact Note', desc: '升級為 ESG Impact Note 成果報告。' },
+  { src: '/images/corporate-travel/可延伸的加值服務-Basic Impact Summary.png', title: '基礎影響力摘要', desc: '基礎影響力摘要，便於內部溝通。' },
+  { src: '/images/corporate-travel/可延伸的加值服務-ESG Impact Note.png', title: 'ESG Impact Note 專案', desc: '升級為 ESG Impact Note 成果報告。' },
 ];
 
 const expImages = [

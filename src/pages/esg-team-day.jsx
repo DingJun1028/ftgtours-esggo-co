@@ -33,9 +33,9 @@ export default function EsgTeamDay() {
   usePageSeo({
     title: 'ESG 戶外團隊日',
     description:
-      '讓員工在一天內親身參與永續行動的 Team Day，結合安全設計、團隊凝聚、ESG 學習與地方共益。',
+      '讓員工在一天內親身參與永續行動的戶外團隊日，結合安全設計、團隊凝聚、ESG 學習與地方共益。',
     path: '/esg-team-day',
-    keywords: ['ESG Team Day', '企業活動', '團隊凝聚', '無痕山林', '永續行動'],
+    keywords: ['ESG 戶外團隊日', '企業活動', '團隊凝聚', '無痕山林', '永續行動'],
   });
   return (
     <div>
@@ -44,7 +44,7 @@ export default function EsgTeamDay() {
           <Link to="/" className="text-ftg-green hover:underline mb-4 inline-block">← 返回首頁</Link>
           <h1 className="section-title">ESG 戶外團隊日</h1>
           <p className="section-subtitle">
-            讓 ESG 不只是報告文字，而是員工可以親身參與的一日戶外永續行動。
+            讓 ESG 不只是報告文字，而是員工可以親身參與的一日戶外永續團隊行動。
           </p>
         </div>
       </section>
