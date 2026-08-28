@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
+
+// reCAPTCHA v3 Site Key（由使用者提供，注入於 Vite env 或下方常數）
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || 'REPLACE_WITH_YOUR_V3_SITE_KEY';
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -11,6 +14,16 @@ export default function Contact() {
     path: '/contact',
     keywords: ['聯絡', '洽詢', '企業方案', 'FTG TOURS', '墾趣旅遊'],
   });
+
+  // 載入 reCAPTCHA v3 script
+  useEffect(() => {
+    if (RECAPTCHA_SITE_KEY.startsWith('REPLACE')) return;
+    if (document.querySelector(`script[src*="recaptcha/api.js"]`)) return;
+    const s = document.createElement('script');
+    s.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+    s.async = true;
+    document.head.appendChild(s);
+  }, []);
 
   const ACTIVITY_TYPES = [
     t('products.corpTravel'),
@@ -38,11 +51,22 @@ export default function Contact() {
     e.preventDefault();
     setStatus('sending');
     setErrorMsg('');
+
+    // reCAPTCHA v3：取得 token 附在表單（後端 ftgtours-api Worker 可加驗證）
+    let recaptchaToken = '';
+    try {
+      if (!RECAPTCHA_SITE_KEY.startsWith('REPLACE') && window.grecaptcha) {
+        recaptchaToken = await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_contact' });
+      }
+    } catch (err) {
+      console.warn('reCAPTCHA skipped:', err);
+    }
+
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, recaptchaToken }),
       });
       const data = await res.json();
       if (data.ok) {

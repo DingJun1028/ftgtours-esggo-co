@@ -23,8 +23,17 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-ftg-forest via-ftg-green to-ftg-leaf">
-        <div className="absolute inset-0 bg-black/30"></div>
+      <section className="relative h-screen flex items-center justify-center bg-ftg-forest overflow-hidden">
+        {/* 橫幅大圖 (LCP 優化: 不 lazy + fetchpriority high) */}
+        <img
+          src="/images/corporate-travel/企業員工旅遊-頁首大橫幅.png"
+          alt="FTG TOURS 墾趣旅遊 企業員工旅遊戶外旅程橫幅"
+          className="absolute inset-0 w-full h-full object-cover"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-ftg-forest/80 via-ftg-green/60 to-ftg-leaf/50"></div>
+        <div className="absolute inset-0 bg-black/25"></div>
         <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 font-serif leading-tight">
             {t('home.heroTitle')}
