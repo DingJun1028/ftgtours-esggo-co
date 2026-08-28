@@ -1,24 +1,26 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
-
-const ACTIVITY_TYPES = [
-  '企業員工旅遊',
-  '企業家庭日',
-  'ESG 戶外團隊日',
-  '員工身心平衡旅程',
-  '高階主管共識營',
-  'ESG Impact Note',
-  '其他 / 綜合規劃',
-];
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Contact() {
+  const { t } = useLanguage();
   usePageSeo({
-    title: '聯絡我們',
-    description: '歡迎洽詢 FTG TOURS 墾趣旅遊的企業方案、ESG 戶外活動與員工旅遊規劃。',
+    title: t('contact.title'),
+    description: t('contact.metaDesc'),
     path: '/contact',
     keywords: ['聯絡', '洽詢', '企業方案', 'FTG TOURS', '墾趣旅遊'],
   });
+
+  const ACTIVITY_TYPES = [
+    t('products.corpTravel'),
+    t('products.familyDay'),
+    t('products.esgTeamDay'),
+    t('products.wellbeing'),
+    t('products.executive'),
+    t('products.impactNote'),
+    t('contact.otherOption'),
+  ];
 
   const [form, setForm] = useState({
     company: '', contact_name: '', email: '', phone: '',
@@ -48,11 +50,11 @@ export default function Contact() {
         setForm({ company: '', contact_name: '', email: '', phone: '', participants: '', activity_type: '', preferred_date: '', message: '' });
       } else {
         setStatus('error');
-        setErrorMsg(data.error || '送出失敗，請稍後再試');
+        setErrorMsg(data.error || t('contact.submitFailed'));
       }
     } catch (err) {
       setStatus('error');
-      setErrorMsg('網路錯誤，請稍後再試');
+      setErrorMsg(t('contact.networkError'));
     }
   };
 
@@ -63,10 +65,10 @@ export default function Contact() {
     <div>
       <section className="relative py-20 bg-ftg-sand">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Link to="/" className="text-ftg-green hover:underline mb-4 inline-block">← 返回首頁</Link>
-          <h1 className="section-title">聯絡我們</h1>
+          <Link to="/" className="text-ftg-green hover:underline mb-4 inline-block">{t('nav.backHome')}</Link>
+          <h1 className="section-title">{t('contact.title')}</h1>
           <p className="section-subtitle">
-            無論是企業員工旅遊、ESG 戶外活動，或客製化的永續旅程規劃，都歡迎與我們聯繫。
+            {t('contact.sub')}
           </p>
         </div>
       </section>
@@ -75,74 +77,74 @@ export default function Contact() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mb-12">
             <div className="rounded-2xl bg-white shadow-lg p-8">
-              <h3 className="text-lg font-bold text-ftg-green mb-2">電話</h3>
+              <h3 className="text-lg font-bold text-ftg-green mb-2">{t('contact.phone')}</h3>
               <p className="text-gray-700">886 2 7743 1006</p>
             </div>
             <div className="rounded-2xl bg-white shadow-lg p-8">
-              <h3 className="text-lg font-bold text-ftg-green mb-2">信箱</h3>
+              <h3 className="text-lg font-bold text-ftg-green mb-2">{t('contact.email')}</h3>
               <p className="text-gray-700">hello@ftgtours.com</p>
             </div>
             <div className="rounded-2xl bg-white shadow-lg p-8">
-              <h3 className="text-lg font-bold text-ftg-green mb-2">地址</h3>
+              <h3 className="text-lg font-bold text-ftg-green mb-2">{t('contact.address')}</h3>
               <p className="text-gray-700">台北市中山區</p>
             </div>
           </div>
 
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-            <h2 className="text-2xl font-bold text-ftg-forest mb-6 text-center">洽詢表單</h2>
+            <h2 className="text-2xl font-bold text-ftg-forest mb-6 text-center">{t('contact.formTitle')}</h2>
 
             {status === 'success' && (
               <div className="mb-6 rounded-xl bg-green-50 border border-green-200 text-green-800 px-4 py-3 text-center">
-                感謝您的洽詢，我們已收到您的訊息，將盡快與您聯繫！
+                {t('contact.successMsg')}
               </div>
             )}
             {status === 'error' && (
               <div className="mb-6 rounded-xl bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-center">
-                送出失敗：{errorMsg}
+                {t('contact.failPrefix')}{errorMsg}
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className={labelCls}>公司名稱</label>
-                  <input name="company" value={form.company} onChange={handleChange} className={inputCls} placeholder="請填寫公司名稱" />
+                  <label className={labelCls}>{t('contact.company')}</label>
+                  <input name="company" value={form.company} onChange={handleChange} className={inputCls} placeholder={t('contact.companyPh')} />
                 </div>
                 <div>
-                  <label className={labelCls}>聯絡人</label>
-                  <input name="contact_name" value={form.contact_name} onChange={handleChange} className={inputCls} placeholder="請填寫聯絡人姓名" required />
+                  <label className={labelCls}>{t('contact.contactName')}</label>
+                  <input name="contact_name" value={form.contact_name} onChange={handleChange} className={inputCls} placeholder={t('contact.contactNamePh')} required />
                 </div>
                 <div>
-                  <label className={labelCls}>Email</label>
+                  <label className={labelCls}>{t('contact.email')}</label>
                   <input type="email" name="email" value={form.email} onChange={handleChange} className={inputCls} placeholder="name@company.com" required />
                 </div>
                 <div>
-                  <label className={labelCls}>電話</label>
-                  <input name="phone" value={form.phone} onChange={handleChange} className={inputCls} placeholder="聯絡電話" />
+                  <label className={labelCls}>{t('contact.phone')}</label>
+                  <input name="phone" value={form.phone} onChange={handleChange} className={inputCls} placeholder={t('contact.phonePh')} />
                 </div>
                 <div>
-                  <label className={labelCls}>預計人數</label>
-                  <input type="number" name="participants" value={form.participants} onChange={handleChange} className={inputCls} placeholder="如 20" min="1" />
+                  <label className={labelCls}>{t('contact.participants')}</label>
+                  <input type="number" name="participants" value={form.participants} onChange={handleChange} className={inputCls} placeholder={t('contact.participantsPh')} min="1" />
                 </div>
                 <div>
-                  <label className={labelCls}>預計時間</label>
-                  <input name="preferred_date" value={form.preferred_date} onChange={handleChange} className={inputCls} placeholder="如 2026-09 或 待討論" />
+                  <label className={labelCls}>{t('contact.preferredDate')}</label>
+                  <input name="preferred_date" value={form.preferred_date} onChange={handleChange} className={inputCls} placeholder={t('contact.preferredDatePh')} />
                 </div>
               </div>
 
               <div>
-                <label className={labelCls}>活動類型</label>
+                <label className={labelCls}>{t('contact.activityType')}</label>
                 <select name="activity_type" value={form.activity_type} onChange={handleChange} className={inputCls} required>
-                  <option value="">請選擇活動類型</option>
-                  {ACTIVITY_TYPES.map((t) => (
-                    <option key={t} value={t}>{t}</option>
+                  <option value="">{t('contact.activityTypePh')}</option>
+                  {ACTIVITY_TYPES.map((tp) => (
+                    <option key={tp} value={tp}>{tp}</option>
                   ))}
                 </select>
               </div>
 
               <div>
-                <label className={labelCls}>想探索的旅程或需求</label>
-                <textarea name="message" value={form.message} onChange={handleChange} rows={4} className={inputCls} placeholder="活動目的、想去的地點、特殊需求等" />
+                <label className={labelCls}>{t('contact.message')}</label>
+                <textarea name="message" value={form.message} onChange={handleChange} rows={4} className={inputCls} placeholder={t('contact.messagePh')} />
               </div>
 
               <div className="text-center">
@@ -151,7 +153,7 @@ export default function Contact() {
                   disabled={status === 'sending'}
                   className="inline-block bg-ftg-orange text-white px-10 py-4 rounded-full font-semibold text-lg hover:bg-orange-600 transition-colors disabled:opacity-60"
                 >
-                  {status === 'sending' ? '送出中…' : '送出洽詢'}
+                  {status === 'sending' ? t('contact.sending') : t('contact.submitBtn')}
                 </button>
               </div>
             </form>

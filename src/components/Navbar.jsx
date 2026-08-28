@@ -1,17 +1,19 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { t, lang, setLang } = useLanguage();
 
   const productLinks = [
-    { path: '/corporate-travel', label: '企業員工旅遊' },
-    { path: '/family-day', label: '企業家庭日' },
-    { path: '/esg-team-day', label: 'ESG 戶外團隊日' },
-    { path: '/wellbeing-retreat', label: '員工身心平衡旅程' },
-    { path: '/executive-retreat', label: '高階主管共識營' },
-    { path: '/esg-impact-note', label: 'ESG Impact Note 專案' },
+    { path: '/corporate-travel', label: t('products.corpTravel') },
+    { path: '/family-day', label: t('products.familyDay') },
+    { path: '/esg-team-day', label: t('products.esgTeamDay') },
+    { path: '/wellbeing-retreat', label: t('products.wellbeing') },
+    { path: '/executive-retreat', label: t('products.executive') },
+    { path: '/esg-impact-note', label: t('products.impactNote') },
   ];
 
   return (
@@ -31,11 +33,11 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
             <Link to="/" className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === '/' ? 'text-ftg-green bg-ftg-sand' : 'text-gray-700 hover:text-ftg-green'}`}>
-              首頁
+              {t('nav.home')}
             </Link>
             <div className="relative group">
               <button className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-ftg-green flex items-center">
-                企業戶外客製專案
+                {t('nav.products')}
                 <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -50,8 +52,25 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
-            <a href="#/contact" className="bg-ftg-orange text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-orange-600 transition-colors">
-              立即洽詢
+
+            {/* Language Switcher */}
+            <div className="flex items-center ml-2 border rounded-full overflow-hidden text-xs font-semibold">
+              <button
+                onClick={() => setLang('zh')}
+                className={`px-3 py-1.5 transition-colors ${lang === 'zh' ? 'bg-ftg-green text-white' : 'text-gray-600 hover:bg-ftg-sand'}`}
+              >
+                {t('lang.zh')}
+              </button>
+              <button
+                onClick={() => setLang('en')}
+                className={`px-3 py-1.5 transition-colors ${lang === 'en' ? 'bg-ftg-green text-white' : 'text-gray-600 hover:bg-ftg-sand'}`}
+              >
+                {t('lang.en')}
+              </button>
+            </div>
+
+            <a href="#/contact" className="bg-ftg-orange text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-orange-600 transition-colors ml-2">
+              {t('nav.contact')}
             </a>
           </div>
 
@@ -71,16 +90,24 @@ export default function Navbar() {
         {mobileOpen && (
           <div className="lg:hidden pb-4">
             <Link to="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ftg-green" onClick={() => setMobileOpen(false)}>
-              首頁
+              {t('nav.home')}
             </Link>
-            <div className="px-3 py-2 text-sm font-semibold text-gray-500">企業戶外客製專案</div>
+            <div className="px-3 py-2 text-sm font-semibold text-gray-500">{t('nav.products')}</div>
             {productLinks.map(link => (
               <Link key={link.path} to={link.path} className="block px-6 py-2 rounded-md text-sm text-gray-600 hover:text-ftg-green" onClick={() => setMobileOpen(false)}>
                 {link.label}
               </Link>
             ))}
+
+            {/* Mobile Language Switcher */}
+            <div className="flex items-center px-3 mt-3 space-x-2">
+              <span className="text-sm text-gray-500">{t('lang.label')}：</span>
+              <button onClick={() => setLang('zh')} className={`px-3 py-1 rounded-full text-sm ${lang === 'zh' ? 'bg-ftg-green text-white' : 'bg-ftg-sand text-gray-700'}`}>{t('lang.zh')}</button>
+              <button onClick={() => setLang('en')} className={`px-3 py-1 rounded-full text-sm ${lang === 'en' ? 'bg-ftg-green text-white' : 'bg-ftg-sand text-gray-700'}`}>{t('lang.en')}</button>
+            </div>
+
             <a href="#/contact" className="block mx-3 mt-3 bg-ftg-orange text-white px-6 py-2 rounded-full text-sm font-medium text-center" onClick={() => setMobileOpen(false)}>
-              立即洽詢
+              {t('nav.contact')}
             </a>
           </div>
         )}

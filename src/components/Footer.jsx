@@ -1,4 +1,7 @@
+import { useLanguage } from '../i18n/LanguageContext';
+
 export default function Footer() {
+  const { t } = useLanguage();
   return (
     <footer className="bg-ftg-forest text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -14,34 +17,34 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-gray-300 text-sm">
-              走進自然，創造更有意義的旅程。
+              {t('footer.brandTagline')}
             </p>
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4">企業方案</h4>
+            <h4 className="text-lg font-semibold mb-4">{t('footer.corpPrograms')}</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#/corporate-travel" className="text-gray-300 hover:text-white">企業員工旅遊</a></li>
-              <li><a href="#/family-day" className="text-gray-300 hover:text-white">企業家庭日</a></li>
-              <li><a href="#/esg-team-day" className="text-gray-300 hover:text-white">ESG 戶外團隊日</a></li>
-              <li><a href="#/wellbeing-retreat" className="text-gray-300 hover:text-white">員工身心平衡旅程</a></li>
+              <li><a href="#/corporate-travel" className="text-gray-300 hover:text-white">{t('products.corpTravel')}</a></li>
+              <li><a href="#/family-day" className="text-gray-300 hover:text-white">{t('products.familyDay')}</a></li>
+              <li><a href="#/esg-team-day" className="text-gray-300 hover:text-white">{t('products.esgTeamDay')}</a></li>
+              <li><a href="#/wellbeing-retreat" className="text-gray-300 hover:text-white">{t('products.wellbeing')}</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4">進階方案</h4>
+            <h4 className="text-lg font-semibold mb-4">{t('footer.advancedPrograms')}</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#/executive-retreat" className="text-gray-300 hover:text-white">高階主管共識營</a></li>
-              <li><a href="#/esg-impact-note" className="text-gray-300 hover:text-white">ESG Impact Note 專案</a></li>
+              <li><a href="#/executive-retreat" className="text-gray-300 hover:text-white">{t('products.executive')}</a></li>
+              <li><a href="#/esg-impact-note" className="text-gray-300 hover:text-white">{t('products.impactNote')}</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4">聯絡我們</h4>
+            <h4 className="text-lg font-semibold mb-4">{t('footer.contactUs')}</h4>
             <ul className="space-y-2 text-sm text-gray-300">
-              <li>電話：886 2 7743 1006</li>
-              <li>信箱：hello@ftgtours.com</li>
-              <li>地址：台北市中山區</li>
+              <li>{t('footer.phone')}：886 2 7743 1006</li>
+              <li>{t('footer.email')}：hello@ftgtours.com</li>
+              <li>{t('footer.address')}：台北市中山區</li>
               <li className="flex space-x-4 pt-2">
                 <a href="#/" className="hover:text-white">FB</a>
                 <a href="#/" className="hover:text-white">IG</a>
@@ -53,10 +56,10 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-          <p>&copy; 2026 FTG TOURS 墾趣旅遊. All Rights Reserved.</p>
+          <p>&copy; 2026 FTG TOURS 墾趣旅遊. {t('footer.rights')}</p>
           <div className="mt-2 space-x-4">
-            <a href="#/" className="hover:text-white">隱私政策</a>
-            <a href="#/" className="hover:text-white">服務條款</a>
+            <a href="#/" className="hover:text-white">{t('footer.privacy')}</a>
+            <a href="#/" className="hover:text-white">{t('footer.terms')}</a>
           </div>
         </div>
       </div>
