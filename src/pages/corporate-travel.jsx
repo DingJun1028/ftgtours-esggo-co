@@ -28,12 +28,22 @@ const expImages = [
 function PhotoCard({ src, title, desc }) {
   return (
     <figure className="relative overflow-hidden rounded-2xl shadow-lg group">
-      <img src={src} alt={title} className="w-full h-72 object-cover transition-transform group-hover:scale-105" loading="lazy" />
-      <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-        <h3 className="text-white text-lg font-bold">{title}</h3>
-        <p className="text-gray-200 text-sm">{desc}</p>
+      <img src={src} alt={title} className="w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover transition-transform group-hover:scale-105" loading="lazy" />
+      <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:p-4">
+        <h3 className="text-white text-base md:text-lg font-bold">{title}</h3>
+        <p className="text-gray-200 text-xs md:text-sm">{desc}</p>
       </figcaption>
     </figure>
+  );
+}
+
+function IconCard({ icon, title, desc }) {
+  return (
+    <div className="bg-white border border-gray-200 rounded-2xl card-responsive text-center hover:shadow-lg transition-shadow">
+      <div className="w-12 h-12 md:w-14 md:h-14 bg-ftg-green/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 text-2xl md:text-3xl">{icon}</div>
+      <h3 className="text-base md:text-lg font-bold text-ftg-forest mb-2">{title}</h3>
+      <p className="text-gray-600 text-xs md:text-sm leading-relaxed">{desc}</p>
+    </div>
   );
 }
 
@@ -46,15 +56,54 @@ export default function CorporateTravel() {
     keywords: ['企業員工旅遊', 'Team Building', '戶外體驗', 'ESG 活動', '公司旅遊'],
   });
 
-  const provideItems = [
-    t('corporateTravel.provide1'), t('corporateTravel.provide2'),
-    t('corporateTravel.provide3'), t('corporateTravel.provide4'),
+  const designCards = [
+    { icon: '🎯', title: t('corporateTravel.design1Title'), desc: t('corporateTravel.design1Desc') },
+    { icon: '🥾', title: t('corporateTravel.design2Title'), desc: t('corporateTravel.design2Desc') },
+    { icon: '🍱', title: t('corporateTravel.design3Title'), desc: t('corporateTravel.design3Desc') },
+    { icon: '🌿', title: t('corporateTravel.design4Title'), desc: t('corporateTravel.design4Desc') },
+    { icon: '🏮', title: t('corporateTravel.design5Title'), desc: t('corporateTravel.design5Desc') },
+    { icon: '🤝', title: t('corporateTravel.design6Title'), desc: t('corporateTravel.design6Desc') },
   ];
-  const canProvideItems = [
-    t('corporateTravel.provide1'), t('corporateTravel.provide2'),
-    t('corporateTravel.provide3'), t('corporateTravel.provide4'),
-    t('corporateTravel.provide5'), t('corporateTravel.provide6'),
-    t('corporateTravel.provide7'), t('corporateTravel.provide8'),
+
+  const targetCards = [
+    { icon: '📅', title: t('corporateTravel.target1Title'), desc: t('corporateTravel.target1Desc') },
+    { icon: '👥', title: t('corporateTravel.target2Title'), desc: t('corporateTravel.target2Desc') },
+    { icon: '🎁', title: t('corporateTravel.target3Title'), desc: t('corporateTravel.target3Desc') },
+    { icon: '🌱', title: t('corporateTravel.target4Title'), desc: t('corporateTravel.target4Desc') },
+    { icon: '🔗', title: t('corporateTravel.target5Title'), desc: t('corporateTravel.target5Desc') },
+  ];
+
+  const leaveCards = [
+    { title: t('corporateTravel.leave1Title'), desc: t('corporateTravel.leave1Desc') },
+    { title: t('corporateTravel.leave2Title'), desc: t('corporateTravel.leave2Desc') },
+    { title: t('corporateTravel.leave3Title'), desc: t('corporateTravel.leave3Desc') },
+    { title: t('corporateTravel.leave4Title'), desc: t('corporateTravel.leave4Desc') },
+    { title: t('corporateTravel.leave5Title'), desc: t('corporateTravel.leave5Desc') },
+  ];
+
+  const processSteps = [
+    { title: t('corporateTravel.process1Title'), desc: t('corporateTravel.process1Desc') },
+    { title: t('corporateTravel.process2Title'), desc: t('corporateTravel.process2Desc') },
+    { title: t('corporateTravel.process3Title'), desc: t('corporateTravel.process3Desc') },
+    { title: t('corporateTravel.process4Title'), desc: t('corporateTravel.process4Desc') },
+    { title: t('corporateTravel.process5Title'), desc: t('corporateTravel.process5Desc') },
+  ];
+
+  const safetyCards = [
+    { icon: '🛡️', title: t('corporateTravel.safety1Title'), desc: t('corporateTravel.safety1Desc') },
+    { icon: '🛡️', title: t('corporateTravel.safety2Title'), desc: t('corporateTravel.safety2Desc') },
+    { icon: '🛡️', title: t('corporateTravel.safety3Title'), desc: t('corporateTravel.safety3Desc') },
+    { icon: '🛡️', title: t('corporateTravel.safety4Title'), desc: t('corporateTravel.safety4Desc') },
+    { icon: '🛡️', title: t('corporateTravel.safety5Title'), desc: t('corporateTravel.safety5Desc') },
+  ];
+
+  const valueAddCards = valueImages;
+
+  const ctaFeatures = [
+    t('corporateTravel.ctaFeature1'),
+    t('corporateTravel.ctaFeature2'),
+    t('corporateTravel.ctaFeature3'),
+    t('corporateTravel.ctaFeature4'),
   ];
 
   return (
@@ -64,71 +113,94 @@ export default function CorporateTravel() {
         <div className="subpage-hero__overlay"></div>
         <div className="subpage-hero__dim"></div>
         <div className="subpage-hero__content">
-          <Link to="/" className="text-ftg-orange hover:underline mb-4 inline-block font-medium">{t('nav.backHome')}</Link>
+          <Link to="/" className="text-ftg-orange hover:underline mb-3 md:mb-4 inline-block font-medium text-sm md:text-base">{t('nav.backHome')}</Link>
           <h1 className="subpage-hero__title">{t('products.corpTravel')}</h1>
           <p className="subpage-hero__subtitle">{t('corporateTravel.sub')}</p>
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="section-padding">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <div>
-              <h2 className="text-3xl font-bold text-ftg-forest mb-6">{t('common.whyNeed')}</h2>
-              <p className="text-gray-600 mb-4 leading-relaxed">
-                {t('corporateTravel.whyP1')}
-              </p>
-              <p className="text-gray-600 leading-relaxed">
-                {t('corporateTravel.whyP2')}
-              </p>
-            </div>
-            <div className="bg-ftg-cream rounded-2xl p-8">
-              <h3 className="text-xl font-bold text-ftg-forest mb-4">{t('common.weProvide')}</h3>
-              <ul className="space-y-3">
-                {provideItems.map((item, i) => (
-                  <li key={i} className="flex items-start">
-                    <span className="text-ftg-green mr-2">✓</span>
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
 
-          <h2 className="text-3xl font-bold text-ftg-forest mb-8 text-center">{t('corporateTravel.bringTitle')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {/* 1. Benefits */}
+          <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-5 md:mb-8 text-center">{t('corporateTravel.benefitsTitle')}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-16">
             {travelImages.map((p, i) => <PhotoCard key={i} src={p.src} title={t(p.tKey)} desc={t(p.tKey + 'Desc')} />)}
           </div>
 
-          <h2 className="text-3xl font-bold text-ftg-forest mb-8 text-center">{t('corporateTravel.valueTitle')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {valueImages.map((p, i) => <PhotoCard key={i} src={p.src} title={t(p.tKey)} desc={t(p.tKey + 'Desc')} />)}
+          {/* 2. Design */}
+          <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-5 md:mb-8 text-center">{t('corporateTravel.designTitle')}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-16">
+            {designCards.map((c, i) => <IconCard key={i} icon={c.icon} title={c.title} desc={c.desc} />)}
           </div>
 
-          <h2 className="text-3xl font-bold text-ftg-forest mb-8 text-center">{t('corporateTravel.expTitle')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {/* 3. Target */}
+          <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-5 md:mb-8 text-center">{t('corporateTravel.targetTitle')}</h2>
+          <div className="grid grid-5-responsive gap-4 md:gap-6 mb-12 md:mb-16">
+            {targetCards.map((c, i) => <IconCard key={i} icon={c.icon} title={c.title} desc={c.desc} />)}
+          </div>
+
+          {/* 4. Journey */}
+          <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-5 md:mb-8 text-center">{t('corporateTravel.journeyTitle')}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-16">
             {expImages.map((p, i) => <PhotoCard key={i} src={p.src} title={t(p.tKey)} desc={t(p.tKey + 'Desc')} />)}
           </div>
 
-          <h2 className="text-3xl font-bold text-ftg-forest mb-8 text-center">{t('corporateTravel.canProvideTitle')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {canProvideItems.map((item, i) => (
-              <div key={i} className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-ftg-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-ftg-green text-xl">✓</span>
-                </div>
-                <p className="text-gray-700 font-medium">{item}</p>
+          {/* 5. Leave */}
+          <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-5 md:mb-8 text-center">{t('corporateTravel.leaveTitle')}</h2>
+          <div className="grid grid-5-responsive gap-4 md:gap-6 mb-12 md:mb-16">
+            {leaveCards.map((c, i) => (
+              <div key={i} className="bg-ftg-cream border border-gray-100 rounded-2xl card-responsive hover:shadow-lg transition-shadow">
+                <h3 className="text-base md:text-lg font-bold text-ftg-forest mb-2">{c.title}</h3>
+                <p className="text-gray-600 text-xs md:text-sm leading-relaxed">{c.desc}</p>
               </div>
             ))}
           </div>
 
-          <div className="bg-ftg-green text-white rounded-2xl p-12 text-center">
-            <h3 className="text-2xl font-bold mb-4">{t('common.benefitsTitle')}</h3>
-            <p className="text-gray-100 mb-6">{t('corporateTravel.audience')}</p>
-            <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors">
+          {/* 6. Process */}
+          <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-5 md:mb-8 text-center">{t('corporateTravel.processTitle')}</h2>
+          <div className="grid grid-5-responsive gap-4 md:gap-6 mb-12 md:mb-16">
+            {processSteps.map((s, i) => (
+              <div key={i} className="bg-white border border-gray-200 rounded-2xl card-responsive text-center hover:shadow-lg transition-shadow">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-ftg-green text-white rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 text-lg md:text-xl font-bold">{i + 1}</div>
+                <h3 className="text-base md:text-lg font-bold text-ftg-forest mb-2">{s.title}</h3>
+                <p className="text-gray-600 text-xs md:text-sm leading-relaxed">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* 7. Safety */}
+          <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-5 md:mb-8 text-center">{t('corporateTravel.safetyTitle')}</h2>
+          <div className="grid grid-5-responsive gap-4 md:gap-6 mb-12 md:mb-16">
+            {safetyCards.map((c, i) => (
+              <div key={i} className="bg-white border border-gray-200 rounded-2xl card-responsive text-center hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 md:w-14 md:h-14 bg-ftg-green/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 text-2xl md:text-3xl">{c.icon}</div>
+                <h3 className="text-base md:text-lg font-bold text-ftg-forest mb-2">{c.title}</h3>
+                <p className="text-gray-600 text-xs md:text-sm leading-relaxed">{c.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* 8. Value Add */}
+          <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-5 md:mb-8 text-center">{t('corporateTravel.valueAddTitle')}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
+            {valueAddCards.map((p, i) => <PhotoCard key={i} src={p.src} title={t(p.tKey)} desc={t(p.tKey + 'Desc')} />)}
+          </div>
+
+          {/* 9. CTA Block */}
+          <div className="bg-ftg-green text-white rounded-2xl p-6 md:p-10 lg:p-12 text-center">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4">{t('corporateTravel.ctaBlockTitle')}</h2>
+            <p className="text-gray-100 mb-5 md:mb-8 text-sm md:text-base max-w-3xl mx-auto">{t('corporateTravel.ctaBlockSub')}</p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
+              {ctaFeatures.map((f, i) => (
+                <div key={i} className="bg-white/10 rounded-xl card-responsive text-sm md:text-base font-medium">{f}</div>
+              ))}
+            </div>
+            <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-6 py-2.5 md:px-8 md:py-3 rounded-full font-semibold text-sm md:text-base hover:bg-orange-600 transition-colors">
               {t('corporateTravel.ctaBtn')}
             </Link>
           </div>
+
         </div>
       </section>
     </div>

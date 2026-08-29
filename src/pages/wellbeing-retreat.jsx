@@ -19,13 +19,36 @@ const images = [
 
 function PhotoCard({ src, title, desc }) {
   return (
-    <figure className="relative overflow-hidden rounded-2xl shadow-lg group">
-      <img src={src} alt={title} className="w-full h-72 object-cover transition-transform group-hover:scale-105" loading="lazy" />
-      <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-        <h3 className="text-white text-lg font-bold">{title}</h3>
-        <p className="text-gray-200 text-sm">{desc}</p>
+    <figure className="relative overflow-hidden rounded-2xl shadow-lg group h-full">
+      <img src={src} alt={title} className="w-full h-56 sm:h-64 lg:h-72 object-cover transition-transform group-hover:scale-105" loading="lazy" />
+      <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3 sm:p-4">
+        <h3 className="text-white text-base sm:text-lg font-bold leading-snug">{title}</h3>
+        <p className="text-gray-200 text-xs sm:text-sm">{desc}</p>
       </figcaption>
     </figure>
+  );
+}
+
+// 圖標（呈現用，非翻譯內容）
+const benefitIcons = ['🌿', '🍃', '🤝', '💡', '🌟'];
+const designIcons = ['💬', '🗺️', '🛡️', '🌲', '🍱', '⏳', '🧭', '📋'];
+const leaveIcons = ['😌', '🔗', '❤️', '📸', '💭'];
+const safetyIcons = ['🏢', '🛡️', '🥾', '🎒', '🧭'];
+
+const benefitKeys = ['benefit1', 'benefit2', 'benefit3', 'benefit4', 'benefit5'];
+const designKeys = ['design1', 'design2', 'design3', 'design4', 'design5', 'design6', 'design7', 'design8'];
+const leaveKeys = ['leave1', 'leave2', 'leave3', 'leave4', 'leave5'];
+const safetyKeys = ['safety1', 'safety2', 'safety3', 'safety4', 'safety5'];
+const journeyKeys = ['journey1', 'journey2', 'journey3', 'journey4', 'journey5', 'journey6'];
+const processKeys = ['process1', 'process2', 'process3', 'process4', 'process5'];
+
+function IconCard({ icon, title, desc }) {
+  return (
+    <div className="bg-ftg-cream rounded-2xl p-6 text-center h-full hover:shadow-lg transition-shadow flex flex-col">
+      <div className="text-4xl mb-3" aria-hidden="true">{icon}</div>
+      <h3 className="font-bold text-ftg-forest mb-2 text-lg leading-snug">{title}</h3>
+      <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>
+    </div>
   );
 }
 
@@ -38,17 +61,15 @@ export default function WellbeingRetreat() {
     keywords: ['員工身心平衡旅程', '員工福祉', '高壓紓壓', '團隊對話', '自然休養'],
   });
 
-  const provideItems = [
-    t('wellbeing.provide1'), t('wellbeing.provide2'),
-    t('wellbeing.provide3'), t('wellbeing.provide4'),
-  ];
-  const modules = [
-    t('wellbeing.mod1'), t('wellbeing.mod2'), t('wellbeing.mod3'),
-    t('wellbeing.mod4'), t('wellbeing.mod5'), t('wellbeing.mod6'),
-  ];
+  const targetImages = images.slice(1).slice(0, 4);
+  const targetKeys = ['target1', 'target2', 'target3', 'target4'];
+  const valueAddImages = images.slice(1).slice(4, 8);
+  const valueAddKeys = ['valueAdd1', 'valueAdd2', 'valueAdd3', 'valueAdd4'];
+  const ctaFeatures = ['ctaFeature1', 'ctaFeature2', 'ctaFeature3', 'ctaFeature4'];
 
   return (
     <div>
+      {/* Hero（保留原有 subpage-hero） */}
       <section className="subpage-hero">
         <img src="/images/wellbeing-retreat/員工身心平衡-頁首大橫幅.png" alt={t('products.wellbeing')} className="subpage-hero__img" loading="lazy" />
         <div className="subpage-hero__overlay"></div>
@@ -60,52 +81,114 @@ export default function WellbeingRetreat() {
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <div>
-              <h2 className="text-3xl font-bold text-ftg-forest mb-6">{t('common.whyNeed')}</h2>
-              <p className="text-gray-600 mb-4 leading-relaxed">{t('wellbeing.whyP')}</p>
-            </div>
-            <div className="bg-ftg-cream rounded-2xl p-8">
-              <h3 className="text-xl font-bold text-ftg-forest mb-4">{t('common.weProvide')}</h3>
-              <ul className="space-y-3">
-                {provideItems.map((item, i) => (
-                  <li key={i} className="flex items-start">
-                    <span className="text-ftg-green mr-2">✓</span>
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* 1. Benefits */}
+        <section className="section-padding">
+          <h2 className="section-title text-center">{t('wellbeing.benefitsTitle')}</h2>
+          <div className="grid grid-5-responsive gap-5 sm:gap-6 mt-8">
+            {benefitKeys.map((k, i) => (
+              <IconCard key={k} icon={benefitIcons[i]} title={t(`wellbeing.${k}Title`)} desc={t(`wellbeing.${k}Desc`)} />
+            ))}
           </div>
+        </section>
 
-          <h2 className="text-3xl font-bold text-ftg-forest mb-8 text-center">{t('wellbeing.leaveTitle')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-            {images.slice(1).map((p, i) => <PhotoCard key={i} src={p.src} title={t(p.tKey)} desc={t(p.tKey + 'Desc')} />)}
+        {/* 2. Design */}
+        <section className="section-padding bg-ftg-sand rounded-3xl">
+          <h2 className="section-title text-center">{t('wellbeing.designTitle')}</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-8">
+            {designKeys.map((k, i) => (
+              <IconCard key={k} icon={designIcons[i]} title={t(`wellbeing.${k}Title`)} desc={t(`wellbeing.${k}Desc`)} />
+            ))}
           </div>
+        </section>
 
-          <h2 className="text-3xl font-bold text-ftg-forest mb-8 text-center">{t('wellbeing.modulesTitle')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {modules.map((item, i) => (
-              <div key={i} className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
-                <div className="flex items-center mb-3">
-                  <span className="w-8 h-8 bg-ftg-green text-white rounded-full flex items-center justify-center font-bold mr-3">{i + 1}</span>
-                  <p className="text-gray-700 font-medium">{item.split('：')[0]}</p>
-                </div>
-                <p className="text-gray-600 text-sm ml-11">{item.split('：')[1]}</p>
+        {/* 3. Target */}
+        <section className="section-padding">
+          <h2 className="section-title text-center">{t('wellbeing.targetTitle')}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 mt-8">
+            {targetImages.map((p, i) => (
+              <PhotoCard key={i} src={p.src} title={t(`wellbeing.${targetKeys[i]}Title`)} desc={t(`wellbeing.${targetKeys[i]}Desc`)} />
+            ))}
+          </div>
+        </section>
+
+        {/* 4. Journey (timeline) */}
+        <section className="section-padding bg-ftg-cream rounded-3xl">
+          <h2 className="section-title text-center">{t('wellbeing.journeyTitle')}</h2>
+          <ol className="relative mt-10 max-w-3xl mx-auto pl-12">
+            <span className="absolute left-4 top-2 bottom-2 w-0.5 bg-ftg-green/30" aria-hidden="true"></span>
+            {journeyKeys.map((k, i) => (
+              <li key={k} className="relative mb-8 last:mb-0">
+                <span className="absolute -left-12 top-0 w-8 h-8 rounded-full bg-ftg-green text-white flex items-center justify-center font-bold text-sm shadow">{i + 1}</span>
+                <h3 className="font-bold text-ftg-forest text-lg mb-1">{t(`wellbeing.${k}Title`)}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{t(`wellbeing.${k}Desc`)}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* 5. Leave */}
+        <section className="section-padding">
+          <h2 className="section-title text-center">{t('wellbeing.leaveTitle')}</h2>
+          <div className="grid grid-5-responsive gap-5 sm:gap-6 mt-8">
+            {leaveKeys.map((k, i) => (
+              <IconCard key={k} icon={leaveIcons[i]} title={t(`wellbeing.${k}Title`)} desc={t(`wellbeing.${k}Desc`)} />
+            ))}
+          </div>
+        </section>
+
+        {/* 6. Process */}
+        <section className="section-padding bg-ftg-sand rounded-3xl">
+          <h2 className="section-title text-center">{t('wellbeing.processTitle')}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mt-8">
+            {processKeys.map((k, i) => (
+              <div key={k} className="relative text-center">
+                <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-ftg-green text-white flex items-center justify-center text-xl font-bold">{i + 1}</div>
+                <h3 className="font-bold text-ftg-forest mb-2 text-lg leading-snug">{t(`wellbeing.${k}Title`)}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{t(`wellbeing.${k}Desc`)}</p>
               </div>
             ))}
           </div>
-          <div className="bg-ftg-green text-white rounded-2xl p-12 text-center">
-            <h3 className="text-2xl font-bold mb-4">{t('common.benefitsTitle')}</h3>
-            <p className="text-gray-100 mb-6">{t('wellbeing.audience')}</p>
+        </section>
+
+        {/* 7. Safety */}
+        <section className="section-padding">
+          <h2 className="section-title text-center">{t('wellbeing.safetyTitle')}</h2>
+          <div className="grid grid-5-responsive gap-5 sm:gap-6 mt-8">
+            {safetyKeys.map((k, i) => (
+              <IconCard key={k} icon={safetyIcons[i]} title={t(`wellbeing.${k}Title`)} desc={t(`wellbeing.${k}Desc`)} />
+            ))}
+          </div>
+        </section>
+
+        {/* 8. Value Add */}
+        <section className="section-padding bg-ftg-cream rounded-3xl">
+          <h2 className="section-title text-center">{t('wellbeing.valueAddTitle')}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 mt-8">
+            {valueAddImages.map((p, i) => (
+              <PhotoCard key={i} src={p.src} title={t(`wellbeing.${valueAddKeys[i]}Title`)} desc={t(`wellbeing.${valueAddKeys[i]}Desc`)} />
+            ))}
+          </div>
+        </section>
+
+        {/* 9. CTA Block */}
+        <section className="section-padding">
+          <div className="bg-ftg-green rounded-3xl p-8 sm:p-12 lg:p-16 text-center text-white">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">{t('wellbeing.ctaBlockTitle')}</h2>
+            <p className="text-gray-100 mb-8 max-w-2xl mx-auto leading-relaxed">{t('wellbeing.ctaBlockSub')}</p>
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
+              {ctaFeatures.map((f) => (
+                <span key={f} className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 text-sm">
+                  {t(`wellbeing.${f}`)}
+                </span>
+              ))}
+            </div>
             <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors">
               {t('wellbeing.ctaBtn')}
             </Link>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }

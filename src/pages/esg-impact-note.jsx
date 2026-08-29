@@ -33,6 +33,24 @@ function PhotoCard({ src, title, desc }) {
   );
 }
 
+function IconCard({ icon, title, desc }) {
+  return (
+    <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow flex flex-col h-full">
+      <div className="w-12 h-12 rounded-full bg-ftg-green text-white flex items-center justify-center text-2xl mb-4 shrink-0">{icon}</div>
+      <h3 className="text-lg font-bold text-ftg-forest mb-2 leading-snug">{title}</h3>
+      <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>
+    </div>
+  );
+}
+
+function SectionTitle({ children, light }) {
+  return (
+    <h2 className={`text-2xl md:text-3xl font-bold mb-8 md:mb-10 text-center ${light ? 'text-white' : 'text-ftg-forest'}`}>
+      {children}
+    </h2>
+  );
+}
+
 export default function EsgImpactNote() {
   const { t } = useLanguage();
   usePageSeo({
@@ -42,14 +60,59 @@ export default function EsgImpactNote() {
     keywords: ['ESG Impact Note', '活動成果', '雇主品牌', '永續溝通', 'ESG 素材'],
   });
 
-  const provideItems = [
-    t('impactNote.provide1'), t('impactNote.provide2'),
-    t('impactNote.provide3'), t('impactNote.provide4'),
-  ];
-  const modules = [
-    t('impactNote.mod1'), t('impactNote.mod2'), t('impactNote.mod3'),
-    t('impactNote.mod4'), t('impactNote.mod5'), t('impactNote.mod6'),
-  ];
+  // 1. Benefits — 3 cards with images from noteImages
+  const benefitCards = [1, 2, 3].map((n) => ({
+    src: noteImages[n - 1].src,
+    title: t(`impactNote.benefit${n}Title`),
+    desc: t(`impactNote.benefit${n}Desc`),
+  }));
+
+  // 2. Design — 6 icon cards
+  const designIcons = ['🎯', '🧩', '📊', '✍️', '🔄', '💡'];
+  const designCards = [1, 2, 3, 4, 5, 6].map((n) => ({
+    icon: designIcons[n - 1],
+    title: t(`impactNote.design${n}Title`),
+    desc: t(`impactNote.design${n}Desc`),
+  }));
+
+  // 3. Target — 5 icon cards
+  const targetIcons = ['📑', '🏷️', '💬', '🗂️', '🤝'];
+  const targetCards = [1, 2, 3, 4, 5].map((n) => ({
+    icon: targetIcons[n - 1],
+    title: t(`impactNote.target${n}Title`),
+    desc: t(`impactNote.target${n}Desc`),
+  }));
+
+  // 5. Leave — 5 cards
+  const leaveCards = [1, 2, 3, 4, 5].map((n) => ({
+    title: t(`impactNote.leave${n}Title`),
+    desc: t(`impactNote.leave${n}Desc`),
+  }));
+
+  // 6. Process — 5 numbered steps
+  const processSteps = [1, 2, 3, 4, 5].map((n) => ({
+    title: t(`impactNote.process${n}Title`),
+    desc: t(`impactNote.process${n}Desc`),
+  }));
+
+  // 7. Safety — 5 cards
+  const safetyIcons = ['👥', '✅', '📋', '🔒', '🛟'];
+  const safetyCards = [1, 2, 3, 4, 5].map((n) => ({
+    icon: safetyIcons[n - 1],
+    title: t(`impactNote.safety${n}Title`),
+    desc: t(`impactNote.safety${n}Desc`),
+  }));
+
+  // 8. Value Add — 4 cards
+  const valueIcons = ['🧭', '🎉', '📅', '🛠️'];
+  const valueCards = [1, 2, 3, 4].map((n) => ({
+    icon: valueIcons[n - 1],
+    title: t(`impactNote.valueAdd${n}Title`),
+    desc: t(`impactNote.valueAdd${n}Desc`),
+  }));
+
+  // 9. CTA — 4 features
+  const ctaFeatures = [1, 2, 3, 4].map((n) => t(`impactNote.ctaFeature${n}`));
 
   return (
     <div>
@@ -64,59 +127,129 @@ export default function EsgImpactNote() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
+      {/* 1. Benefits Section */}
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-16">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-4 md:mb-6">{t('common.whyNeed')}</h2>
-              <p className="text-gray-600 mb-4 leading-relaxed">{t('impactNote.whyP')}</p>
-            </div>
-            <div className="bg-ftg-cream rounded-2xl p-6 md:p-8">
-              <h3 className="text-lg md:text-xl font-bold text-ftg-forest mb-4">{t('common.weProvide')}</h3>
-              <ul className="space-y-3">
-                {provideItems.map((item, i) => (
-                  <li key={i} className="flex items-start">
-                    <span className="text-ftg-green mr-2">✓</span>
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <SectionTitle>{t('impactNote.benefitsTitle')}</SectionTitle>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {benefitCards.map((c, i) => (
+              <PhotoCard key={i} src={c.src} title={c.title} desc={c.desc} />
+            ))}
           </div>
+        </div>
+      </section>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-6 md:mb-8 text-center">{t('impactNote.noteTitle')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16">
-            {noteImages.map((p, i) => <PhotoCard key={i} src={p.src} title={t(p.tKey)} desc={t(p.tKey + 'Desc')} />)}
+      {/* 2. Design Section */}
+      <section className="py-12 md:py-16 bg-ftg-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle>{t('impactNote.designTitle')}</SectionTitle>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+            {designCards.map((c, i) => (
+              <IconCard key={i} icon={c.icon} title={c.title} desc={c.desc} />
+            ))}
           </div>
+        </div>
+      </section>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-6 md:mb-8 text-center">{t('impactNote.resultTitle')}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
-            {resultImages.map((p, i) => <PhotoCard key={i} src={p.src} title={t(p.tKey)} desc={t(p.tKey + 'Desc')} />)}
+      {/* 3. Target Section */}
+      <section className="py-12 md:py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle>{t('impactNote.targetTitle')}</SectionTitle>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+            {targetCards.map((c, i) => (
+              <IconCard key={i} icon={c.icon} title={c.title} desc={c.desc} />
+            ))}
           </div>
+        </div>
+      </section>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-6 md:mb-8 text-center">{t('impactNote.modulesTitle')}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-12">
-            {modules.map((item, i) => (
-              <div key={i} className="bg-white border border-gray-200 rounded-xl p-5 md:p-6 hover:shadow-lg transition-shadow">
-                <div className="flex items-center mb-3">
-                  <span className="w-8 h-8 bg-ftg-green text-white rounded-full flex items-center justify-center font-bold mr-3">{i + 1}</span>
-                  <p className="text-gray-700 font-medium">{item.split('：')[0]}</p>
+      {/* 4. Journey Section */}
+      <section className="py-12 md:py-16 bg-ftg-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle>{t('impactNote.journeyTitle')}</SectionTitle>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {resultImages.map((p, i) => (
+              <PhotoCard key={i} src={p.src} title={t(p.tKey)} desc={t(p.tKey + 'Desc')} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Leave Section */}
+      <section className="py-12 md:py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle>{t('impactNote.leaveTitle')}</SectionTitle>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+            {leaveCards.map((c, i) => (
+              <div key={i} className="bg-ftg-cream rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow flex items-start gap-4 h-full">
+                <span className="text-ftg-green text-2xl leading-none shrink-0">✓</span>
+                <div>
+                  <h3 className="text-lg font-bold text-ftg-forest mb-1 leading-snug">{c.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{c.desc}</p>
                 </div>
-                <p className="text-gray-600 text-sm ml-11">{item.split('：')[1]}</p>
               </div>
             ))}
           </div>
-          <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-6 md:p-8 mb-10 md:mb-12">
+        </div>
+      </section>
+
+      {/* 6. Process Section */}
+      <section className="py-12 md:py-16 bg-ftg-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle>{t('impactNote.processTitle')}</SectionTitle>
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4">
+            {processSteps.map((s, i) => (
+              <div key={i} className="relative flex flex-col items-center text-center">
+                <div className="w-14 h-14 rounded-full bg-ftg-green text-white flex items-center justify-center text-xl font-bold mb-4 shadow-md shrink-0">{i + 1}</div>
+                <h3 className="text-base md:text-lg font-bold text-ftg-forest mb-2 leading-snug">{s.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Safety Section */}
+      <section className="py-12 md:py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle>{t('impactNote.safetyTitle')}</SectionTitle>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+            {safetyCards.map((c, i) => (
+              <IconCard key={i} icon={c.icon} title={c.title} desc={c.desc} />
+            ))}
+          </div>
+          <div className="mt-8 md:mt-10 bg-yellow-50 border border-yellow-200 rounded-2xl p-6 md:p-8">
             <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-2">{t('impactNote.disclaimerTitle')}</h3>
-            <p className="text-gray-700 text-sm">{t('impactNote.disclaimer')}</p>
+            <p className="text-gray-700 text-sm leading-relaxed">{t('impactNote.disclaimer')}</p>
           </div>
-          <div className="bg-ftg-green text-white rounded-2xl p-8 md:p-12 text-center">
-            <h3 className="text-xl md:text-2xl font-bold mb-4">{t('common.benefitsTitle')}</h3>
-            <p className="text-gray-100 mb-6">{t('impactNote.audience')}</p>
-            <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors">
-              {t('impactNote.ctaBtn')}
-            </Link>
+        </div>
+      </section>
+
+      {/* 8. Value Add Section */}
+      <section className="py-12 md:py-16 bg-ftg-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle>{t('impactNote.valueAddTitle')}</SectionTitle>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+            {valueCards.map((c, i) => (
+              <IconCard key={i} icon={c.icon} title={c.title} desc={c.desc} />
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* 9. CTA Block */}
+      <section className="bg-ftg-green text-white py-14 md:py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">{t('impactNote.ctaBlockTitle')}</h2>
+          <p className="text-gray-100 mb-8 md:mb-10 leading-relaxed">{t('impactNote.ctaBlockSub')}</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 md:mb-10">
+            {ctaFeatures.map((f, i) => (
+              <div key={i} className="bg-white/10 rounded-xl p-4 text-sm sm:text-base font-medium">{f}</div>
+            ))}
+          </div>
+          <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors">
+            {t('impactNote.ctaBtn')}
+          </Link>
         </div>
       </section>
     </div>

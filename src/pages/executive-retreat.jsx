@@ -22,12 +22,49 @@ const consensusImages = [
 function PhotoCard({ src, title, desc }) {
   return (
     <figure className="relative overflow-hidden rounded-2xl shadow-lg group">
-      <img src={src} alt={title} className="w-full h-72 object-cover transition-transform group-hover:scale-105" loading="lazy" />
-      <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-        <h3 className="text-white text-lg font-bold">{title}</h3>
-        <p className="text-gray-200 text-sm">{desc}</p>
+      <img src={src} alt={title} className="w-full h-60 sm:h-64 md:h-72 object-cover transition-transform group-hover:scale-105" loading="lazy" />
+      <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3 sm:p-4">
+        <h3 className="text-white text-base sm:text-lg font-bold leading-snug">{title}</h3>
+        <p className="text-gray-200 text-xs sm:text-sm">{desc}</p>
       </figcaption>
     </figure>
+  );
+}
+
+function SectionTitle({ children, light = false }) {
+  return (
+    <h2 className={`text-2xl sm:text-3xl font-bold mb-8 sm:mb-10 text-center ${light ? 'text-white' : 'text-ftg-forest'}`}>
+      {children}
+    </h2>
+  );
+}
+
+function IconCard({ icon, title, desc }) {
+  return (
+    <div className="bg-white border border-gray-100 rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-lg transition-shadow h-full">
+      <div className="w-12 h-12 rounded-full bg-ftg-cream text-2xl flex items-center justify-center mb-4">{icon}</div>
+      <h3 className="text-base sm:text-lg font-bold text-ftg-forest mb-2 leading-snug">{title}</h3>
+      <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>
+    </div>
+  );
+}
+
+function Card({ title, desc }) {
+  return (
+    <div className="bg-white border border-gray-100 rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-lg transition-shadow h-full">
+      <h3 className="text-base sm:text-lg font-bold text-ftg-forest mb-2 leading-snug">{title}</h3>
+      <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>
+    </div>
+  );
+}
+
+function Step({ num, title, desc }) {
+  return (
+    <div className="relative flex flex-col items-center text-center px-2">
+      <div className="w-12 h-12 rounded-full bg-ftg-green text-white flex items-center justify-center font-bold text-lg mb-4 shrink-0">{num}</div>
+      <h3 className="text-base sm:text-lg font-bold text-ftg-forest mb-2 leading-snug">{title}</h3>
+      <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>
+    </div>
   );
 }
 
@@ -40,15 +77,46 @@ export default function ExecutiveRetreat() {
     keywords: ['共識營', '高階主管', '永續轉型', '策略對話', '主管共識旅程'],
   });
 
-  const provideItems = [
-    t('executive.provide1'), t('executive.provide2'),
-    t('executive.provide3'), t('executive.provide4'),
-  ];
-  const modules = [
-    t('executive.mod1'), t('executive.mod2'), t('executive.mod3'),
-    t('executive.mod4'), t('executive.mod5'), t('executive.mod6'),
-  ];
   const consensusShow = [consensusImages[0], consensusImages[1], consensusImages[3]];
+  const benefits = consensusShow.map((p) => ({ src: p.src, title: t(p.tKey), desc: t(p.tKey + 'Desc') }));
+
+  const designIcons = ['🎯', '🗺️', '🛡️', '💬', '🌿', '📋'];
+  const designCards = [1, 2, 3, 4, 5, 6].map((i) => ({
+    icon: designIcons[i - 1],
+    title: t(`executive.design${i}Title`),
+    desc: t(`executive.design${i}Desc`),
+  }));
+
+  const targetIcons = ['🧭', '🔄', '🌱', '👥', '🤝'];
+  const targetCards = [1, 2, 3, 4, 5].map((i) => ({
+    icon: targetIcons[i - 1],
+    title: t(`executive.target${i}Title`),
+    desc: t(`executive.target${i}Desc`),
+  }));
+
+  const leaveCards = [1, 2, 3, 4, 5].map((i) => ({
+    title: t(`executive.leave${i}Title`),
+    desc: t(`executive.leave${i}Desc`),
+  }));
+
+  const processCards = [1, 2, 3, 4, 5].map((i) => ({
+    title: t(`executive.process${i}Title`),
+    desc: t(`executive.process${i}Desc`),
+  }));
+
+  const safetyIcons = ['🏢', '🚌', '🥾', '📩', '🧑‍🏫'];
+  const safetyCards = [1, 2, 3, 4, 5].map((i) => ({
+    icon: safetyIcons[i - 1],
+    title: t(`executive.safety${i}Title`),
+    desc: t(`executive.safety${i}Desc`),
+  }));
+
+  const valueAddCards = [1, 2, 3, 4].map((i) => ({
+    title: t(`executive.valueAdd${i}Title`),
+    desc: t(`executive.valueAdd${i}Desc`),
+  }));
+
+  const ctaFeatures = [1, 2, 3, 4].map((i) => t(`executive.ctaFeature${i}`));
 
   return (
     <div>
@@ -63,55 +131,99 @@ export default function ExecutiveRetreat() {
         </div>
       </section>
 
-      <section className="py-16">
+      {/* 1. Benefits Section */}
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <div>
-              <h2 className="text-3xl font-bold text-ftg-forest mb-6">{t('common.whyNeed')}</h2>
-              <p className="text-gray-600 mb-4 leading-relaxed">{t('executive.whyP')}</p>
-            </div>
-            <div className="bg-ftg-cream rounded-2xl p-8">
-              <h3 className="text-xl font-bold text-ftg-forest mb-4">{t('common.weProvide')}</h3>
-              <ul className="space-y-3">
-                {provideItems.map((item, i) => (
-                  <li key={i} className="flex items-start">
-                    <span className="text-ftg-green mr-2">✓</span>
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <SectionTitle>{t('executive.benefitsTitle')}</SectionTitle>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+            {benefits.map((b, i) => <PhotoCard key={i} src={b.src} title={b.title} desc={b.desc} />)}
           </div>
+        </div>
+      </section>
 
-          <h2 className="text-3xl font-bold text-ftg-forest mb-8 text-center">{t('executive.expTitle')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+      {/* 2. Design Section */}
+      <section className="py-12 md:py-16 bg-ftg-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle>{t('executive.designTitle')}</SectionTitle>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6">
+            {designCards.map((c, i) => <IconCard key={i} icon={c.icon} title={c.title} desc={c.desc} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Target Section */}
+      <section className="py-12 md:py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle>{t('executive.targetTitle')}</SectionTitle>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5">
+            {targetCards.map((c, i) => <IconCard key={i} icon={c.icon} title={c.title} desc={c.desc} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Journey Section */}
+      <section className="py-12 md:py-16 bg-ftg-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle>{t('executive.journeyTitle')}</SectionTitle>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {expImages.map((p, i) => <PhotoCard key={i} src={p.src} title={t(p.tKey)} desc={t(p.tKey + 'Desc')} />)}
           </div>
+        </div>
+      </section>
 
-          <h2 className="text-3xl font-bold text-ftg-forest mb-8 text-center">{t('executive.bringTitle')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {consensusShow.map((p, i) => <PhotoCard key={i} src={p.src} title={t(p.tKey)} desc={t(p.tKey + 'Desc')} />)}
+      {/* 5. Leave Section */}
+      <section className="py-12 md:py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle>{t('executive.leaveTitle')}</SectionTitle>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+            {leaveCards.map((c, i) => <Card key={i} title={c.title} desc={c.desc} />)}
           </div>
+        </div>
+      </section>
 
-          <h2 className="text-3xl font-bold text-ftg-forest mb-8 text-center">{t('executive.modulesTitle')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {modules.map((item, i) => (
-              <div key={i} className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
-                <div className="flex items-center mb-3">
-                  <span className="w-8 h-8 bg-ftg-green text-white rounded-full flex items-center justify-center font-bold mr-3">{i + 1}</span>
-                  <p className="text-gray-700 font-medium">{item.split('：')[0]}</p>
-                </div>
-                <p className="text-gray-600 text-sm ml-11">{item.split('：')[1]}</p>
-              </div>
+      {/* 6. Process Section */}
+      <section className="py-12 md:py-16 bg-ftg-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle>{t('executive.processTitle')}</SectionTitle>
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 sm:gap-8">
+            {processCards.map((s, i) => <Step key={i} num={i + 1} title={s.title} desc={s.desc} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Safety Section */}
+      <section className="py-12 md:py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle>{t('executive.safetyTitle')}</SectionTitle>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5">
+            {safetyCards.map((c, i) => <IconCard key={i} icon={c.icon} title={c.title} desc={c.desc} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Value Add Section */}
+      <section className="py-12 md:py-16 bg-ftg-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle>{t('executive.valueAddTitle')}</SectionTitle>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            {valueAddCards.map((c, i) => <Card key={i} title={c.title} desc={c.desc} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* 9. CTA Block */}
+      <section className="py-12 md:py-16 bg-ftg-green">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center text-white">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">{t('executive.ctaBlockTitle')}</h2>
+          <p className="text-gray-100 mb-8 sm:mb-10 leading-relaxed">{t('executive.ctaBlockSub')}</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-10">
+            {ctaFeatures.map((f, i) => (
+              <div key={i} className="bg-white/10 rounded-xl p-4 text-sm sm:text-base font-medium">{f}</div>
             ))}
           </div>
-          <div className="bg-ftg-green text-white rounded-2xl p-12 text-center">
-            <h3 className="text-2xl font-bold mb-4">{t('common.benefitsTitle')}</h3>
-            <p className="text-gray-100 mb-6">{t('executive.audience')}</p>
-            <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors">
-              {t('executive.ctaBtn')}
-            </Link>
-          </div>
+          <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors">
+            {t('executive.ctaBtn')}
+          </Link>
         </div>
       </section>
     </div>
