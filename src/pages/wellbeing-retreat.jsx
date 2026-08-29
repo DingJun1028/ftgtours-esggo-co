@@ -49,19 +49,16 @@ export default function WellbeingRetreat() {
 
   return (
     <div>
-      <section className="relative py-20 bg-ftg-sand">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link to="/" className="text-ftg-green hover:underline mb-4 inline-block">{t('nav.backHome')}</Link>
-          <h1 className="section-title">{t('products.wellbeing')}</h1>
-          <p className="section-subtitle">
-            {t('wellbeing.sub')}
-          </p>
+      <section className="subpage-hero">
+        <img src="/images/wellbeing-retreat/員工身心平衡-頁首大橫幅.png" alt={t('products.wellbeing')} className="subpage-hero__img" loading="lazy" />
+        <div className="subpage-hero__overlay"></div>
+        <div className="subpage-hero__dim"></div>
+        <div className="subpage-hero__content">
+          <Link to="/" className="text-ftg-orange hover:underline mb-4 inline-block font-medium">{t('nav.backHome')}</Link>
+          <h1 className="subpage-hero__title">{t('products.wellbeing')}</h1>
+          <p className="subpage-hero__subtitle">{t('wellbeing.sub')}</p>
         </div>
       </section>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8">
-        <img src="/images/wellbeing-retreat/員工身心平衡-頁首大橫幅.png" alt={t('products.wellbeing')} className="w-full h-64 md:h-96 object-cover rounded-2xl shadow-xl" loading="lazy" />
-      </div>
 
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

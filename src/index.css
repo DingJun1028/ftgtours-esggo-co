@@ -21,9 +21,46 @@
     @apply border-2 border-ftg-green text-ftg-green px-8 py-3 rounded-full font-medium hover:bg-ftg-green hover:text-white transition-colors duration-300;
   }
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-ftg-forest mb-4;
+    @apply text-2xl md:text-3xl font-bold text-ftg-forest mb-3;
+    text-wrap: balance;
+    orphans: 2;
+    widows: 2;
+    line-height: 1.3;
   }
   .section-subtitle {
-    @apply text-lg text-gray-600 mb-12 max-w-3xl mx-auto;
+    @apply text-base text-gray-600 mb-8 max-w-3xl mx-auto;
+    text-wrap: balance;
+    orphans: 2;
+    widows: 2;
+    line-height: 1.6;
+  }
+  /* 子頁 Hero 合併區 */
+  .subpage-hero {
+    @apply relative flex items-center justify-center overflow-hidden;
+    min-height: 50vh;
+  }
+  .subpage-hero__img {
+    @apply absolute inset-0 w-full h-full object-cover;
+  }
+  .subpage-hero__overlay {
+    @apply absolute inset-0 bg-gradient-to-br from-ftg-forest/80 via-ftg-green/60 to-ftg-leaf/50;
+  }
+  .subpage-hero__dim {
+    @apply absolute inset-0 bg-black/25;
+  }
+  .subpage-hero__content {
+    @apply relative z-10 text-center text-white px-4 max-w-4xl mx-auto py-16;
+  }
+  .subpage-hero__title {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-serif leading-tight;
+    text-wrap: balance;
+    orphans: 2;
+    widows: 2;
+  }
+  .subpage-hero__subtitle {
+    @apply text-sm sm:text-base md:text-lg mt-4 text-gray-100 max-w-2xl mx-auto;
+    text-wrap: balance;
+    orphans: 2;
+    widows: 2;
   }
 }
