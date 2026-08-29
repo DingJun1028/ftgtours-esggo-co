@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
+import CtaForm from '../components/CtaForm';
 
 // 嚴格照資料夾原始順序：子網頁-員工身心平衡旅程 (11張)
 const images = [
@@ -173,19 +174,12 @@ export default function WellbeingRetreat() {
 
         {/* 9. CTA Block */}
         <section className="section-padding">
-          <div className="bg-ftg-green rounded-3xl p-8 sm:p-12 lg:p-16 text-center text-white">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">{t('wellbeing.ctaBlockTitle')}</h2>
-            <p className="text-gray-100 mb-8 max-w-2xl mx-auto leading-relaxed">{t('wellbeing.ctaBlockSub')}</p>
-            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
-              {ctaFeatures.map((f) => (
-                <span key={f} className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 text-sm">
-                  {t(`wellbeing.${f}`)}
-                </span>
-              ))}
-            </div>
-            <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors">
-              {t('wellbeing.ctaBtn')}
-            </Link>
+          <div className="max-w-5xl mx-auto">
+            <CtaForm
+              ctaTitle={t('wellbeing.ctaBlockTitle')}
+              ctaSub={t('wellbeing.ctaBlockSub')}
+              features={ctaFeatures.map((f) => t(`wellbeing.${f}`))}
+            />
           </div>
         </section>
       </div>

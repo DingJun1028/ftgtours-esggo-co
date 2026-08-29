@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
+import CtaForm from '../components/CtaForm';
 
 // 嚴格照資料夾原始順序：子網頁-ESG Impact Note (13張)
 const noteImages = [
@@ -238,18 +239,13 @@ export default function EsgImpactNote() {
       </section>
 
       {/* 9. CTA Block */}
-      <section className="bg-ftg-green text-white py-14 md:py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">{t('impactNote.ctaBlockTitle')}</h2>
-          <p className="text-gray-100 mb-8 md:mb-10 leading-relaxed">{t('impactNote.ctaBlockSub')}</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 md:mb-10">
-            {ctaFeatures.map((f, i) => (
-              <div key={i} className="bg-white/10 rounded-xl p-4 text-sm sm:text-base font-medium">{f}</div>
-            ))}
-          </div>
-          <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors">
-            {t('impactNote.ctaBtn')}
-          </Link>
+      <section className="py-12 md:py-16 lg:py-20 bg-ftg-cream">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <CtaForm
+            ctaTitle={t('impactNote.ctaBlockTitle')}
+            ctaSub={t('impactNote.ctaBlockSub')}
+            features={ctaFeatures}
+          />
         </div>
       </section>
     </div>

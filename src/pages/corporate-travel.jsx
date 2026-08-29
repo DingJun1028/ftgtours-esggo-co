@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
+import CtaForm from '../components/CtaForm';
 
 // 嚴格照資料夾原始順序：子網頁-企業員工旅遊 (14張)
 const travelImages = [
@@ -28,7 +29,7 @@ const expImages = [
 function PhotoCard({ src, title, desc }) {
   return (
     <figure className="relative overflow-hidden rounded-2xl shadow-lg group">
-      <img src={src} alt={title} className="w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover transition-transform group-hover:scale-105" loading="lazy" />
+      <img src={src} alt={title} className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover transition-transform group-hover:scale-105" loading="lazy" />
       <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:p-4">
         <h3 className="text-white text-base md:text-lg font-bold">{title}</h3>
         <p className="text-gray-200 text-xs md:text-sm">{desc}</p>
@@ -119,7 +120,7 @@ export default function CorporateTravel() {
         </div>
       </section>
 
-      <section className="section-padding">
+      <section className="section-padding px-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* 1. Benefits */}
@@ -136,7 +137,7 @@ export default function CorporateTravel() {
 
           {/* 3. Target */}
           <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-5 md:mb-8 text-center">{t('corporateTravel.targetTitle')}</h2>
-          <div className="grid grid-5-responsive gap-4 md:gap-6 mb-12 md:mb-16">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 mb-12 md:mb-16">
             {targetCards.map((c, i) => <IconCard key={i} icon={c.icon} title={c.title} desc={c.desc} />)}
           </div>
 
@@ -148,7 +149,7 @@ export default function CorporateTravel() {
 
           {/* 5. Leave */}
           <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-5 md:mb-8 text-center">{t('corporateTravel.leaveTitle')}</h2>
-          <div className="grid grid-5-responsive gap-4 md:gap-6 mb-12 md:mb-16">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 mb-12 md:mb-16">
             {leaveCards.map((c, i) => (
               <div key={i} className="bg-ftg-cream border border-gray-100 rounded-2xl card-responsive hover:shadow-lg transition-shadow">
                 <h3 className="text-base md:text-lg font-bold text-ftg-forest mb-2">{c.title}</h3>
@@ -159,7 +160,7 @@ export default function CorporateTravel() {
 
           {/* 6. Process */}
           <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-5 md:mb-8 text-center">{t('corporateTravel.processTitle')}</h2>
-          <div className="grid grid-5-responsive gap-4 md:gap-6 mb-12 md:mb-16">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 mb-12 md:mb-16">
             {processSteps.map((s, i) => (
               <div key={i} className="bg-white border border-gray-200 rounded-2xl card-responsive text-center hover:shadow-lg transition-shadow">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-ftg-green text-white rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 text-lg md:text-xl font-bold">{i + 1}</div>
@@ -171,7 +172,7 @@ export default function CorporateTravel() {
 
           {/* 7. Safety */}
           <h2 className="text-2xl md:text-3xl font-bold text-ftg-forest mb-5 md:mb-8 text-center">{t('corporateTravel.safetyTitle')}</h2>
-          <div className="grid grid-5-responsive gap-4 md:gap-6 mb-12 md:mb-16">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 mb-12 md:mb-16">
             {safetyCards.map((c, i) => (
               <div key={i} className="bg-white border border-gray-200 rounded-2xl card-responsive text-center hover:shadow-lg transition-shadow">
                 <div className="w-12 h-12 md:w-14 md:h-14 bg-ftg-green/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 text-2xl md:text-3xl">{c.icon}</div>
@@ -188,18 +189,11 @@ export default function CorporateTravel() {
           </div>
 
           {/* 9. CTA Block */}
-          <div className="bg-ftg-green text-white rounded-2xl p-6 md:p-10 lg:p-12 text-center">
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4">{t('corporateTravel.ctaBlockTitle')}</h2>
-            <p className="text-gray-100 mb-5 md:mb-8 text-sm md:text-base max-w-3xl mx-auto">{t('corporateTravel.ctaBlockSub')}</p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
-              {ctaFeatures.map((f, i) => (
-                <div key={i} className="bg-white/10 rounded-xl card-responsive text-sm md:text-base font-medium">{f}</div>
-              ))}
-            </div>
-            <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-6 py-2.5 md:px-8 md:py-3 rounded-full font-semibold text-sm md:text-base hover:bg-orange-600 transition-colors">
-              {t('corporateTravel.ctaBtn')}
-            </Link>
-          </div>
+          <CtaForm
+            ctaTitle={t('corporateTravel.ctaBlockTitle')}
+            ctaSub={t('corporateTravel.ctaBlockSub')}
+            features={ctaFeatures}
+          />
 
         </div>
       </section>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
+import CtaForm from '../components/CtaForm';
 
 // 嚴格照資料夾原始順序：子網頁-ESG戶外團隊日 (10張)
 const teamImages = [
@@ -55,12 +56,6 @@ const valueAddData = [
   { n: 3, icon: '🗓️' },
   { n: 4, icon: '🔗' },
 ];
-const ctaFeatureData = [
-  { n: 1, icon: '🧑‍🤝‍🧑' },
-  { n: 2, icon: '🌍' },
-  { n: 3, icon: '🛡️' },
-  { n: 4, icon: '🌱' },
-];
 
 // 保留原有 PhotoCard 元件
 function PhotoCard({ src, title, desc }) {
@@ -105,6 +100,12 @@ function SectionHeading({ title }) {
 
 export default function EsgTeamDay() {
   const { t } = useLanguage();
+  const ctaFeatures = [
+    t('esgTeamDay.ctaFeature1'),
+    t('esgTeamDay.ctaFeature2'),
+    t('esgTeamDay.ctaFeature3'),
+    t('esgTeamDay.ctaFeature4'),
+  ];
   usePageSeo({
     title: t('products.esgTeamDay'),
     description: t('esgTeamDay.metaDesc'),
@@ -193,21 +194,13 @@ export default function EsgTeamDay() {
             ))}
           </div>
 
-          {/* 9. CTA Block */}
-          <div className="bg-ftg-green text-white rounded-2xl p-8 sm:p-12 text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">{t('esgTeamDay.ctaBlockTitle')}</h2>
-            <p className="text-gray-100 mb-8 max-w-2xl mx-auto">{t('esgTeamDay.ctaBlockSub')}</p>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
-              {ctaFeatureData.map((d) => (
-                <div key={d.n} className="flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-full bg-white/15 flex items-center justify-center text-2xl mb-2">{d.icon}</div>
-                  <span className="text-sm sm:text-base font-medium">{t(`esgTeamDay.ctaFeature${d.n}`)}</span>
-                </div>
-              ))}
-            </div>
-            <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-6 sm:px-8 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors">
-              {t('esgTeamDay.ctaBtn')}
-            </Link>
+          {/* 9. CTA Block — 改用共用 CtaForm 元件（含 RWD 網格與間距優化） */}
+          <div className="mb-14 sm:mb-20">
+            <CtaForm
+              ctaTitle={t('esgTeamDay.ctaBlockTitle')}
+              ctaSub={t('esgTeamDay.ctaBlockSub')}
+              features={ctaFeatures}
+            />
           </div>
 
         </div>

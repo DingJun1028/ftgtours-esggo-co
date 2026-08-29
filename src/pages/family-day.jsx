@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
+import CtaForm from '../components/CtaForm';
 
 // 嚴格照資料夾原始順序：子網頁-企業家庭日 可搭配體驗 (6張)
 const expImages = [
@@ -225,22 +226,11 @@ export default function FamilyDay() {
       </section>
 
       {/* 9. CTA Block */}
-      <section className="py-12 sm:py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-ftg-green text-white rounded-3xl p-8 sm:p-12 lg:p-16 text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{t('familyDay.ctaBlockTitle')}</h2>
-            <p className="text-gray-100 mb-8 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">{t('familyDay.ctaBlockSub')}</p>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
-              {ctaFeatures.map((f, i) => (
-                <div key={i} className="bg-white/10 rounded-xl px-3 py-4 text-sm sm:text-base font-medium">{f}</div>
-              ))}
-            </div>
-            <Link to="/#contact" className="inline-block bg-ftg-orange text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors text-sm sm:text-base">
-              {t('familyDay.ctaBtn')}
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CtaForm
+        ctaTitle={t('familyDay.ctaBlockTitle')}
+        ctaSub={t('familyDay.ctaBlockSub')}
+        features={ctaFeatures}
+      />
     </div>
   );
 }
