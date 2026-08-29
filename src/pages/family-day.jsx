@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
 import CtaForm from '../components/CtaForm';
+import FTGIcon from '../components/FTGIcon';
 
 // 嚴格照資料夾原始順序：子網頁-企業家庭日 可搭配體驗 (6張)
 const expImages = [
@@ -22,30 +23,30 @@ const benefitCards = [
 
 // 2. Design：6 張圖示卡
 const designCards = [
-  { icon: '💬', titleKey: 'familyDay.design1Title', descKey: 'familyDay.design1Desc' },
-  { icon: '🎨', titleKey: 'familyDay.design2Title', descKey: 'familyDay.design2Desc' },
-  { icon: '📍', titleKey: 'familyDay.design3Title', descKey: 'familyDay.design3Desc' },
-  { icon: '🍱', titleKey: 'familyDay.design4Title', descKey: 'familyDay.design4Desc' },
-  { icon: '🛡️', titleKey: 'familyDay.design5Title', descKey: 'familyDay.design5Desc' },
-  { icon: '📸', titleKey: 'familyDay.design6Title', descKey: 'familyDay.design6Desc' },
+  { icon: 'users', titleKey: 'familyDay.design1Title', descKey: 'familyDay.design1Desc' },
+  { icon: 'star', titleKey: 'familyDay.design2Title', descKey: 'familyDay.design2Desc' },
+  { icon: 'compass', titleKey: 'familyDay.design3Title', descKey: 'familyDay.design3Desc' },
+  { icon: 'utensils', titleKey: 'familyDay.design4Title', descKey: 'familyDay.design4Desc' },
+  { icon: 'shield', titleKey: 'familyDay.design5Title', descKey: 'familyDay.design5Desc' },
+  { icon: 'award', titleKey: 'familyDay.design6Title', descKey: 'familyDay.design6Desc' },
 ];
 
 // 3. Target：5 張圖示卡
 const targetCards = [
-  { icon: '📅', titleKey: 'familyDay.target1Title', descKey: 'familyDay.target1Desc' },
-  { icon: '💝', titleKey: 'familyDay.target2Title', descKey: 'familyDay.target2Desc' },
-  { icon: '🏢', titleKey: 'familyDay.target3Title', descKey: 'familyDay.target3Desc' },
-  { icon: '📚', titleKey: 'familyDay.target4Title', descKey: 'familyDay.target4Desc' },
-  { icon: '🤝', titleKey: 'familyDay.target5Title', descKey: 'familyDay.target5Desc' },
+  { icon: 'calendar', titleKey: 'familyDay.target1Title', descKey: 'familyDay.target1Desc' },
+  { icon: 'heart', titleKey: 'familyDay.target2Title', descKey: 'familyDay.target2Desc' },
+  { icon: 'users', titleKey: 'familyDay.target3Title', descKey: 'familyDay.target3Desc' },
+  { icon: 'clipboard', titleKey: 'familyDay.target4Title', descKey: 'familyDay.target4Desc' },
+  { icon: 'users', titleKey: 'familyDay.target5Title', descKey: 'familyDay.target5Desc' },
 ];
 
 // 5. Leave：5 張圖示卡
 const leaveCards = [
-  { icon: '💞', titleKey: 'familyDay.leave1Title', descKey: 'familyDay.leave1Desc' },
-  { icon: '🌟', titleKey: 'familyDay.leave2Title', descKey: 'familyDay.leave2Desc' },
-  { icon: '🌱', titleKey: 'familyDay.leave3Title', descKey: 'familyDay.leave3Desc' },
-  { icon: '🏅', titleKey: 'familyDay.leave4Title', descKey: 'familyDay.leave4Desc' },
-  { icon: '😊', titleKey: 'familyDay.leave5Title', descKey: 'familyDay.leave5Desc' },
+  { icon: 'heart', titleKey: 'familyDay.leave1Title', descKey: 'familyDay.leave1Desc' },
+  { icon: 'star', titleKey: 'familyDay.leave2Title', descKey: 'familyDay.leave2Desc' },
+  { icon: 'leaf', titleKey: 'familyDay.leave3Title', descKey: 'familyDay.leave3Desc' },
+  { icon: 'award', titleKey: 'familyDay.leave4Title', descKey: 'familyDay.leave4Desc' },
+  { icon: 'smile', titleKey: 'familyDay.leave5Title', descKey: 'familyDay.leave5Desc' },
 ];
 
 // 6. Process：5 個編號步驟
@@ -59,19 +60,19 @@ const processSteps = [
 
 // 7. Safety：5 張圖示卡
 const safetyCards = [
-  { icon: '🏛️', titleKey: 'familyDay.safety1Title', descKey: 'familyDay.safety1Desc' },
-  { icon: '🚌', titleKey: 'familyDay.safety2Title', descKey: 'familyDay.safety2Desc' },
-  { icon: '👶', titleKey: 'familyDay.safety3Title', descKey: 'familyDay.safety3Desc' },
-  { icon: '📋', titleKey: 'familyDay.safety4Title', descKey: 'familyDay.safety4Desc' },
-  { icon: '🧑‍🏫', titleKey: 'familyDay.safety5Title', descKey: 'familyDay.safety5Desc' },
+  { icon: 'shield', titleKey: 'familyDay.safety1Title', descKey: 'familyDay.safety1Desc' },
+  { icon: 'navigation', titleKey: 'familyDay.safety2Title', descKey: 'familyDay.safety2Desc' },
+  { icon: 'users', titleKey: 'familyDay.safety3Title', descKey: 'familyDay.safety3Desc' },
+  { icon: 'clipboard', titleKey: 'familyDay.safety4Title', descKey: 'familyDay.safety4Desc' },
+  { icon: 'users', titleKey: 'familyDay.safety5Title', descKey: 'familyDay.safety5Desc' },
 ];
 
 // 8. Value Add：4 張圖示卡
 const valueAddCards = [
-  { icon: '📝', titleKey: 'familyDay.valueAdd1Title', descKey: 'familyDay.valueAdd1Desc' },
-  { icon: '🌿', titleKey: 'familyDay.valueAdd2Title', descKey: 'familyDay.valueAdd2Desc' },
-  { icon: '🗓️', titleKey: 'familyDay.valueAdd3Title', descKey: 'familyDay.valueAdd3Desc' },
-  { icon: '🔗', titleKey: 'familyDay.valueAdd4Title', descKey: 'familyDay.valueAdd4Desc' },
+  { icon: 'clipboard', titleKey: 'familyDay.valueAdd1Title', descKey: 'familyDay.valueAdd1Desc' },
+  { icon: 'leaf', titleKey: 'familyDay.valueAdd2Title', descKey: 'familyDay.valueAdd2Desc' },
+  { icon: 'calendar', titleKey: 'familyDay.valueAdd3Title', descKey: 'familyDay.valueAdd3Desc' },
+  { icon: 'link', titleKey: 'familyDay.valueAdd4Title', descKey: 'familyDay.valueAdd4Desc' },
 ];
 
 function PhotoCard({ src, title, desc }) {
@@ -88,10 +89,12 @@ function PhotoCard({ src, title, desc }) {
 
 function IconCard({ icon, title, desc }) {
   return (
-    <div className="bg-white border border-gray-100 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-shadow text-center h-full">
-      <div className="text-4xl mb-3" aria-hidden="true">{icon}</div>
-      <h3 className="text-base sm:text-lg font-bold text-ftg-forest mb-2">{title}</h3>
-      <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>
+    <div className="bg-white border border-gray-200 rounded-2xl card-responsive text-center hover:shadow-lg transition-shadow">
+      <div className="w-12 h-12 md:w-14 md:h-14 bg-ftg-green/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+        <FTGIcon name={icon} size={28} className="text-ftg-green" />
+      </div>
+      <h3 className="text-base md:text-lg font-bold text-ftg-forest mb-2">{title}</h3>
+      <p className="text-gray-600 text-xs md:text-sm leading-relaxed">{desc}</p>
     </div>
   );
 }

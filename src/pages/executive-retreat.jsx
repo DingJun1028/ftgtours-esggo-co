@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
 import CtaForm from '../components/CtaForm';
+import FTGIcon from '../components/FTGIcon';
 
 // 嚴格照資料夾原始順序：子網頁-高階主管共識旅程 (10張)
 const expImages = [
@@ -81,14 +82,14 @@ export default function ExecutiveRetreat() {
   const consensusShow = [consensusImages[0], consensusImages[1], consensusImages[3]];
   const benefits = consensusShow.map((p) => ({ src: p.src, title: t(p.tKey), desc: t(p.tKey + 'Desc') }));
 
-  const designIcons = ['🎯', '🗺️', '🛡️', '💬', '🌿', '📋'];
+  const designIcons = ['compass', 'map', 'shield', 'users', 'leaf', 'clipboard'];
   const designCards = [1, 2, 3, 4, 5, 6].map((i) => ({
     icon: designIcons[i - 1],
     title: t(`executive.design${i}Title`),
     desc: t(`executive.design${i}Desc`),
   }));
 
-  const targetIcons = ['🧭', '🔄', '🌱', '👥', '🤝'];
+  const targetIcons = ['🧭', '🔄', 'leaf', 'users', 'users'];
   const targetCards = [1, 2, 3, 4, 5].map((i) => ({
     icon: targetIcons[i - 1],
     title: t(`executive.target${i}Title`),
@@ -105,7 +106,7 @@ export default function ExecutiveRetreat() {
     desc: t(`executive.process${i}Desc`),
   }));
 
-  const safetyIcons = ['🏢', '🚌', '🥾', '📩', '🧑‍🏫'];
+  const safetyIcons = ['users', 'navigation', 'mountain', '📩', 'users'];
   const safetyCards = [1, 2, 3, 4, 5].map((i) => ({
     icon: safetyIcons[i - 1],
     title: t(`executive.safety${i}Title`),

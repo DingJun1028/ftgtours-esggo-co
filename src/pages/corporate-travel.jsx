@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
 import CtaForm from '../components/CtaForm';
+import FTGIcon from '../components/FTGIcon';
 
 // 嚴格照資料夾原始順序：子網頁-企業員工旅遊 (14張)
 const travelImages = [
@@ -41,7 +42,9 @@ function PhotoCard({ src, title, desc }) {
 function IconCard({ icon, title, desc }) {
   return (
     <div className="bg-white border border-gray-200 rounded-2xl card-responsive text-center hover:shadow-lg transition-shadow">
-      <div className="w-12 h-12 md:w-14 md:h-14 bg-ftg-green/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 text-2xl md:text-3xl">{icon}</div>
+      <div className="w-12 h-12 md:w-14 md:h-14 bg-ftg-green/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+        <FTGIcon name={icon} size={28} className="text-ftg-green" />
+      </div>
       <h3 className="text-base md:text-lg font-bold text-ftg-forest mb-2">{title}</h3>
       <p className="text-gray-600 text-xs md:text-sm leading-relaxed">{desc}</p>
     </div>
@@ -58,20 +61,20 @@ export default function CorporateTravel() {
   });
 
   const designCards = [
-    { icon: '🎯', title: t('corporateTravel.design1Title'), desc: t('corporateTravel.design1Desc') },
-    { icon: '🥾', title: t('corporateTravel.design2Title'), desc: t('corporateTravel.design2Desc') },
-    { icon: '🍱', title: t('corporateTravel.design3Title'), desc: t('corporateTravel.design3Desc') },
-    { icon: '🌿', title: t('corporateTravel.design4Title'), desc: t('corporateTravel.design4Desc') },
-    { icon: '🏮', title: t('corporateTravel.design5Title'), desc: t('corporateTravel.design5Desc') },
-    { icon: '🤝', title: t('corporateTravel.design6Title'), desc: t('corporateTravel.design6Desc') },
+    { icon: 'compass', title: t('corporateTravel.design1Title'), desc: t('corporateTravel.design1Desc') },
+    { icon: 'mountain', title: t('corporateTravel.design2Title'), desc: t('corporateTravel.design2Desc') },
+    { icon: 'utensils', title: t('corporateTravel.design3Title'), desc: t('corporateTravel.design3Desc') },
+    { icon: 'leaf', title: t('corporateTravel.design4Title'), desc: t('corporateTravel.design4Desc') },
+    { icon: 'sun', title: t('corporateTravel.design5Title'), desc: t('corporateTravel.design5Desc') },
+    { icon: 'users', title: t('corporateTravel.design6Title'), desc: t('corporateTravel.design6Desc') },
   ];
 
   const targetCards = [
-    { icon: '📅', title: t('corporateTravel.target1Title'), desc: t('corporateTravel.target1Desc') },
-    { icon: '👥', title: t('corporateTravel.target2Title'), desc: t('corporateTravel.target2Desc') },
-    { icon: '🎁', title: t('corporateTravel.target3Title'), desc: t('corporateTravel.target3Desc') },
-    { icon: '🌱', title: t('corporateTravel.target4Title'), desc: t('corporateTravel.target4Desc') },
-    { icon: '🔗', title: t('corporateTravel.target5Title'), desc: t('corporateTravel.target5Desc') },
+    { icon: 'calendar', title: t('corporateTravel.target1Title'), desc: t('corporateTravel.target1Desc') },
+    { icon: 'users', title: t('corporateTravel.target2Title'), desc: t('corporateTravel.target2Desc') },
+    { icon: 'gift', title: t('corporateTravel.target3Title'), desc: t('corporateTravel.target3Desc') },
+    { icon: 'leaf', title: t('corporateTravel.target4Title'), desc: t('corporateTravel.target4Desc') },
+    { icon: 'link', title: t('corporateTravel.target5Title'), desc: t('corporateTravel.target5Desc') },
   ];
 
   const leaveCards = [
@@ -91,11 +94,11 @@ export default function CorporateTravel() {
   ];
 
   const safetyCards = [
-    { icon: '🛡️', title: t('corporateTravel.safety1Title'), desc: t('corporateTravel.safety1Desc') },
-    { icon: '🛡️', title: t('corporateTravel.safety2Title'), desc: t('corporateTravel.safety2Desc') },
-    { icon: '🛡️', title: t('corporateTravel.safety3Title'), desc: t('corporateTravel.safety3Desc') },
-    { icon: '🛡️', title: t('corporateTravel.safety4Title'), desc: t('corporateTravel.safety4Desc') },
-    { icon: '🛡️', title: t('corporateTravel.safety5Title'), desc: t('corporateTravel.safety5Desc') },
+    { icon: 'shield', title: t('corporateTravel.safety1Title'), desc: t('corporateTravel.safety1Desc') },
+    { icon: 'navigation', title: t('corporateTravel.safety2Title'), desc: t('corporateTravel.safety2Desc') },
+    { icon: 'compass', title: t('corporateTravel.safety3Title'), desc: t('corporateTravel.safety3Desc') },
+    { icon: 'award', title: t('corporateTravel.safety4Title'), desc: t('corporateTravel.safety4Desc') },
+    { icon: 'users', title: t('corporateTravel.safety5Title'), desc: t('corporateTravel.safety5Desc') },
   ];
 
   const valueAddCards = valueImages;

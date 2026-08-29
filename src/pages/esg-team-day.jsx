@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
 import CtaForm from '../components/CtaForm';
+import FTGIcon from '../components/FTGIcon';
 
 // 嚴格照資料夾原始順序：子網頁-ESG戶外團隊日 (10張)
 const teamImages = [
@@ -21,40 +22,40 @@ const expImages = [
 
 // 靜態圖示對應（設計 / 目標 / 安心 / 加值 / CTA 各區塊）
 const designData = [
-  { n: 1, icon: '🎯' },
-  { n: 2, icon: '🌿' },
-  { n: 3, icon: '🗺️' },
-  { n: 4, icon: '🤝' },
-  { n: 5, icon: '🛡️' },
-  { n: 6, icon: '📸' },
+  { n: 1, icon: 'compass' },
+  { n: 2, icon: 'leaf' },
+  { n: 3, icon: 'map' },
+  { n: 4, icon: 'users' },
+  { n: 5, icon: 'shield' },
+  { n: 6, icon: 'award' },
 ];
 const targetData = [
-  { n: 1, icon: '🌱' },
-  { n: 2, icon: '🤝' },
-  { n: 3, icon: '🌟' },
-  { n: 4, icon: '🔗' },
-  { n: 5, icon: '💡' },
+  { n: 1, icon: 'leaf' },
+  { n: 2, icon: 'users' },
+  { n: 3, icon: 'star' },
+  { n: 4, icon: 'link' },
+  { n: 5, icon: 'star' },
 ];
 const leaveData = [
-  { n: 1, icon: '🤝' },
-  { n: 2, icon: '🌿' },
-  { n: 3, icon: '🏘️' },
-  { n: 4, icon: '📷' },
-  { n: 5, icon: '💬' },
+  { n: 1, icon: 'users' },
+  { n: 2, icon: 'leaf' },
+  { n: 3, icon: 'local' },
+  { n: 4, icon: 'camera' },
+  { n: 5, icon: 'users' },
 ];
 const processData = [1, 2, 3, 4, 5].map((n) => ({ n }));
 const safetyData = [
-  { n: 1, icon: '🏢' },
-  { n: 2, icon: '🛡️' },
-  { n: 3, icon: '🥾' },
-  { n: 4, icon: '🎒' },
-  { n: 5, icon: '👥' },
+  { n: 1, icon: 'users' },
+  { n: 2, icon: 'shield' },
+  { n: 3, icon: 'mountain' },
+  { n: 4, icon: 'sustainable' },
+  { n: 5, icon: 'users' },
 ];
 const valueAddData = [
-  { n: 1, icon: '📝' },
-  { n: 2, icon: '📊' },
-  { n: 3, icon: '🗓️' },
-  { n: 4, icon: '🔗' },
+  { n: 1, icon: 'clipboard' },
+  { n: 2, icon: 'clipboard' },
+  { n: 3, icon: 'calendar' },
+  { n: 4, icon: 'link' },
 ];
 
 // 保留原有 PhotoCard 元件

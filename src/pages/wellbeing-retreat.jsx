@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
 import CtaForm from '../components/CtaForm';
+import FTGIcon from '../components/FTGIcon';
 
 // 嚴格照資料夾原始順序：子網頁-員工身心平衡旅程 (11張)
 const images = [
@@ -30,11 +31,11 @@ function PhotoCard({ src, title, desc }) {
   );
 }
 
-// 圖標（呈現用，非翻譯內容）
-const benefitIcons = ['🌿', '🍃', '🤝', '💡', '🌟'];
-const designIcons = ['💬', '🗺️', '🛡️', '🌲', '🍱', '⏳', '🧭', '📋'];
-const leaveIcons = ['😌', '🔗', '❤️', '📸', '💭'];
-const safetyIcons = ['🏢', '🛡️', '🥾', '🎒', '🧭'];
+// 圖標（呈現用，非翻譯內容）— FTGIcon SVG 名稱
+const benefitIcons = ['leaf', 'leaf', 'users', 'star', 'star'];
+const designIcons = ['mail', 'map', 'shield', 'tree', 'utensils', 'calendar', 'compass', 'clipboard'];
+const leaveIcons = ['wind', 'link', 'heart', 'camera', 'star'];
+const safetyIcons = ['local', 'shield', 'mountain', 'compass', 'safety'];
 
 const benefitKeys = ['benefit1', 'benefit2', 'benefit3', 'benefit4', 'benefit5'];
 const designKeys = ['design1', 'design2', 'design3', 'design4', 'design5', 'design6', 'design7', 'design8'];

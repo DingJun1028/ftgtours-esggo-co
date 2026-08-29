@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
 import CtaForm from '../components/CtaForm';
+import FTGIcon from '../components/FTGIcon';
 
 // 嚴格照資料夾原始順序：子網頁-ESG Impact Note (13張)
 const noteImages = [
@@ -69,7 +70,7 @@ export default function EsgImpactNote() {
   }));
 
   // 2. Design — 6 icon cards
-  const designIcons = ['🎯', '🧩', '📊', '✍️', '🔄', '💡'];
+  const designIcons = ['compass', '🧩', 'clipboard', '✍️', '🔄', 'star'];
   const designCards = [1, 2, 3, 4, 5, 6].map((n) => ({
     icon: designIcons[n - 1],
     title: t(`impactNote.design${n}Title`),
@@ -77,7 +78,7 @@ export default function EsgImpactNote() {
   }));
 
   // 3. Target — 5 icon cards
-  const targetIcons = ['📑', '🏷️', '💬', '🗂️', '🤝'];
+  const targetIcons = ['📑', '🏷️', 'users', '🗂️', 'users'];
   const targetCards = [1, 2, 3, 4, 5].map((n) => ({
     icon: targetIcons[n - 1],
     title: t(`impactNote.target${n}Title`),
@@ -97,7 +98,7 @@ export default function EsgImpactNote() {
   }));
 
   // 7. Safety — 5 cards
-  const safetyIcons = ['👥', '✅', '📋', '🔒', '🛟'];
+  const safetyIcons = ['users', '✅', 'clipboard', '🔒', '🛟'];
   const safetyCards = [1, 2, 3, 4, 5].map((n) => ({
     icon: safetyIcons[n - 1],
     title: t(`impactNote.safety${n}Title`),
@@ -105,7 +106,7 @@ export default function EsgImpactNote() {
   }));
 
   // 8. Value Add — 4 cards
-  const valueIcons = ['🧭', '🎉', '📅', '🛠️'];
+  const valueIcons = ['🧭', '🎉', 'calendar', '🛠️'];
   const valueCards = [1, 2, 3, 4].map((n) => ({
     icon: valueIcons[n - 1],
     title: t(`impactNote.valueAdd${n}Title`),
