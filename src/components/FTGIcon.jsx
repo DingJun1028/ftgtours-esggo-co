@@ -148,6 +148,21 @@ export const FTG_ICONS = {
       <path d="M12 2v6"/><path d="m16.24 7.76 4.24-4.24"/><path d="M18 12h6"/><path d="m16.24 16.24 4.24 4.24"/><path d="M12 18v6"/><path d="m4.93 19.07 4.24-4.24"/><path d="M2 12h6"/><path d="m4.93 4.93 4.24 4.24"/>
     </svg>
   ),
+  navigation: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+    </svg>
+  ),
+  award: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+    </svg>
+  ),
+  cup: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x6="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/>
+    </svg>
+  ),
 };
 
 export function FTGIcon({ name, size = 24, className = '' }) {

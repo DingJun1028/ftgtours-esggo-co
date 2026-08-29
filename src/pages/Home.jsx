@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
+import FTGIcon from '../components/FTGIcon';
 
 export default function Home() {
   const { t } = useLanguage();
@@ -20,11 +21,11 @@ export default function Home() {
     { title: t('home.p6Title'), desc: t('home.p6Desc'), link: '/esg-impact-note', img: '/images/esg-impact-note/ESG Impact Note-頁首大橫幅.png' },
   ];
 
-  const featureIcons = ['🌲', '🍽️', '👨‍👩‍👧', '🤝', '♻️'];
-  const processIcons = ['💬', '🗺️', '🛡️', '❤️', '📊'];
-  const momentIcons = ['🏖️', '👨‍👩‍👧‍👦', '🎯', '🧘', '👔'];
+  const featureIcons = ['leaf', 'utensils', 'users', 'link', 'sustainable'];
+  const processIcons = ['users', 'map', 'shield', 'heart', 'clipboard'];
+  const momentIcons = ['sun', 'users', 'compass', 'smile', 'award'];
   const stepIcons = ['1', '2', '3', '4', '5'];
-  const safetyIcons = ['🚌', '📋', '🏥', '🧭', '🤝'];
+  const safetyIcons = ['navigation', 'clipboard', 'safety', 'compass', 'users'];
 
   return (
     <div>
@@ -70,7 +71,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-16">
             <div className="bg-white rounded-2xl card-responsive shadow-lg">
               <div className="w-12 h-12 md:w-16 md:h-16 bg-ftg-green/10 rounded-full flex items-center justify-center mb-4 md:mb-6">
-                <span className="text-2xl md:text-3xl">🌲</span>
+                <FTGIcon name="leaf" size={28} className="text-ftg-green" />
               </div>
               <h3 className="text-xl md:text-2xl font-bold text-ftg-forest mb-3 md:mb-4">{t('home.v1Title')}</h3>
               <p className="text-gray-600 leading-relaxed text-sm md:text-base">
@@ -80,7 +81,7 @@ export default function Home() {
 
             <div className="bg-white rounded-2xl card-responsive shadow-lg">
               <div className="w-12 h-12 md:w-16 md:h-16 bg-ftg-green/10 rounded-full flex items-center justify-center mb-4 md:mb-6">
-                <span className="text-2xl md:text-3xl">🤝</span>
+                <FTGIcon name="users" size={28} className="text-ftg-green" />
               </div>
               <h3 className="text-xl md:text-2xl font-bold text-ftg-forest mb-3 md:mb-4">{t('home.v2Title')}</h3>
               <p className="text-gray-600 leading-relaxed text-sm md:text-base">
@@ -90,7 +91,7 @@ export default function Home() {
 
             <div className="bg-white rounded-2xl card-responsive shadow-lg">
               <div className="w-12 h-12 md:w-16 md:h-16 bg-ftg-green/10 rounded-full flex items-center justify-center mb-4 md:mb-6">
-                <span className="text-2xl md:text-3xl">💚</span>
+                <FTGIcon name="heart" size={28} className="text-ftg-green" />
               </div>
               <h3 className="text-xl md:text-2xl font-bold text-ftg-forest mb-3 md:mb-4">{t('home.v3Title')}</h3>
               <p className="text-gray-600 leading-relaxed text-sm md:text-base">
@@ -111,7 +112,7 @@ export default function Home() {
             {t('home.featureList').map((item, i) => (
               <div key={i} className="text-center card-responsive bg-ftg-cream rounded-2xl hover:shadow-lg transition-shadow">
                 <div className="w-12 h-12 md:w-16 md:h-16 bg-ftg-green/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                  <span className="text-2xl md:text-3xl">{featureIcons[i]}</span>
+                  <FTGIcon name={featureIcons[i]} size={28} className="text-ftg-green" />
                 </div>
                 <h3 className="font-bold text-ftg-forest mb-2 text-sm md:text-base">{item.title}</h3>
                 <p className="text-gray-600 text-xs md:text-sm">{item.desc}</p>
@@ -131,7 +132,7 @@ export default function Home() {
             {t('home.processList').map((item, i) => (
               <div key={i} className="text-center card-responsive bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow">
                 <div className="w-12 h-12 md:w-16 md:h-16 bg-ftg-green text-white rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                  <span className="text-xl md:text-2xl">{processIcons[i]}</span>
+                  <FTGIcon name={processIcons[i]} size={24} className="text-white" />
                 </div>
                 <h3 className="font-bold text-ftg-forest mb-2 text-xs md:text-sm">{item.title}</h3>
                 <p className="text-gray-600 text-xs">{item.desc}</p>
@@ -187,7 +188,7 @@ export default function Home() {
             {t('home.momentList').map((item, i) => (
               <div key={i} className="text-center card-responsive bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow">
                 <div className="w-12 h-12 md:w-16 md:h-16 bg-ftg-green/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                  <span className="text-2xl md:text-3xl">{momentIcons[i]}</span>
+                  <FTGIcon name={momentIcons[i]} size={28} className="text-ftg-green" />
                 </div>
                 <h3 className="font-bold text-ftg-forest mb-2 text-sm md:text-base">{item.title}</h3>
                 <p className="text-gray-600 text-xs md:text-sm">{item.desc}</p>
@@ -227,7 +228,7 @@ export default function Home() {
             {t('home.safetyList').map((item, i) => (
               <div key={i} className="text-center card-responsive bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow">
                 <div className="w-12 h-12 md:w-16 md:h-16 bg-ftg-green/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                  <span className="text-2xl md:text-3xl">{safetyIcons[i]}</span>
+                  <FTGIcon name={safetyIcons[i]} size={28} className="text-ftg-green" />
                 </div>
                 <h3 className="font-bold text-ftg-forest mb-2 text-sm md:text-base">{item.title}</h3>
                 <p className="text-gray-600 text-xs md:text-sm">{item.desc}</p>
