@@ -20,14 +20,8 @@ export default function Navbar() {
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-ftg-green rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-lg">FTG</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-bold text-ftg-green font-serif">墾趣旅遊</span>
-              <span className="text-xs text-gray-500">FTG TOURS</span>
-            </div>
+          <Link to="/" className="flex items-center">
+            <img src="/images/logo.png" alt="聖趣旅遊 FTG TOURS" className="h-12 md:h-14 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}

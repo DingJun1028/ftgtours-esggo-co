@@ -7,15 +7,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                <span className="text-ftg-green font-bold text-lg">FTG</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold font-serif">墾趣旅遊</h3>
-                <p className="text-xs text-gray-300">FTG TOURS</p>
-              </div>
-            </div>
+            <img src="/images/logo.png" alt="聖趣旅遊 FTG TOURS" className="h-10 md:h-12 w-auto mb-4 brightness-0 invert" />
             <p className="text-gray-300 text-sm">
               {t('footer.brandTagline')}
             </p>
