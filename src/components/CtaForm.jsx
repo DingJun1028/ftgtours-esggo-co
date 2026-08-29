@@ -54,7 +54,7 @@ export default function CtaForm({ ctaTitle, ctaSub, features }) {
   }
 
   return (
-    <div className="bg-forest/90 backdrop-blur-sm text-white rounded-2xl shadow-xl w-full p-5 sm:p-7 md:p-9 lg:p-12">
+    <div className="bg-forest/90 backdrop-blur-sm text-white rounded-2xl shadow-xl mx-auto max-w-5xl w-full p-5 sm:p-7 md:p-9 lg:p-12">
       {/* Header */}
       <div className="text-center mb-5 sm:mb-6 md:mb-7 lg:mb-8">
         <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-3">{ctaTitle}</h2>
