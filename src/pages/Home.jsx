@@ -35,7 +35,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-ftg-forest/80 via-ftg-green/60 to-ftg-leaf/50"></div>
         <div className="absolute inset-0 bg-black/25"></div>
         <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 font-serif leading-tight">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 font-serif leading-tight whitespace-nowrap">
             {t('home.heroTitle')}
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-gray-100 max-w-3xl mx-auto leading-relaxed">
