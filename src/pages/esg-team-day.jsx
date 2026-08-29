@@ -61,16 +61,16 @@ export default function EsgTeamDay() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
             <div>
-              <h2 className="text-3xl font-bold text-ftg-forest mb-6">{t('common.whyNeed')}</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-ftg-forest mb-4 sm:mb-6">{t('common.whyNeed')}</h2>
               <p className="text-gray-600 mb-4 leading-relaxed">
                 {t('esgTeamDay.whyP')}
               </p>
             </div>
-            <div className="bg-ftg-cream rounded-2xl p-8">
+            <div className="bg-ftg-cream rounded-2xl p-6 sm:p-8">
               <h3 className="text-xl font-bold text-ftg-forest mb-4">{t('common.weProvide')}</h3>
               <ul className="space-y-3">
                 {provideItems.map((item, i) => (
@@ -83,20 +83,20 @@ export default function EsgTeamDay() {
             </div>
           </div>
 
-          <h2 className="text-3xl font-bold text-ftg-forest mb-8 text-center">{t('esgTeamDay.bringTitle')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-ftg-forest mb-6 sm:mb-8 text-center">{t('esgTeamDay.bringTitle')}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16">
             {teamImages.map((p, i) => <PhotoCard key={i} src={p.src} title={t(p.tKey)} desc={t(p.tKey + 'Desc')} />)}
           </div>
 
-          <h2 className="text-3xl font-bold text-ftg-forest mb-8 text-center">{t('esgTeamDay.expTitle')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-ftg-forest mb-6 sm:mb-8 text-center">{t('esgTeamDay.expTitle')}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
             {expImages.map((p, i) => <PhotoCard key={i} src={p.src} title={t(p.tKey)} desc={t(p.tKey + 'Desc')} />)}
           </div>
 
-          <h2 className="text-3xl font-bold text-ftg-forest mb-8 text-center">{t('esgTeamDay.modulesTitle')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-ftg-forest mb-6 sm:mb-8 text-center">{t('esgTeamDay.modulesTitle')}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
             {modules.map((item, i) => (
-              <div key={i} className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+              <div key={i} className="bg-white border border-gray-200 rounded-xl p-5 sm:p-6 hover:shadow-lg transition-shadow">
                 <div className="flex items-center mb-3">
                   <span className="w-8 h-8 bg-ftg-green text-white rounded-full flex items-center justify-center font-bold mr-3">{i + 1}</span>
                   <p className="text-gray-700 font-medium">{item.split('：')[0]}</p>

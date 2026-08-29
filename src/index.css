@@ -37,7 +37,7 @@
   /* 子頁 Hero 合併區 */
   .subpage-hero {
     @apply relative flex items-center justify-center overflow-hidden;
-    min-height: 50vh;
+    min-height: 40vh;
   }
   .subpage-hero__img {
     @apply absolute inset-0 w-full h-full object-cover;
@@ -49,18 +49,37 @@
     @apply absolute inset-0 bg-black/25;
   }
   .subpage-hero__content {
-    @apply relative z-10 text-center text-white px-4 max-w-4xl mx-auto py-16;
+    @apply relative z-10 text-center text-white px-4 max-w-4xl mx-auto py-12 md:py-16;
   }
   .subpage-hero__title {
-    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-serif leading-tight;
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-serif leading-tight;
     text-wrap: balance;
     orphans: 2;
     widows: 2;
   }
   .subpage-hero__subtitle {
-    @apply text-sm sm:text-base md:text-lg mt-4 text-gray-100 max-w-2xl mx-auto;
+    @apply text-xs sm:text-sm md:text-base mt-3 text-gray-100 max-w-2xl mx-auto;
     text-wrap: balance;
     orphans: 2;
     widows: 2;
+  }
+  /* RWD 工具 */
+  .section-padding {
+    @apply py-10 md:py-16 lg:py-20;
+  }
+  .card-responsive {
+    @apply p-4 md:p-6 lg:p-8;
+  }
+  .grid-5-responsive {
+    @apply grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
   }
 }
