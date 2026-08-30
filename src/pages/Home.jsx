@@ -52,9 +52,9 @@ export default function Home() {
             <Link to="/corporate-travel" className="bg-ftg-green text-white px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold text-base md:text-lg hover:bg-ftg-forest transition-colors">
               {t('home.exploreBtn')}
             </Link>
-            <a href="#esg-section" className="bg-white/10 backdrop-blur-sm text-white border-2 border-white px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold text-base md:text-lg hover:bg-white/20 transition-colors">
+            <Link to="/journey-design" className="bg-white/10 backdrop-blur-sm text-white border-2 border-white px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold text-base md:text-lg hover:bg-white/20 transition-colors">
               {t('home.designBtn')}
-            </a>
+            </Link>
           </div>
           {/* 4 Feature Tags */}
           <div className="mt-8 flex flex-wrap justify-center gap-3">

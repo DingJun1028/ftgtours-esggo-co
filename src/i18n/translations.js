@@ -3,6 +3,11 @@
 
 export const translations = {
   zh: {
+    notFound: {
+      title: '找不到這個頁面',
+      desc: '您要找的旅程頁面可能已移動或網址有誤。',
+      back: '返回首頁',
+    },
     nav: {
       home: '首頁',
       products: '企業戶外客製專案',
