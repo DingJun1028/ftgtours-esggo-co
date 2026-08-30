@@ -40,64 +40,66 @@ export default function CtaForm({ ctaTitle, ctaSub, features }) {
     }
   };
 
-  const inputCls = 'w-full px-3 py-2 md:px-4 md:py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm md:text-base';
-  const labelCls = 'block text-xs md:text-sm font-semibold text-ftg-forest mb-1 md:mb-2';
-
   if (status === 'success') {
     return (
-      <div className="bg-ftg-green text-white rounded-2xl p-6 md:p-10 text-center">
-        <div className="text-4xl md:text-5xl mb-4">✓</div>
-        <h2 className="text-xl md:text-2xl font-bold mb-2">{t('contact.successTitle')}</h2>
-        <p className="text-gray-100 text-sm md:text-base">{t('contact.successMsg')}</p>
+      <div className="bg-ftg-sand rounded-3xl p-8 sm:p-10 md:p-14 text-center max-w-3xl mx-auto">
+        <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-ftg-green/10 flex items-center justify-center">
+          <svg className="w-8 h-8 text-ftg-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3 className="text-xl md:text-2xl font-bold text-ftg-forest mb-3">{t('contact.successTitle')}</h3>
+        <p className="text-gray-600 text-sm md:text-base leading-relaxed max-w-md mx-auto">{t('contact.successMsg')}</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-forest/90 backdrop-blur-sm text-white rounded-2xl shadow-xl mx-auto max-w-5xl w-full p-5 sm:p-7 md:p-9 lg:p-12">
-      {/* Header */}
-      <div className="text-center mb-5 sm:mb-6 md:mb-7 lg:mb-8">
-        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-3">{ctaTitle}</h2>
-        {ctaSub && <p className="text-gray-100 text-xs sm:text-sm md:text-base max-w-2xl mx-auto">{ctaSub}</p>}
+    <div className="bg-white rounded-3xl shadow-xl overflow-hidden max-w-4xl mx-auto">
+      {/* Header Band */}
+      <div className="bg-ftg-forest px-6 sm:px-10 py-8 sm:py-10 text-center">
+        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">{ctaTitle}</h3>
+        {ctaSub && <p className="text-gray-300 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">{ctaSub}</p>}
       </div>
 
-      {/* Features */}
+      {/* Feature Pills */}
       {features && features.length > 0 && (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4 gap-y-3 mb-4 sm:mb-6 md:mb-8">
-          {features.map((f, i) => (
-            <div key={i} className="bg-white/10 rounded-lg md:rounded-xl py-2.5 md:py-3 px-2 md:px-3 text-center min-w-0">
-              <span className="text-xs md:text-sm font-medium block truncate">{f}</span>
-            </div>
-          ))}
+        <div className="px-6 sm:px-10 pt-6 pb-2">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+            {features.map((f, i) => (
+              <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-ftg-cream text-ftg-forest text-xs sm:text-sm font-medium">
+                <svg className="w-3.5 h-3.5 text-ftg-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                {f}
+              </span>
+            ))}
+          </div>
         </div>
       )}
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-5">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
+      <form onSubmit={handleSubmit} className="px-6 sm:px-10 py-8 sm:py-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
           <div>
-            <label className={labelCls}>{t('contact.formCompany')}</label>
-            <input name="company" value={form.company} onChange={handleChange} required className={inputCls} placeholder={t('contact.formCompanyPlaceholder')} />
+            <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formCompany')}</label>
+            <input name="company" value={form.company} onChange={handleChange} required placeholder={t('contact.formCompanyPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm" />
           </div>
           <div>
-            <label className={labelCls}>{t('contact.formContact')}</label>
-            <input name="contact_name" value={form.contact_name} onChange={handleChange} required className={inputCls} placeholder={t('contact.formContactPlaceholder')} />
+            <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formContact')}</label>
+            <input name="contact_name" value={form.contact_name} onChange={handleChange} required placeholder={t('contact.formContactPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm" />
           </div>
           <div>
-            <label className={labelCls}>{t('contact.formEmail')}</label>
-            <input name="email" type="email" value={form.email} onChange={handleChange} required className={inputCls} placeholder={t('contact.formEmailPlaceholder')} />
+            <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formEmail')}</label>
+            <input name="email" type="email" value={form.email} onChange={handleChange} required placeholder={t('contact.formEmailPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm" />
           </div>
           <div>
-            <label className={labelCls}>{t('contact.formPhone')}</label>
-            <input name="phone" value={form.phone} onChange={handleChange} className={inputCls} placeholder={t('contact.formPhonePlaceholder')} />
+            <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formPhone')}</label>
+            <input name="phone" value={form.phone} onChange={handleChange} placeholder={t('contact.formPhonePlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm" />
           </div>
           <div>
-            <label className={labelCls}>{t('contact.formParticipants')}</label>
-            <input name="participants" value={form.participants} onChange={handleChange} className={inputCls} placeholder={t('contact.formParticipantsPlaceholder')} />
+            <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formParticipants')}</label>
+            <input name="participants" value={form.participants} onChange={handleChange} placeholder={t('contact.formParticipantsPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm" />
           </div>
           <div>
-            <label className={labelCls}>{t('contact.formActivityType')}</label>
-            <select name="activity_type" value={form.activity_type} onChange={handleChange} required className={inputCls}>
+            <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formActivityType')}</label>
+            <select name="activity_type" value={form.activity_type} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm">
               <option value="">{t('contact.formSelectOption')}</option>
               <option value="corporate-travel">{t('products.corpTravel')}</option>
               <option value="family-day">{t('products.familyDay')}</option>
@@ -109,22 +111,22 @@ export default function CtaForm({ ctaTitle, ctaSub, features }) {
             </select>
           </div>
           <div>
-            <label className={labelCls}>{t('contact.formDate')}</label>
-            <input name="preferred_date" type="date" value={form.preferred_date} onChange={handleChange} className={inputCls} />
+            <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formDate')}</label>
+            <input name="preferred_date" type="date" value={form.preferred_date} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm" />
           </div>
           <div>
-            <label className={labelCls}>{t('contact.formMessage')}</label>
-            <input name="message" value={form.message} onChange={handleChange} className={inputCls} placeholder={t('contact.formMessagePlaceholder')} />
+            <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formMessage')}</label>
+            <input name="message" value={form.message} onChange={handleChange} placeholder={t('contact.formMessagePlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm" />
           </div>
         </div>
 
-        {errorMsg && <p className="text-red-300 text-sm">{errorMsg}</p>}
+        {errorMsg && <p className="mt-4 text-sm text-red-600 bg-red-50 px-4 py-2 rounded-lg">{errorMsg}</p>}
 
-        <div className="flex flex-col sm:flex-row gap-2 md:gap-3 pt-2">
-          <button type="submit" disabled={status === 'sending'} className="bg-ftg-orange text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full font-semibold text-sm md:text-base hover:bg-orange-600 transition-colors disabled:opacity-60 flex-1 sm:flex-none">
+        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+          <button type="submit" disabled={status === 'sending'} className="flex-1 bg-ftg-orange text-white px-8 py-3.5 rounded-full font-semibold text-sm md:text-base hover:bg-orange-600 transition-colors disabled:opacity-50 shadow-lg shadow-orange-200">
             {status === 'sending' ? t('contact.submitting') : t('contact.submitBtn')}
           </button>
-          <a href="/files/ftg-tours-brochure.pdf" target="_blank" rel="noopener noreferrer" className="border-2 border-white text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full font-semibold text-sm md:text-base hover:bg-white/10 transition-colors text-center flex-1 sm:flex-none">
+          <a href="/files/ftg-tours-brochure.pdf" target="_blank" rel="noopener noreferrer" className="flex-1 border-2 border-ftg-forest text-ftg-forest px-8 py-3.5 rounded-full font-semibold text-sm md:text-base hover:bg-ftg-forest hover:text-white transition-colors text-center">
             {t('contact.downloadBtn')}
           </a>
         </div>
