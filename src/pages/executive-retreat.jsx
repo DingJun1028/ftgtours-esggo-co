@@ -44,7 +44,9 @@ function SectionTitle({ children, light = false }) {
 function IconCard({ icon, title, desc }) {
   return (
     <div className="bg-white border border-gray-100 rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-lg transition-shadow h-full">
-      <div className="w-12 h-12 rounded-full bg-ftg-cream text-2xl flex items-center justify-center mb-4">{icon}</div>
+      <div className="w-12 h-12 rounded-full bg-ftg-cream text-2xl flex items-center justify-center mb-4">
+                  <FTGIcon name={icon} size={28} className="text-ftg-green" />
+                </div>
       <h3 className="text-base sm:text-lg font-bold text-ftg-forest mb-2 leading-snug">{title}</h3>
       <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>
     </div>

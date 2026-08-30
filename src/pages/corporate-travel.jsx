@@ -178,7 +178,9 @@ export default function CorporateTravel() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 mb-12 md:mb-16">
             {safetyCards.map((c, i) => (
               <div key={i} className="bg-white border border-gray-200 rounded-2xl card-responsive text-center hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 md:w-14 md:h-14 bg-ftg-green/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 text-2xl md:text-3xl">{c.icon}</div>
+                <div className="w-12 h-12 md:w-14 md:h-14 bg-ftg-green/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+                  <FTGIcon name={c.icon} size={28} className="text-ftg-green" />
+                </div>
                 <h3 className="text-base md:text-lg font-bold text-ftg-forest mb-2">{c.title}</h3>
                 <p className="text-gray-600 text-xs md:text-sm leading-relaxed">{c.desc}</p>
               </div>
