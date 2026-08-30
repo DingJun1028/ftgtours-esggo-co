@@ -51,11 +51,16 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-400">
-          <p>&copy; 2026 FTG TOURS 墾趣旅遊. {t('footer.rights')}</p>
-          <div className="mt-2 space-x-4">
-            <a href="#/" className="hover:text-white transition-colors">{t('footer.privacy')}</a>
-            <a href="#/" className="hover:text-white transition-colors">{t('footer.terms')}</a>
+        <div className="border-t border-gray-700 mt-8 pt-6 text-sm text-gray-400">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <img src="/images/logo.png" alt="墾趣旅遊 FTG TOURS" className="h-8 w-auto brightness-0 invert" />
+              <p>&copy; 2026 FTG TOURS 墾趣旅遊. {t('footer.rights')}</p>
+            </div>
+            <div className="space-x-4">
+              <a href="#/" className="hover:text-white transition-colors">{t('footer.privacy')}</a>
+              <a href="#/" className="hover:text-white transition-colors">{t('footer.terms')}</a>
+            </div>
           </div>
         </div>
       </div>
