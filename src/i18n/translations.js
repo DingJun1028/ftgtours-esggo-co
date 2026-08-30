@@ -54,6 +54,11 @@ export const translations = {
       ctaTitle: '讓團隊旅行，不只是出遊',
       ctaSub: '從需求訪談到成果交付，我們協助企業把每一次戶外活動，轉化為員工福祉、團隊凝聚與永續行動的解方。',
       ctaBtn: '立即洽詢企業方案',
+      notFound: {
+        title: '找不到這個頁面',
+        desc: '您要找的旅程頁面可能已移動或網址有誤。',
+        back: '返回首頁',
+      },
       // ===== 首頁新增區塊 =====
       featuresTitle: '墾趣的旅程特色',
       featureList: [
@@ -1186,6 +1191,11 @@ export const translations = {
       downloadBtn: 'Download Brochure',
       successTitle: 'Inquiry Sent',
       successMsg: 'Thank you for your inquiry. We have received your message and will contact you soon!',
+      notFound: {
+        title: 'Page Not Found',
+        desc: 'The journey page you are looking for may have been moved or the URL is incorrect.',
+        back: 'Back to Home',
+      },
     },
     lang: {
       label: 'Language',

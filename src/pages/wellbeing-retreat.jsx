@@ -47,7 +47,9 @@ const processKeys = ['process1', 'process2', 'process3', 'process4', 'process5']
 function IconCard({ icon, title, desc }) {
   return (
     <div className="bg-ftg-cream rounded-2xl p-6 text-center h-full hover:shadow-lg transition-shadow flex flex-col">
-      <div className="text-4xl mb-3" aria-hidden="true">{icon}</div>
+      <div className="text-4xl mb-3 flex items-center justify-center" aria-hidden="true">
+        <FTGIcon name={icon} size={32} className="text-ftg-green" />
+      </div>
       <h3 className="font-bold text-ftg-forest mb-2 text-lg leading-snug">{title}</h3>
       <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>
     </div>
