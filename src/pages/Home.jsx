@@ -55,9 +55,9 @@ export default function Home() {
               {t('home.designBtn')}
             </a>
           </div>
-          {/* 5 Feature Tags */}
+          {/* 4 Feature Tags */}
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            {['自然遠跡', '地方文化', '員工福祉', '團隊互動', 'ESG 倡議'].map((tag, i) => (
+            {['自然體驗', '在地連結', '團隊共融', '永續行動'].map((tag, i) => (
               <span key={i} className="px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full text-sm font-medium border border-white/20">
                 {tag}
               </span>
@@ -66,7 +66,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. 從一趟旅程，看見更多可能 (Three Values) */}
+      {/* 2. 為什麼是塑趣 */}
+      <section className="section-padding bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="section-title">為什麼是墾趣</h2>
+            <p className="section-subtitle">五大優勢，讓旅程與眾不同</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+            {[
+              { icon: 'mountain', title: '深耕戶外生活的品牌經驗', desc: '多年戶外導覽與旅遊經營經驗。' },
+              { icon: 'map', title: '戶外路線與難度設計', desc: '依據需求規劃最適合的旅程難度。' },
+              { icon: 'clipboard', title: '完整的旅行專業執行', desc: '合法旅行社、保險、交通一站式。' },
+              { icon: 'users', title: '與地方共同完成旅程', desc: '在地夥伴合作，共創地方價值。' },
+              { icon: 'sustainable', title: '讓永續成為旅程中的實際行動', desc: 'ESG Impact Note 成果摘要。' },
+            ].map((item, i) => (
+              <div key={i} className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-ftg-green/10 flex items-center justify-center">
+                  <FTGIcon name={item.icon} size={32} className="text-ftg-green" />
+                </div>
+                <h3 className="font-bold text-ftg-forest mb-2 text-sm">{item.title}</h3>
+                <p className="text-gray-600 text-xs">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. 從一趟旅程，看見更多可能 (Three Values) */}
       <section id="esg-section" className="section-padding bg-ftg-sand">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
