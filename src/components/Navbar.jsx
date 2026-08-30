@@ -22,7 +22,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           <Link to="/" className="flex items-center">
-            <img src="/images/logo.png" alt="聖趣旅遊 FTG TOURS" className="h-10 md:h-14 w-auto" />
+            <img src="/images/logo.png" alt="墾趣旅遊 FTG TOURS" className="h-10 md:h-14 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
