@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
 import FTGIcon from '../components/FTGIcon';
+import CtaForm from '../components/CtaForm';
 
 export default function Home() {
   const { t } = useLanguage();
@@ -320,14 +321,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 10. CTA Section */}
-      <section className="py-20 bg-ftg-green text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-serif">{t('home.ctaTitle')}</h2>
-          <p className="text-xl text-gray-100 mb-8">{t('home.ctaSub')}</p>
-          <a href="#/contact" className="inline-block bg-ftg-orange text-white px-10 py-4 rounded-full font-semibold text-lg hover:bg-orange-600 transition-colors">
-            {t('home.ctaBtn')}
-          </a>
+      {/* 10. CTA Section — 設計稿：深色森林底 + 右側表單 */}
+      <section className="relative py-20 bg-ftg-forest text-white overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-ftg-forest via-ftg-green/90 to-ftg-forest"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 font-serif">{t('home.ctaTitle')}</h2>
+              <p className="text-lg md:text-xl text-gray-200 mb-8 leading-relaxed">{t('home.ctaSub')}</p>
+              <div className="flex items-center gap-4 text-gray-300 text-sm">
+                <div className="flex items-center gap-2"><FTGIcon name="shield" size={20} /> 合法旅行社</div>
+                <div className="flex items-center gap-2"><FTGIcon name="award" size={20} /> 專業帶領</div>
+                <div className="flex items-center gap-2"><FTGIcon name="heart" size={20} /> 全方位保障</div>
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl shadow-2xl p-8 text-gray-800">
+              <CtaForm />
+            </div>
+          </div>
         </div>
       </section>
     </div>
