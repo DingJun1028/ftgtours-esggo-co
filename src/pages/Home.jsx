@@ -66,8 +66,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. 為什麼是塑趣 */}
-      <section className="section-padding bg-white">
+      {/* 2. 為什麼是墾趣 */}
+      <section id="esg-section" className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
             <h2 className="section-title">為什麼是墾趣</h2>
