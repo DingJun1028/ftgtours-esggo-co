@@ -1,0 +1,62 @@
+name: Deploy FTG Tours Website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'index.html'
+      - 'package.json'
+      - 'vite.config.*'
+      - 'tailwind.config.*'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy to VPS
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Prepare SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          cat > ~/.ssh/config <<EOF
+          Host vps
+            HostName ${{ secrets.VPS_HOST }}
+            User root
+            Port 22
+            IdentityFile ~/.ssh/id_ed25519
+            StrictHostKeyChecking no
+            UserKnownHostsFile /dev/null
+          EOF
+
+      - name: Deploy to VPS
+        run: |
+          cd dist
+          tar czf /tmp/ftgtours-dist.tar.gz .
+          scp /tmp/ftgtours-dist.tar.gz vps:/tmp/
+          ssh vps "cd /var/www/ftgtours && tar xzf /tmp/ftgtours-dist.tar.gz && echo 'deployed'"
+
+      - name: Verify
+        run: |
+          curl -sI https://ftgtours.esggo.co/ | head -1
+          curl -sI https://journey.ftgtours.esggo.co/ | head -1
