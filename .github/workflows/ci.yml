@@ -24,11 +24,10 @@ jobs:
           cache: 'pnpm'
 
       # 3. Install dependencies
-      - name: Enable pnpm via corepack
-        run: corepack enable
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Setup Python (if needed)
+        run: |
+          corepack enable
+          pnpm install --frozen-lockfile
 
       # 4. Run typecheck / lint
       - name: Run lint
