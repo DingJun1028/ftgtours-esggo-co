@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <img src="/images/logo.png" alt="墾趣旅遊 FTG TOURS" className="h-10 md:h-12 w-auto mb-4 grayscale contrast-100 brightness-110" />
+            <img src="/images/logo.png" alt="墾趣旅遊 FTG TOURS" className="h-10 md:h-12 w-auto mb-4" />
             <p className="text-gray-300 text-sm leading-relaxed">
               {t('footer.brandTagline')}
             </p>
