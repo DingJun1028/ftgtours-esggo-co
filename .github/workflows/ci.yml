@@ -16,19 +16,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Setup Node.js
+      # 2. Setup Node.js + pnpm
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'pnpm'
-          cache-dependency-path: package-lock.json
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
       # 3. Install dependencies
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # 4. Run typecheck / lint
+      # 4. Run lint
       - name: Run lint
         run: pnpm run lint
 
@@ -36,7 +40,7 @@ jobs:
       - name: Run build
         run: pnpm run build
 
-      # 6. Run tests (if any)
+      # 6. Run tests
       - name: Run tests
         run: pnpm run test || echo "No test script defined, skipping..."
 
