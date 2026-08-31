@@ -30,18 +30,18 @@ export default function Home() {
 
   return (
     <div>
-      {/* 1. Hero Section */}
-      <section className="relative h-screen flex items-center justify-center bg-ftg-forest overflow-hidden">
-        <img
-          src="/images/hero-banner.webp"
-          alt="FTG TOURS 墾趣旅遊 企業員工旅遊戶外旅程橫幅"
-          className="absolute inset-0 w-full h-full object-cover"
-          fetchpriority="high"
-          decoding="async"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-ftg-forest/80 via-ftg-green/60 to-ftg-leaf/50"></div>
-        <div className="absolute inset-0 bg-black/25"></div>
-        <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
+      /* 1. Hero Section */
+            <section className="relative h-screen flex items-center justify-center bg-ftg-forest overflow-hidden">
+              <img
+                src="/images/hero-banner.webp"
+                alt="FTG TOURS 墾趣旅遊 企業員工旅遊戶外旅程橫幅"
+                className="absolute inset-0 w-full h-full object-cover"
+                fetchpriority="high"
+                decoding="async"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-ftg-forest/60 via-ftg-green/40 to-ftg-leaf/30"></div>
+              <div className="absolute inset-0 bg-white/10"></div>
+              <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 font-serif leading-tight whitespace-nowrap">
             {t('home.heroTitle')}
           </h1>

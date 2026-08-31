@@ -43,11 +43,11 @@
     @apply absolute inset-0 w-full h-full object-cover;
   }
   .subpage-hero__overlay {
-    @apply absolute inset-0 bg-gradient-to-br from-ftg-forest/80 via-ftg-green/60 to-ftg-leaf/50;
-  }
-  .subpage-hero__dim {
-    @apply absolute inset-0 bg-black/25;
-  }
+      @apply absolute inset-0 bg-gradient-to-br from-ftg-forest/60 via-ftg-green/40 to-ftg-leaf/30;
+    }
+    .subpage-hero__dim {
+      @apply absolute inset-0 bg-white/10;
+    }
   .subpage-hero__content {
     @apply relative z-10 text-center text-white px-4 max-w-4xl mx-auto py-12 md:py-16;
   }
