@@ -22,12 +22,11 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
+          cache-dependency-path: package-lock.json
 
       # 3. Install dependencies
-      - name: Setup Python (if needed)
-        run: |
-          corepack enable
-          pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       # 4. Run typecheck / lint
       - name: Run lint
@@ -44,5 +43,4 @@ jobs:
       # 7. Report result
       - name: Report CI status
         if: always()
-        run: |
-          echo "CI completed for ${{ github.sha }}"
+        run: echo "CI completed for ${{ github.sha }}"
