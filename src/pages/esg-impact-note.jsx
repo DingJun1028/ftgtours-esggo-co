@@ -100,7 +100,7 @@ export default function EsgImpactNote() {
   }));
 
   // 7. Safety — 5 cards
-  const safetyIcons = ['users', '✅', 'clipboard', '🔒', '🛟'];
+  const safetyIcons = ['users', 'check', 'clipboard', 'shield', 'safety'];
   const safetyCards = [1, 2, 3, 4, 5].map((n) => ({
     icon: safetyIcons[n - 1],
     title: t(`impactNote.safety${n}Title`),
@@ -108,7 +108,7 @@ export default function EsgImpactNote() {
   }));
 
   // 8. Value Add — 4 cards
-  const valueIcons = ['🧭', '🎉', 'calendar', '🛠️'];
+  const valueIcons = ['compass', 'star', 'calendar', 'tool'];
   const valueCards = [1, 2, 3, 4].map((n) => ({
     icon: valueIcons[n - 1],
     title: t(`impactNote.valueAdd${n}Title`),

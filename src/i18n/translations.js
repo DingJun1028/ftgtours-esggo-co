@@ -57,7 +57,10 @@ export const translations = {
       p6Desc: '把活動成果整理成 HR、ESG、品牌部皆可用的成果素材。',
       learnMore: '了解更多',
       ctaTitle: '讓團隊旅行，不只是出遊',
-      ctaSub: '從需求訪談到成果交付，我們協助企業把每一次戶外活動，轉化為員工福祉、團隊凝聚與永續行動的解方。',
+      ctaSub: '我們協助企業把每一次戶外活動，轉化為員工福祉、團隊凝聚與永續行動的解方。',
+      ctaFeature1: '合法旅行社',
+      ctaFeature2: '專業帶領',
+      ctaFeature3: '全方位保障',
       ctaBtn: '立即洽詢企業方案',
       notFound: {
         title: '找不到這個頁面',
@@ -953,6 +956,9 @@ export const translations = {
       ctaTitle: 'Make team travel more than just a trip',
       ctaSub: 'From needs interview to deliverables, we help companies turn every outdoor activity into a solution for employee wellbeing, team cohesion and sustainable action.',
       ctaBtn: 'Contact Us for Corporate Programs',
+      ctaFeature1: 'Licensed Agency',
+      ctaFeature2: 'Expert Guides',
+      ctaFeature3: 'Full Support',
       // ===== Homepage New Sections =====
       featuresTitle: 'FTG Journey Features',
       featureList: [

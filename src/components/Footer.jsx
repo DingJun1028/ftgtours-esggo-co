@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <img src="/images/logo.png" alt="墾趣旅遊 FTG TOURS" className="h-10 md:h-12 w-auto mb-4 brightness-0 invert" />
+            <img src="/images/logo.png" alt="墾趣旅遊 FTG TOURS" className="h-10 md:h-12 w-auto mb-4 grayscale contrast-100 brightness-110" />
             <p className="text-gray-300 text-sm leading-relaxed">
               {t('footer.brandTagline')}
             </p>
@@ -51,10 +51,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-8 pt-6 text-sm text-gray-400">
+        <div className="border-t border-green-500 mt-8 pt-6 text-sm text-gray-400">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <img src="/images/logo.png" alt="墾趣旅遊 FTG TOURS" className="h-8 w-auto brightness-0 invert" />
+              <img src="/images/logo.png" alt="墾趣旅遊 FTG TOURS" className="h-8 w-auto" />
               <p>&copy; 2026 FTG TOURS 墾趣旅遊. {t('footer.rights')}</p>
             </div>
             <div className="space-x-4">
