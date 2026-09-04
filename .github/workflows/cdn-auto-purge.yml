@@ -1,0 +1,16 @@
+name: Auto CDN Purge
+on:
+  workflow_dispatch:
+jobs:
+  purge-cdn:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Purge Cloudflare CDN
+        run: |
+          curl -s -X POST "https://api.cloudflare.com/client/v4/zones/d248316e8d74d24270e5d894ec82c53a/purge_cache" \
+            -H "Authorization: Bearer ***" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}'
+      - name: Verify Bypass CDN
+        run: |
+          curl -s -H "Cache-Control: no-store" "https://ftgtours.esggo.co/streams" | grep -oE "Six Streams System" | head -1
