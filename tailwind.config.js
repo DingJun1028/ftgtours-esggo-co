@@ -13,7 +13,6 @@ export default {
           leaf: '#4a7c59',
           sand: '#f5f0e8',
           cream: '#faf7f2',
-          bark: '#8b6f47',
           orange: '#e07a3d',
         }
       },

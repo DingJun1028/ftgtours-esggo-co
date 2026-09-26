@@ -19,7 +19,7 @@ function App() {
     <LanguageProvider>
       <Router>
         <ScrollToTop />
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col font-sans">
           <Navbar />
           <main className="flex-1">
             <Routes>

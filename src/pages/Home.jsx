@@ -38,6 +38,7 @@ export default function Home() {
                 className="absolute inset-0 w-full h-full object-cover"
                 fetchpriority="high"
                 decoding="async"
+                loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-br from-ftg-forest/60 via-ftg-green/40 to-ftg-leaf/30"></div>
               <div className="absolute inset-0 bg-white/10"></div>

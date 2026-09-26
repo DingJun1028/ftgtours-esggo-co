@@ -1,0 +1,19 @@
+設計 token 稽核報告 — FTG Tours
+====================================
+
+ftg-* color class 使用統計：
+  ftg-green: 92 次
+  ftg-forest: 77 次
+  ftg-leaf: 1 次
+  ftg-sand: 22 次
+  ftg-cream: 26 次
+  ftg-bark: 0 次
+  ftg-orange: 13 次
+
+font-* class 使用統計：
+  font-sans: 0 次
+  font-serif: 3 次
+
+稽核結論：
+  未使用 color token: ftg-bark
+  未使用 font token: font-sans
