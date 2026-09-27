@@ -47,7 +47,11 @@ jobs:
       - name: Prepare SSH
         run: |
           mkdir -p ~/.ssh
-          printf '%s' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          # `gh secret set` strips the trailing newline, and OpenSSH refuses to
+          # parse a PEM/OpenSSH key that does not end with one:
+          #   "Load key ...: error in libcrypto"
+          # printf '%s\n' (not %s) restores it.
+          printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           cat > ~/.ssh/config <<EOF
           Host vps
