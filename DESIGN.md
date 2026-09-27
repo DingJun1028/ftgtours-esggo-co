@@ -199,7 +199,7 @@ CTA 按鈕（暖橘 + 全圓角 + 縮放回饋）：
 
 ### 6.2 卡片區塊
 
-參考實作：`src/components/IconCard.jsx`
+參考實作：`src/pages/esg-team-day.jsx`（`IconCard` local 元件）
 
 ```jsx
 <div className="bg-white border border-gray-200 rounded-xl p-5 sm:p-6 hover:shadow-lg transition-shadow flex flex-col items-center text-center h-full">

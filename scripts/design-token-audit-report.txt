@@ -1,11 +1,11 @@
 設計 token 稽核報告 — FTG Tours
 ====================================
 SSOT 來源：tailwind.config.js
-掃描檔案數：27
+掃描檔案數：26
 
 【色彩 token】
-  ftg-green    #2d4a3e   90 次  ✅
-  ftg-forest   #1a3c34   76 次  ✅
+  ftg-green    #2d4a3e   87 次  ✅
+  ftg-forest   #1a3c34   75 次  ✅
   ftg-leaf     #4a7c59    1 次  ✅
   ftg-sand     #f5f0e8   22 次  ✅
   ftg-cream    #faf7f2   26 次  ✅

@@ -1,3 +1,26 @@
 node_modules
 dist
 worker/.wrangler
+
+# Build / packaging artifacts
+dist.tar.gz
+*.tar.gz
+build
+out
+.vite
+
+# Test & coverage output
+coverage
+.nyc_output
+playwright-report
+test-results
+
+# Local env & editor noise
+.env
+.env.*
+!.env.example
+.DS_Store
+*.local
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
