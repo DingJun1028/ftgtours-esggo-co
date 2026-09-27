@@ -16,9 +16,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 3. Install dependencies (with corepack pnpm enable)
+      # 3. Install dependencies (pin pnpm to match deploy.yml; a bare major can
+      #    resolve to a version whose lockfileVersion mismatches pnpm-lock.yaml,
+      #    which breaks `pnpm install --frozen-lockfile`)
       - name: Enable pnpm via corepack
-        run: corepack enable pnpm && pnpm --version
+        run: corepack enable pnpm && corepack prepare pnpm@11.15.1 --activate && pnpm --version
 
       # 4. Install dependencies
       - name: Install dependencies
@@ -33,8 +35,9 @@ jobs:
         run: pnpm run build
 
       # 6. Run tests
+      # NOTE: no `|| echo` fallback — a real test failure must fail CI.
       - name: Run tests
-        run: pnpm run test || echo "No test script defined, skipping..."
+        run: pnpm run test
 
       # 7. Report result
       - name: Report CI status
