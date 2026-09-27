@@ -36,7 +36,7 @@ export default function Home() {
                 src="/images/hero-banner.webp"
                 alt="FTG TOURS 墾趣旅遊 企業員工旅遊戶外旅程橫幅"
                 className="absolute inset-0 w-full h-full object-cover"
-                fetchpriority="high"
+                fetchPriority="high"
                 decoding="async"
                 loading="eager"
               />
