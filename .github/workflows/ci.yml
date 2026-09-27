@@ -30,6 +30,12 @@ jobs:
       - name: Run lint
         run: pnpm run lint
 
+      # 5b. Design token gate: Tailwind silently drops classes that are not
+      # defined in tailwind.config.js, so this failure is invisible to lint and
+      # build. Audit exits non-zero on any undefined ftg-*/font-* class.
+      - name: Audit design tokens
+        run: pnpm run audit:tokens
+
       # 6. Run build
       - name: Run build
         run: pnpm run build
