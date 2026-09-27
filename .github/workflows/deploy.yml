@@ -10,6 +10,8 @@ on:
       - 'package.json'
       - 'vite.config.*'
       - 'tailwind.config.*'
+      # 部署腳本自身的變更必須能觸發部署，否則改了 deploy.yml 只會靜默不生效
+      - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
 jobs:
@@ -70,9 +72,51 @@ jobs:
           cd dist
           tar czf /tmp/ftgtours-dist.tar.gz .
           scp /tmp/ftgtours-dist.tar.gz vps:/tmp/
-          ssh vps "cd /var/www/ftgtours && tar xzf /tmp/ftgtours-dist.tar.gz && echo 'deployed'"
+          # 5T-Trustworthy: 不再就地解壓覆蓋。原流程 `tar xzf` 只寫入不刪除，
+          # 被刪除的檔案（例：71 張 PNG，167.6MB）會永久留在磁碟並逐次累積。
+          # 改為「發布到時間戳目錄 → 原子 symlink 切換」：
+          #   - 每版獨立目錄，天然無殘留
+          #   - ln -s + mv -T 走 rename(2)，切換期間沒有「路徑不存在」的空窗
+          #   - 保留前兩版供人工回滾
+          ssh vps 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          TS=$(date +%Y%m%d-%H%M%S)
+          REL="/var/www/releases/${TS}"
+          mkdir -p "$REL"
+          tar xzf /tmp/ftgtours-dist.tar.gz -C "$REL"
+
+          if [ -L /var/www/ftgtours ]; then
+            # 正常路徑：原子 symlink 切換（rename(2)）
+            ln -s "$REL" /var/www/ftgtours.tmp
+            mv -T /var/www/ftgtours.tmp /var/www/ftgtours
+          else
+            # 首次遷移：現場是實體目錄，先移到 releases 下再建立 symlink
+            if [ -d /var/www/ftgtours ]; then
+              mv /var/www/ftgtours "/var/www/releases/pre-${TS}"
+            fi
+            ln -s "$REL" /var/www/ftgtours
+          fi
+
+          # 只保留最近兩版，其餘回收
+          ls -1dt /var/www/releases/*/ 2>/dev/null | tail -n +3 | xargs -r rm -rf
+
+          echo "--- 部署結果 ---"
+          echo "current -> $(readlink -f /var/www/ftgtours)"
+          du -sh /var/www/ftgtours
+          echo "releases retained:"
+          ls -1dt /var/www/releases/*/ | head -3
+          REMOTE
 
       - name: Verify
         run: |
-          curl -sI https://ftgtours.esggo.co/ | head -1
-          curl -sI https://journey.ftgtours.esggo.co/ | head -1
+          set -euo pipefail
+          for u in https://ftgtours.esggo.co/ https://journey.ftgtours.esggo.co/; do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "$u")
+            echo "${u} -> HTTP ${code}"
+            [ "$code" = "200" ] || { echo "::error::${u} 非 200"; exit 1; }
+          done
+          # SPA fallback 會把任何路徑回 index.html，故以大小區分真實資源與 404
+          idx=$(curl -sS --max-time 30 https://ftgtours.esggo.co/ | wc -c)
+          img=$(curl -sS --max-time 60 https://ftgtours.esggo.co/images/logo.webp | wc -c)
+          echo "index=${idx}B  logo.webp=${img}B"
+          [ "$img" -gt 1000 ] || { echo "::error::logo.webp 未正確部署（疑似 404 fallback）"; exit 1; }
