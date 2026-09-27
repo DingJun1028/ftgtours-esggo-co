@@ -52,7 +52,7 @@ jobs:
           cat > ~/.ssh/config <<EOF
           Host vps
             HostName ${{ secrets.VPS_HOST }}
-            User root
+            User ${{ secrets.VPS_USER }}
             Port 22
             IdentityFile ~/.ssh/id_ed25519
             StrictHostKeyChecking no
