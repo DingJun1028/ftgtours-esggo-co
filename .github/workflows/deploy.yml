@@ -68,7 +68,16 @@ jobs:
           cd dist
           tar czf /tmp/ftgtours-dist.tar.gz .
           scp /tmp/ftgtours-dist.tar.gz vps:/tmp/
-          ssh vps "cd /var/www/ftgtours && tar xzf /tmp/ftgtours-dist.tar.gz && echo 'deployed'"
+          # /var/www/ftgtours is owned by a non-login UID, so the deploy user
+          # cannot write there directly; it does have passwordless sudo.
+          # Unpack to a staging dir owned by the deploy user, then rsync over
+          # with --delete so removed assets cannot linger in production.
+          ssh vps "set -e; rm -rf /tmp/ftgtours-stage && mkdir -p /tmp/ftgtours-stage \
+            && tar xzf /tmp/ftgtours-dist.tar.gz -C /tmp/ftgtours-stage \
+            && sudo rsync -a --delete /tmp/ftgtours-stage/ /var/www/ftgtours/ \
+            && sudo chown -R \$(stat -c '%u:%g' /var/www/ftgtours) /var/www/ftgtours \
+            && rm -rf /tmp/ftgtours-stage /tmp/ftgtours-dist.tar.gz \
+            && echo deployed"
 
       - name: Verify
         run: |
