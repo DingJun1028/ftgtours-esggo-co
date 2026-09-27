@@ -108,14 +108,27 @@ jobs:
 
       - name: Verify
         run: |
-          set -euo pipefail
-          for u in https://ftgtours.esggo.co/ https://journey.ftgtours.esggo.co/; do
-            code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "$u")
-            echo "${u} -> HTTP ${code}"
-            [ "$code" = "200" ] || { echo "::error::${u} 非 200"; exit 1; }
-          done
-          # SPA fallback 會把任何路徑回 index.html，故以大小區分真實資源與 404
-          idx=$(curl -sS --max-time 30 https://ftgtours.esggo.co/ | wc -c)
-          img=$(curl -sS --max-time 60 https://ftgtours.esggo.co/images/logo.webp | wc -c)
-          echo "index=${idx}B  logo.webp=${img}B"
-          [ "$img" -gt 1000 ] || { echo "::error::logo.webp 未正確部署（疑似 404 fallback）"; exit 1; }
+          set -uo pipefail
+          # 5T-Trackable: 部署後需容許傳播延遲 —— nginx/Cloudflare 可能仍在重新
+          # 驗證剛被替換的內容。首次實測曾在部署完成 0.14s 後即發出請求而誤判失敗，
+          # 隨後 6/6 重試全數 200。單次失敗不足以判定部署失敗，改為退避重試。
+          check() {  # $1=url $2=min_bytes $3=label
+            local url=$1 minb=$2 label=$3 code size
+            for attempt in 1 2 3 4 5; do
+              size=$(curl -sS --max-time 45 "$url" 2>/dev/null | wc -c)
+              code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "$url" 2>/dev/null || echo 000)
+              echo "  [${label}] attempt ${attempt}: HTTP ${code}, ${size}B"
+              if [ "$code" = "200" ] && [ "$size" -ge "$minb" ]; then
+                return 0
+              fi
+              sleep $((attempt * 4))
+            done
+            return 1
+          }
+
+          # SPA fallback 會把任何路徑回 index.html，故以位元組數下限區分真實資源與 404
+          check https://ftgtours.esggo.co/ 500 首頁 || { echo "::error::ftgtours 首頁異常"; exit 1; }
+          check https://journey.ftgtours.esggo.co/ 500 journey || { echo "::error::journey 網域異常"; exit 1; }
+          check https://ftgtours.esggo.co/images/logo.webp 1000 logo.webp \
+            || { echo "::error::logo.webp 未正確部署（疑似 404 fallback）"; exit 1; }
+          echo "所有端點驗證通過"
