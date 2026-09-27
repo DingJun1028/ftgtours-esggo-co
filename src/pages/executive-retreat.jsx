@@ -6,19 +6,19 @@ import FTGIcon from '../components/FTGIcon';
 
 // 嚴格照資料夾原始順序：子網頁-高階主管共識旅程 (10張)
 const expImages = [
-  { src: '/images/executive-retreat/可搭配的旅程內容-圓桌對話.png', tKey: 'executive.imgExp1' },
-  { src: '/images/executive-retreat/可搭配的旅程內容-團隊共學.png', tKey: 'executive.imgExp2' },
-  { src: '/images/executive-retreat/可搭配的旅程內容-在地餐集.png', tKey: 'executive.imgExp3' },
-  { src: '/images/executive-retreat/可搭配的旅程內容-山林慢行.png', tKey: 'executive.imgExp4' },
-  { src: '/images/executive-retreat/可搭配的旅程內容-文化體驗.png', tKey: 'executive.imgExp5' },
-  { src: '/images/executive-retreat/可搭配的旅程內容-靜心觀景.png', tKey: 'executive.imgExp6' },
+  { src: '/images/executive-retreat/可搭配的旅程內容-圓桌對話.webp', tKey: 'executive.imgExp1' },
+  { src: '/images/executive-retreat/可搭配的旅程內容-團隊共學.webp', tKey: 'executive.imgExp2' },
+  { src: '/images/executive-retreat/可搭配的旅程內容-在地餐集.webp', tKey: 'executive.imgExp3' },
+  { src: '/images/executive-retreat/可搭配的旅程內容-山林慢行.webp', tKey: 'executive.imgExp4' },
+  { src: '/images/executive-retreat/可搭配的旅程內容-文化體驗.webp', tKey: 'executive.imgExp5' },
+  { src: '/images/executive-retreat/可搭配的旅程內容-靜心觀景.webp', tKey: 'executive.imgExp6' },
 ];
 
 const consensusImages = [
-  { src: '/images/executive-retreat/高階主管共識-放慢腳步與重新思考.png', tKey: 'executive.imgCon1' },
-  { src: '/images/executive-retreat/高階主管共識-連結自然與對方.png', tKey: 'executive.imgCon2' },
-  { src: '/images/executive-retreat/高階主管共識-頁首橫幅.png', tKey: 'executive.imgCon3' },
-  { src: '/images/executive-retreat/高階主管共識-領導團隊對話.png', tKey: 'executive.imgCon3' },
+  { src: '/images/executive-retreat/高階主管共識-放慢腳步與重新思考.webp', tKey: 'executive.imgCon1' },
+  { src: '/images/executive-retreat/高階主管共識-連結自然與對方.webp', tKey: 'executive.imgCon2' },
+  { src: '/images/executive-retreat/高階主管共識-頁首橫幅.webp', tKey: 'executive.imgCon3' },
+  { src: '/images/executive-retreat/高階主管共識-領導團隊對話.webp', tKey: 'executive.imgCon3' },
 ];
 
 function PhotoCard({ src, title, desc }) {
@@ -125,7 +125,7 @@ export default function ExecutiveRetreat() {
   return (
     <div>
       <section className="subpage-hero">
-        <img src="/images/executive-retreat/高階主管共識-頁首橫幅.png" alt={t('products.executive')} className="subpage-hero__img" loading="lazy" />
+        <img src="/images/executive-retreat/高階主管共識-頁首橫幅.webp" alt={t('products.executive')} className="subpage-hero__img" loading="lazy" />
         <div className="subpage-hero__overlay"></div>
         <div className="subpage-hero__dim"></div>
         <div className="subpage-hero__content">

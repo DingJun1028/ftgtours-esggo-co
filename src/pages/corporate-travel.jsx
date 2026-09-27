@@ -6,25 +6,25 @@ import FTGIcon from '../components/FTGIcon';
 
 // 嚴格照資料夾原始順序：子網頁-企業員工旅遊 (14張)
 const travelImages = [
-  { src: '/images/corporate-travel/企業員工旅遊-團隊交流.png', tKey: 'corporateTravel.imgTravel1' },
-  { src: '/images/corporate-travel/企業員工旅遊-放鬆與充電.png', tKey: 'corporateTravel.imgTravel2' },
-  { src: '/images/corporate-travel/企業員工旅遊-自然與地方體驗.png', tKey: 'corporateTravel.imgTravel3' },
+  { src: '/images/corporate-travel/企業員工旅遊-團隊交流.webp', tKey: 'corporateTravel.imgTravel1' },
+  { src: '/images/corporate-travel/企業員工旅遊-放鬆與充電.webp', tKey: 'corporateTravel.imgTravel2' },
+  { src: '/images/corporate-travel/企業員工旅遊-自然與地方體驗.webp', tKey: 'corporateTravel.imgTravel3' },
 ];
 
 const valueImages = [
-  { src: '/images/corporate-travel/可延伸加值服務-串接 Team Day／Wellbeing Retreat.png', tKey: 'corporateTravel.imgVal1' },
-  { src: '/images/corporate-travel/可延伸加值服務-年度企業活動規劃.png', tKey: 'corporateTravel.imgVal2' },
-  { src: '/images/corporate-travel/可延伸的加值服務-Basic Impact Summary.png', tKey: 'corporateTravel.imgVal3' },
-  { src: '/images/corporate-travel/可延伸的加值服務-ESG Impact Note.png', tKey: 'corporateTravel.imgVal4' },
+  { src: '/images/corporate-travel/可延伸加值服務-串接 Team Day／Wellbeing Retreat.webp', tKey: 'corporateTravel.imgVal1' },
+  { src: '/images/corporate-travel/可延伸加值服務-年度企業活動規劃.webp', tKey: 'corporateTravel.imgVal2' },
+  { src: '/images/corporate-travel/可延伸的加值服務-Basic Impact Summary.webp', tKey: 'corporateTravel.imgVal3' },
+  { src: '/images/corporate-travel/可延伸的加值服務-ESG Impact Note.webp', tKey: 'corporateTravel.imgVal4' },
 ];
 
 const expImages = [
-  { src: '/images/corporate-travel/搭配旅程-地方餐食.png', tKey: 'corporateTravel.imgExp1' },
-  { src: '/images/corporate-travel/搭配旅程-文化體驗.png', tKey: 'corporateTravel.imgExp2' },
-  { src: '/images/corporate-travel/搭配旅程-森林慢行.png', tKey: 'corporateTravel.imgExp3' },
-  { src: '/images/corporate-travel/搭配旅程-無痕戶外.png', tKey: 'corporateTravel.imgExp4' },
-  { src: '/images/corporate-travel/搭配旅程-親近自然.png', tKey: 'corporateTravel.imgExp5' },
-  { src: '/images/corporate-travel/搭配旅程-輕量團隊互動.png', tKey: 'corporateTravel.imgExp6' },
+  { src: '/images/corporate-travel/搭配旅程-地方餐食.webp', tKey: 'corporateTravel.imgExp1' },
+  { src: '/images/corporate-travel/搭配旅程-文化體驗.webp', tKey: 'corporateTravel.imgExp2' },
+  { src: '/images/corporate-travel/搭配旅程-森林慢行.webp', tKey: 'corporateTravel.imgExp3' },
+  { src: '/images/corporate-travel/搭配旅程-無痕戶外.webp', tKey: 'corporateTravel.imgExp4' },
+  { src: '/images/corporate-travel/搭配旅程-親近自然.webp', tKey: 'corporateTravel.imgExp5' },
+  { src: '/images/corporate-travel/搭配旅程-輕量團隊互動.webp', tKey: 'corporateTravel.imgExp6' },
 ];
 
 function PhotoCard({ src, title, desc }) {
@@ -113,7 +113,7 @@ export default function CorporateTravel() {
   return (
     <div>
       <section className="subpage-hero">
-        <img src="/images/corporate-travel/企業員工旅遊-頁首大橫幅.png" alt={t('products.corpTravel')} className="subpage-hero__img" loading="lazy" />
+        <img src="/images/corporate-travel/企業員工旅遊-頁首大橫幅.webp" alt={t('products.corpTravel')} className="subpage-hero__img" loading="lazy" />
         <div className="subpage-hero__overlay"></div>
         <div className="subpage-hero__dim"></div>
         <div className="subpage-hero__content">

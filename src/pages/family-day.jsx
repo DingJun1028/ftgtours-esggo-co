@@ -6,19 +6,19 @@ import FTGIcon from '../components/FTGIcon';
 
 // 嚴格照資料夾原始順序：子網頁-企業家庭日 可搭配體驗 (6張)
 const expImages = [
-  { src: '/images/family-day/可搭配的體驗-地方餐食.png', tKey: 'familyDay.imgExp1' },
-  { src: '/images/family-day/可搭配的體驗-手作體驗png.png', tKey: 'familyDay.imgExp2' },
-  { src: '/images/family-day/可搭配的體驗-森林慢行.png', tKey: 'familyDay.imgExp3' },
-  { src: '/images/family-day/可搭配的體驗-無痕戶外.png', tKey: 'familyDay.imgExp4' },
-  { src: '/images/family-day/可搭配的體驗-親子任務.png', tKey: 'familyDay.imgExp5' },
-  { src: '/images/family-day/可搭配的體驗-親子自然觀察.png', tKey: 'familyDay.imgExp6' },
+  { src: '/images/family-day/可搭配的體驗-地方餐食.webp', tKey: 'familyDay.imgExp1' },
+  { src: '/images/family-day/可搭配的體驗-手作體驗png.webp', tKey: 'familyDay.imgExp2' },
+  { src: '/images/family-day/可搭配的體驗-森林慢行.webp', tKey: 'familyDay.imgExp3' },
+  { src: '/images/family-day/可搭配的體驗-無痕戶外.webp', tKey: 'familyDay.imgExp4' },
+  { src: '/images/family-day/可搭配的體驗-親子任務.webp', tKey: 'familyDay.imgExp5' },
+  { src: '/images/family-day/可搭配的體驗-親子自然觀察.webp', tKey: 'familyDay.imgExp6' },
 ];
 
 // 1. Benefits：3 張圖卡（取用「好的企業家庭日」圖庫中標題相符者）
 const benefitCards = [
-  { src: '/images/family-day/好的企業家庭日-親子互動更緊密.png', titleKey: 'familyDay.benefit1Title', descKey: 'familyDay.benefit1Desc' },
-  { src: '/images/family-day/好的企業家庭日-自然共學與成長.png', titleKey: 'familyDay.benefit2Title', descKey: 'familyDay.benefit2Desc' },
-  { src: '/images/family-day/好的企業家庭日-企業關懷更有感.png', titleKey: 'familyDay.benefit3Title', descKey: 'familyDay.benefit3Desc' },
+  { src: '/images/family-day/好的企業家庭日-親子互動更緊密.webp', titleKey: 'familyDay.benefit1Title', descKey: 'familyDay.benefit1Desc' },
+  { src: '/images/family-day/好的企業家庭日-自然共學與成長.webp', titleKey: 'familyDay.benefit2Title', descKey: 'familyDay.benefit2Desc' },
+  { src: '/images/family-day/好的企業家庭日-企業關懷更有感.webp', titleKey: 'familyDay.benefit3Title', descKey: 'familyDay.benefit3Desc' },
 ];
 
 // 2. Design：6 張圖示卡
@@ -116,7 +116,7 @@ export default function FamilyDay() {
   return (
     <div>
       <section className="subpage-hero">
-        <img src="/images/family-day/企業家庭日-頁首大橫幅.png" alt={t('products.familyDay')} className="subpage-hero__img" loading="lazy" />
+        <img src="/images/family-day/企業家庭日-頁首大橫幅.webp" alt={t('products.familyDay')} className="subpage-hero__img" loading="lazy" />
         <div className="subpage-hero__overlay"></div>
         <div className="subpage-hero__dim"></div>
         <div className="subpage-hero__content">

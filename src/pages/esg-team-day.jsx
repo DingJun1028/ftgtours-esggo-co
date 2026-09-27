@@ -6,18 +6,18 @@ import FTGIcon from '../components/FTGIcon';
 
 // 嚴格照資料夾原始順序：子網頁-ESG戶外團隊日 (10張)
 const teamImages = [
-  { src: '/images/esg-team-day/ESG 戶外團隊-走進自然.png', tKey: 'esgTeamDay.imgTeam1' },
-  { src: '/images/esg-team-day/team day-團隊共創.png', tKey: 'esgTeamDay.imgTeam2' },
-  { src: '/images/esg-team-day/team day-連結地方與環境.png', tKey: 'esgTeamDay.imgTeam3' },
+  { src: '/images/esg-team-day/ESG 戶外團隊-走進自然.webp', tKey: 'esgTeamDay.imgTeam1' },
+  { src: '/images/esg-team-day/team day-團隊共創.webp', tKey: 'esgTeamDay.imgTeam2' },
+  { src: '/images/esg-team-day/team day-連結地方與環境.webp', tKey: 'esgTeamDay.imgTeam3' },
 ];
 
 const expImages = [
-  { src: '/images/esg-team-day/可搭配的旅程內容-友善環境行動.png', tKey: 'esgTeamDay.imgExp1' },
-  { src: '/images/esg-team-day/可搭配的旅程內容-團隊合作任務.png', tKey: 'esgTeamDay.imgExp2' },
-  { src: '/images/esg-team-day/可搭配的旅程內容-地方餐食.png', tKey: 'esgTeamDay.imgExp3' },
-  { src: '/images/esg-team-day/可搭配的旅程內容-文化體驗.png', tKey: 'esgTeamDay.imgExp4' },
-  { src: '/images/esg-team-day/可搭配的旅程內容-森林健走.png', tKey: 'esgTeamDay.imgExp5' },
-  { src: '/images/esg-team-day/可搭配的旅程內容-自然觀察.png', tKey: 'esgTeamDay.imgExp6' },
+  { src: '/images/esg-team-day/可搭配的旅程內容-友善環境行動.webp', tKey: 'esgTeamDay.imgExp1' },
+  { src: '/images/esg-team-day/可搭配的旅程內容-團隊合作任務.webp', tKey: 'esgTeamDay.imgExp2' },
+  { src: '/images/esg-team-day/可搭配的旅程內容-地方餐食.webp', tKey: 'esgTeamDay.imgExp3' },
+  { src: '/images/esg-team-day/可搭配的旅程內容-文化體驗.webp', tKey: 'esgTeamDay.imgExp4' },
+  { src: '/images/esg-team-day/可搭配的旅程內容-森林健走.webp', tKey: 'esgTeamDay.imgExp5' },
+  { src: '/images/esg-team-day/可搭配的旅程內容-自然觀察.webp', tKey: 'esgTeamDay.imgExp6' },
 ];
 
 // 靜態圖示對應（設計 / 目標 / 安心 / 加值 / CTA 各區塊）
@@ -120,7 +120,7 @@ export default function EsgTeamDay() {
     <div>
       {/* 頁首 Hero：保留原有 subpage-hero 區塊 */}
       <section className="subpage-hero">
-        <img src="/images/esg-team-day/team day-頁首大橫幅.png" alt={t('products.esgTeamDay')} className="subpage-hero__img" loading="lazy" />
+        <img src="/images/esg-team-day/team day-頁首大橫幅.webp" alt={t('products.esgTeamDay')} className="subpage-hero__img" loading="lazy" />
         <div className="subpage-hero__overlay"></div>
         <div className="subpage-hero__dim"></div>
         <div className="subpage-hero__content">

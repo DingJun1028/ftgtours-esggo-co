@@ -5,12 +5,34 @@ jobs:
   purge-cdn:
     runs-on: ubuntu-latest
     steps:
+      # 5T-Trustworthy: zone ID 與 API token 一律走 GitHub Secrets，不得硬編進版控。
+      # 審計發現原檔把 token 遮罩成字面值 ***，此 workflow 必定 401，實質上是壞的。
       - name: Purge Cloudflare CDN
+        env:
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
         run: |
-          curl -s -X POST "https://api.cloudflare.com/client/v4/zones/d248316e8d74d24270e5d894ec82c53a/purge_cache" \
-            -H "Authorization: Bearer ***" \
+          set -euo pipefail
+          if [ -z "$CF_ZONE_ID" ] || [ -z "$CF_API_TOKEN" ]; then
+            echo "::error::缺少 secrets.CF_ZONE_ID 或 secrets.CF_API_TOKEN，無法執行 purge"
+            exit 1
+          fi
+          response=$(curl -sS -X POST \
+            "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
+            -H "Authorization: Bearer ${CF_API_TOKEN}" \
             -H "Content-Type: application/json" \
-            --data '{"purge_everything":true}'
-      - name: Verify Bypass CDN
+            --data '{"purge_everything":true}')
+          echo "$response"
+          # Cloudflare 成功回 {"success":true,...}；只看 HTTP 200 不代表 purge 成功
+          echo "$response" | grep -q '"success":true' \
+            || { echo "::error::Cloudflare purge 未回 success:true"; exit 1; }
+
+      # 驗證站點可達。
+      # 註：原版驗證 /streams 的 "Six Streams System"，但 App.jsx 從無 /streams 路由
+      # （src/pages/streams/index.jsx 為未接線草稿），該檢查恆為失敗。
+      - name: Verify site reachable
         run: |
-          curl -s -H "Cache-Control: no-store" "https://ftgtours.esggo.co/streams" | grep -oE "Six Streams System" | head -1
+          set -euo pipefail
+          code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 https://ftgtours.esggo.co/)
+          echo "首頁 HTTP ${code}"
+          [ "$code" = "200" ] || { echo "::error::首頁非 200"; exit 1; }

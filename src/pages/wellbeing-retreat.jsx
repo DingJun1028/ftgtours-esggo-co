@@ -6,17 +6,17 @@ import FTGIcon from '../components/FTGIcon';
 
 // 嚴格照資料夾原始順序：子網頁-員工身心平衡旅程 (11張)
 const images = [
-  { src: '/images/wellbeing-retreat/員工身心平衡-頁首大橫幅.png', tKey: 'wellbeing.imgBanner' },
-  { src: '/images/wellbeing-retreat/旅程可以留下什麼-企業文化溫度.png', tKey: 'wellbeing.img1' },
-  { src: '/images/wellbeing-retreat/旅程可以留下什麼-可分享的活動素材.png', tKey: 'wellbeing.img2' },
-  { src: '/images/wellbeing-retreat/旅程可以留下什麼-員工放鬆回憶.png', tKey: 'wellbeing.img3' },
-  { src: '/images/wellbeing-retreat/旅程可以留下什麼-團隊可更自交流.png', tKey: 'wellbeing.img4' },
-  { src: '/images/wellbeing-retreat/旅程可以留下什麼-團隊更自然的連結.png', tKey: 'wellbeing.img5' },
-  { src: '/images/wellbeing-retreat/旅程可以留下什麼-後續活動靈感.png', tKey: 'wellbeing.img6' },
-  { src: '/images/wellbeing-retreat/旅程可以留下什麼-恢復能量.png', tKey: 'wellbeing.img7' },
-  { src: '/images/wellbeing-retreat/旅程可以留下什麼-放鬆節奏.png', tKey: 'wellbeing.img8' },
-  { src: '/images/wellbeing-retreat/旅程可以留下什麼-留下值得分享的回憶.png', tKey: 'wellbeing.img9' },
-  { src: '/images/wellbeing-retreat/旅程可以留下什麼-自然中的安定感.png', tKey: 'wellbeing.img10' },
+  { src: '/images/wellbeing-retreat/員工身心平衡-頁首大橫幅.webp', tKey: 'wellbeing.imgBanner' },
+  { src: '/images/wellbeing-retreat/旅程可以留下什麼-企業文化溫度.webp', tKey: 'wellbeing.img1' },
+  { src: '/images/wellbeing-retreat/旅程可以留下什麼-可分享的活動素材.webp', tKey: 'wellbeing.img2' },
+  { src: '/images/wellbeing-retreat/旅程可以留下什麼-員工放鬆回憶.webp', tKey: 'wellbeing.img3' },
+  { src: '/images/wellbeing-retreat/旅程可以留下什麼-團隊可更自交流.webp', tKey: 'wellbeing.img4' },
+  { src: '/images/wellbeing-retreat/旅程可以留下什麼-團隊更自然的連結.webp', tKey: 'wellbeing.img5' },
+  { src: '/images/wellbeing-retreat/旅程可以留下什麼-後續活動靈感.webp', tKey: 'wellbeing.img6' },
+  { src: '/images/wellbeing-retreat/旅程可以留下什麼-恢復能量.webp', tKey: 'wellbeing.img7' },
+  { src: '/images/wellbeing-retreat/旅程可以留下什麼-放鬆節奏.webp', tKey: 'wellbeing.img8' },
+  { src: '/images/wellbeing-retreat/旅程可以留下什麼-留下值得分享的回憶.webp', tKey: 'wellbeing.img9' },
+  { src: '/images/wellbeing-retreat/旅程可以留下什麼-自然中的安定感.webp', tKey: 'wellbeing.img10' },
 ];
 
 function PhotoCard({ src, title, desc }) {
@@ -75,7 +75,7 @@ export default function WellbeingRetreat() {
     <div>
       {/* Hero（保留原有 subpage-hero） */}
       <section className="subpage-hero">
-        <img src="/images/wellbeing-retreat/員工身心平衡-頁首大橫幅.png" alt={t('products.wellbeing')} className="subpage-hero__img" loading="lazy" />
+        <img src="/images/wellbeing-retreat/員工身心平衡-頁首大橫幅.webp" alt={t('products.wellbeing')} className="subpage-hero__img" loading="lazy" />
         <div className="subpage-hero__overlay"></div>
         <div className="subpage-hero__dim"></div>
         <div className="subpage-hero__content">

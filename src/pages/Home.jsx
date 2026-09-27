@@ -14,12 +14,12 @@ export default function Home() {
   });
 
   const products = [
-    { title: t('home.p1Title'), desc: t('home.p1Desc'), link: '/corporate-travel', img: '/images/corporate-travel/企業員工旅遊-頁首大橫幅.png' },
-    { title: t('home.p2Title'), desc: t('home.p2Desc'), link: '/family-day', img: '/images/family-day/企業家庭日-頁首大橫幅.png' },
-    { title: t('home.p3Title'), desc: t('home.p3Desc'), link: '/esg-team-day', img: '/images/esg-team-day/team day-頁首大橫幅.png' },
-    { title: t('home.p4Title'), desc: t('home.p4Desc'), link: '/wellbeing-retreat', img: '/images/wellbeing-retreat/員工身心平衡-頁首大橫幅.png' },
-    { title: t('home.p5Title'), desc: t('home.p5Desc'), link: '/executive-retreat', img: '/images/executive-retreat/高階主管共識-頁首橫幅.png' },
-    { title: t('home.p6Title'), desc: t('home.p6Desc'), link: '/esg-impact-note', img: '/images/esg-impact-note/ESG Impact Note-頁首大橫幅.png' },
+    { title: t('home.p1Title'), desc: t('home.p1Desc'), link: '/corporate-travel', img: '/images/corporate-travel/企業員工旅遊-頁首大橫幅.webp' },
+    { title: t('home.p2Title'), desc: t('home.p2Desc'), link: '/family-day', img: '/images/family-day/企業家庭日-頁首大橫幅.webp' },
+    { title: t('home.p3Title'), desc: t('home.p3Desc'), link: '/esg-team-day', img: '/images/esg-team-day/team day-頁首大橫幅.webp' },
+    { title: t('home.p4Title'), desc: t('home.p4Desc'), link: '/wellbeing-retreat', img: '/images/wellbeing-retreat/員工身心平衡-頁首大橫幅.webp' },
+    { title: t('home.p5Title'), desc: t('home.p5Desc'), link: '/executive-retreat', img: '/images/executive-retreat/高階主管共識-頁首橫幅.webp' },
+    { title: t('home.p6Title'), desc: t('home.p6Desc'), link: '/esg-impact-note', img: '/images/esg-impact-note/ESG Impact Note-頁首大橫幅.webp' },
   ];
 
   const featureIcons = ['leaf', 'utensils', 'users', 'link', 'sustainable'];
