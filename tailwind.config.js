@@ -1,4 +1,25 @@
 /** @type {import('tailwindcss').Config} */
+
+// ── 品牌色票（單一真相來源）──────────────────────────────────────────
+// 別名以「引用」而非「複製 hex」定義：改 sand，sunlight 自動跟著變。
+// 複製 hex 會產生漂移風險 —— 設計改色時漏改別名，畫面就會分裂。
+const ftgPalette = {
+  green: '#2d4a3e',
+  forest: '#1a3c34',
+  leaf: '#4a7c59',
+  sand: '#f5f0e8',
+  cream: '#faf7f2',
+  orange: '#e07a3d',
+};
+
+// 語意別名：程式語意名稱，對應到既有色票。
+// 設計稿未給獨立色相，故不新增色值；若日後確認需要獨立色相，
+// 只要在下方改成自己的 hex 即可，所有呼叫端不需任何修改。
+const ftgAliases = {
+  sunlight: ftgPalette.sand,     // Hero 暖白遮罩、手機卡片底
+  deepgreen: ftgPalette.forest,  // streams 深綠底
+};
+
 export default {
   content: [
     "./index.html",
@@ -7,20 +28,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        ftg: {
-          green: '#2d4a3e',
-          forest: '#1a3c34',
-          leaf: '#4a7c59',
-          sand: '#f5f0e8',
-          cream: '#faf7f2',
-          orange: '#e07a3d',
-          // ── 語意別名（非新色）────────────────────────────────────
-          // 這兩個名稱是程式語意（Hero 暖白遮罩 / streams 深綠底），
-          // 但設計稿未給獨立色票，故指向既有最接近色值。
-          // 若設計確認需獨立色相，改此兩行即可，不影響任何呼叫端。
-          sunlight: '#f5f0e8',  // = sand，暖白遮罩與手機卡片底
-          deepgreen: '#1a3c34', // = forest，最深綠
-        }
+        ftg: { ...ftgPalette, ...ftgAliases },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -29,4 +37,4 @@ export default {
     },
   },
   plugins: [],
-}
+};

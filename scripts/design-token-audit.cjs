@@ -20,13 +20,22 @@ function parseTailwindConfig() {
   const cfgPath = path.join(root, 'tailwind.config.js');
   const src = fs.readFileSync(cfgPath, 'utf8');
 
-  // 解析 colors.ftg 區塊：ftg: { green: '#2d4a3e', ... }
+  // ── 色彩 ────────────────────────────────────────────────────────
+  // 結構無關的解析策略（不依賴變數名或物件展開位置）：
+  //   1. 抓全檔所有 `name: '#hex'`        → 基礎色票
+  //   2. 抓所有 `name: <something>.<key>` → 別名引用，解析成實際 hex
+  // 因此 config 改成 `const palette = {...}` + spread 宣告時仍正確。
   const colors = {};
-  const ftgBlock = src.match(/ftg:\s*\{([^}]*)\}/);
-  if (ftgBlock) {
-    const re = /([A-Za-z][A-Za-z0-9]*)\s*:\s*['"](#[0-9a-fA-F]{3,8})['"]/g;
-    let m;
-    while ((m = re.exec(ftgBlock[1])) !== null) colors[m[1]] = m[2];
+  const hexRe = /([A-Za-z][A-Za-z0-9]*)\s*:\s*['"](#[0-9a-fA-F]{3,8})['"]/g;
+  let m;
+  while ((m = hexRe.exec(src)) !== null) colors[m[1]] = m[2];
+
+  // 別名可能引用同檔任一色票，收集後統一解析（處理宣告順序）
+  const aliasRe = /([A-Za-z][A-Za-z0-9]*)\s*:\s*[A-Za-z][A-Za-z0-9]*\.([A-Za-z][A-Za-z0-9]*)/g;
+  const pending = [];
+  while ((m = aliasRe.exec(src)) !== null) pending.push([m[1], m[2]]);
+  for (const [name, target] of pending) {
+    if (colors[target]) colors[name] = colors[target];
   }
 
   // 解析 fontFamily 區塊：sans: [...], serif: [...]
