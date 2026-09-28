@@ -44,6 +44,13 @@ describe('WCAG 2.5.8 觸控目標 >= 44px', () => {
       if (!clsMatch) continue;
       const cls = clsMatch[1];
       if (DECLARES_TAP.test(cls)) continue;
+      // p-2 (8px) / p-2.5 (10px) 單邊撐不起 44px，必須搭配 min-h。
+      // 這裡只放行同時有 min-h/min-w 的情況，避免「以為補了但其實沒補」。
+      if (/\bp-2(\.\d)?\b/.test(cls) && !/min-h-|min-w-/.test(cls)) {
+        const line = src.slice(0, m.index).split('\n').length;
+        offenders.push(`${f}:${line} <${m[1]}> p-2 without min-h: "${cls.slice(0, 60)}"`);
+        continue;
+      }
       // 排除：內含 <img> 或 aspect 容器的 Link（本體尺寸由子元素決定）
       // 視窗要夠大：產品卡的 aspect 容器在 <img> 之後、p-6 還更後面。
       const after = src.slice(m.index, m.index + 600);

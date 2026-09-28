@@ -71,8 +71,15 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile menu button */}
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden p-2 rounded-md text-gray-700 hover:text-ftg-green hover:bg-ftg-sand transition-colors" aria-label="選單">
+          {/* Mobile menu button
+              5T-Tangible: 觸控區 >= 44px。p-2 + 24x20 圖示只有 40x36px，
+              行動版點擊容錯低；用 min-w/min-h 撐開，圖示與視覺不變。 */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="lg:hidden min-w-[44px] min-h-[44px] inline-flex items-center justify-center rounded-md text-gray-700 hover:text-ftg-green hover:bg-ftg-sand transition-colors"
+            aria-label="選單"
+            aria-expanded={mobileOpen}
+          >
             <div className="w-6 h-5 relative flex flex-col justify-between">
               <span className={`block h-0.5 w-6 bg-current transform transition-all duration-300 ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
               <span className={`block h-0.5 w-6 bg-current transition-all duration-300 ${mobileOpen ? 'opacity-0 scale-0' : ''}`} />
