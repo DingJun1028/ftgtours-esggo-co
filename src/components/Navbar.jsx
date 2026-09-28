@@ -27,11 +27,11 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
-            <Link to="/" className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === '/' ? 'text-ftg-green bg-ftg-sand' : 'text-gray-700 hover:text-ftg-green'}`}>
+            <Link to="/" className={`px-3 py-2 min-h-[44px] inline-flex items-center rounded-md text-sm font-medium ${location.pathname === '/' ? 'text-ftg-green bg-ftg-sand' : 'text-gray-700 hover:text-ftg-green'}`}>
               {t('nav.home')}
             </Link>
             <div className="relative group">
-              <button className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-ftg-green flex items-center">
+              <button className="px-3 py-2 min-h-[44px] inline-flex items-center rounded-md text-sm font-medium text-gray-700 hover:text-ftg-green">
                 {t('nav.products')}
                 <svg className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -40,7 +40,7 @@ export default function Navbar() {
               <div className="absolute top-full left-0 mt-1 w-60 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-gray-100">
                 <div className="py-2">
                   {productLinks.map(link => (
-                    <Link key={link.path} to={link.path} className={`block px-4 py-2.5 text-sm ${location.pathname === link.path ? 'text-ftg-green bg-ftg-sand font-semibold' : 'text-gray-700 hover:bg-ftg-sand hover:text-ftg-green'}`}>
+                    <Link key={link.path} to={link.path} className={`block px-4 py-2.5 min-h-[44px] inline-flex items-center text-sm ${location.pathname === link.path ? 'text-ftg-green bg-ftg-sand font-semibold' : 'text-gray-700 hover:bg-ftg-sand hover:text-ftg-green'}`}>
                       {link.label}
                     </Link>
                   ))}
@@ -50,21 +50,23 @@ export default function Navbar() {
 
             {/* Language Switcher */}
             <div className="flex items-center ml-2 border border-gray-200 rounded-full overflow-hidden text-xs font-semibold">
+              {/* 5T-Tangible: 觸控區 >= 44px。py-1.5 只給 28px，違反 WCAG 2.5.8。
+                  視覺字級不變（text-xs），只把點擊區撐高。 */}
               <button
                 onClick={() => setLang('zh')}
-                className={`px-3 py-1.5 transition-colors ${lang === 'zh' ? 'bg-ftg-green text-white' : 'text-gray-600 hover:bg-ftg-sand'}`}
+                className={`px-3 min-h-[44px] inline-flex items-center transition-colors ${lang === 'zh' ? 'bg-ftg-green text-white' : 'text-gray-600 hover:bg-ftg-sand'}`}
               >
                 {t('lang.zh')}
               </button>
               <button
                 onClick={() => setLang('en')}
-                className={`px-3 py-1.5 transition-colors ${lang === 'en' ? 'bg-ftg-green text-white' : 'text-gray-600 hover:bg-ftg-sand'}`}
+                className={`px-3 min-h-[44px] inline-flex items-center transition-colors ${lang === 'en' ? 'bg-ftg-green text-white' : 'text-gray-600 hover:bg-ftg-sand'}`}
               >
                 {t('lang.en')}
               </button>
             </div>
 
-            <a href="#/contact" className="bg-ftg-orange text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-orange-600 transition-colors ml-2 shadow-sm">
+            <a href="#/contact" className="bg-ftg-orange text-white px-5 py-2 min-h-[44px] inline-flex items-center rounded-full text-sm font-medium hover:bg-orange-600 transition-colors ml-2 shadow-sm">
               {t('nav.contact')}
             </a>
           </div>
@@ -97,7 +99,7 @@ export default function Navbar() {
               <div className={`overflow-hidden transition-all duration-300 ${mobileProducts ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
                 <div className="pl-4 py-1">
                   {productLinks.map(link => (
-                    <Link key={link.path} to={link.path} className={`block px-4 py-2.5 rounded-lg text-sm ${location.pathname === link.path ? 'text-ftg-green bg-ftg-sand font-semibold' : 'text-gray-600 hover:text-ftg-green hover:bg-ftg-sand'}`} onClick={() => setMobileOpen(false)}>
+                    <Link key={link.path} to={link.path} className={`block px-4 py-2.5 min-h-[44px] inline-flex items-center rounded-lg text-sm ${location.pathname === link.path ? 'text-ftg-green bg-ftg-sand font-semibold' : 'text-gray-600 hover:text-ftg-green hover:bg-ftg-sand'}`} onClick={() => setMobileOpen(false)}>
                       {link.label}
                     </Link>
                   ))}

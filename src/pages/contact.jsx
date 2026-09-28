@@ -97,7 +97,7 @@ export default function Contact() {
     <div>
       <section className="relative py-20 bg-ftg-sand">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Link to="/" className="text-ftg-green hover:underline mb-4 inline-block">{t('nav.backHome')}</Link>
+          <Link to="/" className="text-ftg-green hover:underline mb-4 inline-block inline-flex items-center min-h-[44px] -my-2">{t('nav.backHome')}</Link>
           <h1 className="section-title">{t('contact.title')}</h1>
           <p className="section-subtitle">
             {t('contact.sub')}

@@ -26,7 +26,9 @@ export default function JourneyDesign() {
       <section className="relative bg-ftg-forest text-white py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-ftg-forest via-ftg-green/90 to-ftg-forest"></div>
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Link to="/" className="inline-flex items-center gap-2 text-ftg-orange hover:text-white transition-colors mb-6 text-sm">
+          {/* 5T-Tangible: 觸控區 >= 44px（WCAG 2.5.8）。text-sm 單行只有 ~24px，
+              用 -my-2 抵銷 padding，視覺位置不變。 */}
+          <Link to="/" className="inline-flex items-center gap-2 text-ftg-orange hover:text-white transition-colors mb-6 text-sm min-h-[44px] -my-2">
             ← 返回首頁
           </Link>
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 font-serif leading-tight">

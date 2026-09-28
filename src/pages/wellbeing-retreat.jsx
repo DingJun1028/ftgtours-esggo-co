@@ -79,7 +79,7 @@ export default function WellbeingRetreat() {
         <div className="subpage-hero__overlay"></div>
         <div className="subpage-hero__dim"></div>
         <div className="subpage-hero__content">
-          <Link to="/" className="text-ftg-orange hover:underline mb-4 inline-block font-medium">{t('nav.backHome')}</Link>
+          <Link to="/" className="text-ftg-orange hover:underline mb-4 inline-block font-medium inline-flex items-center min-h-[44px] -my-2">{t('nav.backHome')}</Link>
           <h1 className="subpage-hero__title">{t('products.wellbeing')}</h1>
           <p className="subpage-hero__subtitle">{t('wellbeing.sub')}</p>
         </div>
