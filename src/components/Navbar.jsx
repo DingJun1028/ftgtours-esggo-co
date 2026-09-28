@@ -118,8 +118,9 @@ export default function Navbar() {
             <div className="flex items-center gap-2 px-4 mt-3">
               <span className="text-sm text-gray-500">{t('lang.label')}：</span>
               <div className="flex border border-gray-200 rounded-full overflow-hidden">
-                <button onClick={() => setLang('zh')} className={`px-3 py-1.5 text-sm font-medium ${lang === 'zh' ? 'bg-ftg-green text-white' : 'text-gray-600'}`}>{t('lang.zh')}</button>
-                <button onClick={() => setLang('en')} className={`px-3 py-1.5 text-sm font-medium ${lang === 'en' ? 'bg-ftg-green text-white' : 'text-gray-600'}`}>{t('lang.en')}</button>
+                {/* 5T-Tangible: 觸控區 >= 44px。py-1.5 只有 32px。 */}
+                <button onClick={() => setLang('zh')} className={`px-3 min-h-[44px] inline-flex items-center text-sm font-medium ${lang === 'zh' ? 'bg-ftg-green text-white' : 'text-gray-600'}`}>{t('lang.zh')}</button>
+                <button onClick={() => setLang('en')} className={`px-3 min-h-[44px] inline-flex items-center text-sm font-medium ${lang === 'en' ? 'bg-ftg-green text-white' : 'text-gray-600'}`}>{t('lang.en')}</button>
               </div>
             </div>
 
