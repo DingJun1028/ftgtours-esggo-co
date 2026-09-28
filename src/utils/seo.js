@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
 const SITE_URL = 'https://ftgtours.esggo.co';
-const BRAND = 'FTG TOURS 墾趣旅遊';
-const DEFAULT_TITLE = '墾趣旅遊 FTG TOURS | ESG 戶外健康旅遊方案';
+const BRAND = 'FTG TOURS 塾趣旅遊';
+const DEFAULT_TITLE = '塾趣旅遊 FTG TOURS | ESG 戶外健康旅遊方案';
 const DEFAULT_DESCRIPTION =
-  '墾趣結合戶外導覽、旅行服務與在地連結，為企業設計兼顧員工身心健康、團隊連結、環境友善與地方價值的旅程。';
+  '塾趣結合戶外導覽、旅行服務與在地連結，為企業設計兼顧員工身心健康、團隊連結、環境友善與地方價值的旅程。';
 
 const canonical = (path = '') =>
   path

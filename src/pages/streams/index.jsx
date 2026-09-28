@@ -1,6 +1,7 @@
 import { useLanguage } from '../../i18n/LanguageContext';
 import { usePageSeo } from '../../utils/seo';
 import { streams, streamsPage, pickLang, pickDesc } from '../../data/streamsData';
+import FTGIcon from '../../components/FTGIcon';
 
 export default function Streams() {
   const { lang } = useLanguage();
@@ -8,7 +9,7 @@ export default function Streams() {
 
   usePageSeo({
     // usePageSeo 會自動補上 ` | ${BRAND}`（見 utils/seo.js:16），
-    // 這裡再自行加一次會變成 "X | FTG TOURS | FTG TOURS 墾趣旅遊"。
+    // 這裡再自行加一次會變成 "X | FTG TOURS | FTG TOURS 塾趣旅遊"。
     title: en ? streamsPage.titleEn : streamsPage.title,
     description: en ? streamsPage.metaDescEn : streamsPage.metaDesc,
     path: '/streams',
@@ -43,8 +44,11 @@ export default function Streams() {
               key={s.id}
               className="bg-ftg-forest rounded-xl p-6 text-center shadow-lg transition-all hover:scale-105"
             >
-              <div className="text-4xl mb-4" aria-hidden="true">
-                {s.emoji}
+              <div
+                className="w-14 h-14 rounded-full bg-ftg-cream/10 flex items-center justify-center mx-auto mb-4 text-ftg-cream"
+                aria-hidden="true"
+              >
+                <FTGIcon name={s.icon} size={28} />
               </div>
               <h3 className="text-xl font-bold mb-2 text-ftg-cream">
                 {pickLang(s, lang)}

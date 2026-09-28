@@ -14,8 +14,8 @@ export default function JourneyDesign() {
   // 待補：將本頁文案抽入 translations.js 的 journeyDesign 命名空間。
   // 注意 journeyDesign 命名空間目前尚未存在於 translations.js 的 zh/en。
   usePageSeo({
-    title: '了解墾趣旅程設計 | FTG TOURS',
-    description: '從需求訪談到成果交付，墾趣如何為企業設計兼顧員工福祉、團隊凝聚與永續行動的旅程。',
+    title: '了解塾趣旅程設計 | FTG TOURS',
+    description: '從需求訪談到成果交付，塾趣如何為企業設計兼顧員工福祉、團隊凝聚與永續行動的旅程。',
     path: '/journey-design',
     keywords: ['旅程設計', '企業旅遊規劃', '客製化行程', 'ESG 旅程'],
   });
@@ -30,7 +30,7 @@ export default function JourneyDesign() {
             ← 返回首頁
           </Link>
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 font-serif leading-tight">
-            了解墾趣旅程設計
+            了解塾趣旅程設計
           </h1>
           <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
             從需求訪談到成果交付，我們協助企業把每一次戶外活動，轉化為員工福祉、團隊凝聚與永續行動的解方。
@@ -42,7 +42,7 @@ export default function JourneyDesign() {
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="section-title">墾趣的設計理念</h2>
+            <h2 className="section-title">塾趣的設計理念</h2>
             <p className="section-subtitle">每一次旅程，都是一次創造價值的機會</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -67,7 +67,7 @@ export default function JourneyDesign() {
       <section className="section-padding bg-ftg-sand">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="section-title">墾趣的設計流程</h2>
+            <h2 className="section-title">塾趣的設計流程</h2>
             <p className="section-subtitle">五個步驟，從需求到完成</p>
           </div>
           <div className="max-w-4xl mx-auto">
@@ -98,11 +98,11 @@ export default function JourneyDesign() {
         </div>
       </section>
 
-      {/* 為什麼選擇墾趣 */}
+      {/* 為什麼選擇塾趣 */}
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="section-title">為什麼企業選擇墾趣</h2>
+            <h2 className="section-title">為什麼企業選擇塾趣</h2>
             <p className="section-subtitle">五大優勢，讓旅程與眾不同</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">

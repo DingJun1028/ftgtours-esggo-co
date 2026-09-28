@@ -17,7 +17,6 @@ const expImages = [
 const consensusImages = [
   { src: '/images/executive-retreat/高階主管共識-放慢腳步與重新思考.webp', tKey: 'executive.imgCon1' },
   { src: '/images/executive-retreat/高階主管共識-連結自然與對方.webp', tKey: 'executive.imgCon2' },
-  { src: '/images/executive-retreat/高階主管共識-頁首橫幅.webp', tKey: 'executive.imgCon3' },
   { src: '/images/executive-retreat/高階主管共識-領導團隊對話.webp', tKey: 'executive.imgCon3' },
 ];
 
@@ -81,7 +80,10 @@ export default function ExecutiveRetreat() {
     keywords: ['共識營', '高階主管', '永續轉型', '策略對話', '主管共識旅程'],
   });
 
-  const consensusShow = [consensusImages[0], consensusImages[1], consensusImages[3]];
+  // 原本這裡是 [0],[1],[3]，靠「跳過 index 2 的頁首橫幅」來避開重複的
+  // imgCon3；橫幅已從陣列移除後，index 3 不存在會渲染出 undefined，
+  // 所以三張就是全部，直接用整個陣列。
+  const consensusShow = consensusImages;
   const benefits = consensusShow.map((p) => ({ src: p.src, title: t(p.tKey), desc: t(p.tKey + 'Desc') }));
 
   const designIcons = ['compass', 'map', 'shield', 'users', 'leaf', 'clipboard'];
@@ -91,7 +93,7 @@ export default function ExecutiveRetreat() {
     desc: t(`executive.design${i}Desc`),
   }));
 
-  const targetIcons = ['🧭', '🔄', 'leaf', 'users', 'users'];
+  const targetIcons = ['compass', 'refresh', 'leaf', 'users', 'users'];
   const targetCards = [1, 2, 3, 4, 5].map((i) => ({
     icon: targetIcons[i - 1],
     title: t(`executive.target${i}Title`),
@@ -108,7 +110,7 @@ export default function ExecutiveRetreat() {
     desc: t(`executive.process${i}Desc`),
   }));
 
-  const safetyIcons = ['users', 'navigation', 'mountain', '📩', 'users'];
+  const safetyIcons = ['users', 'navigation', 'mountain', 'mail', 'users'];
   const safetyCards = [1, 2, 3, 4, 5].map((i) => ({
     icon: safetyIcons[i - 1],
     title: t(`executive.safety${i}Title`),

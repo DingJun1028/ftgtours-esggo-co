@@ -4,7 +4,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 export default function NotFound() {
   const { t } = useLanguage();
   return (
-    <div style={{ minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px 20px', textAlign: 'center' }}>
+    <main style={{ minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px 20px', textAlign: 'center' }}>
       <div style={{ fontSize: 72, fontWeight: 900, color: '#10243f', lineHeight: 1 }}>404</div>
       <h1 style={{ color: '#3c6e47', margin: '16px 0 8px', fontSize: 24 }}>
         {t('notFound.title') || '找不到這個頁面'}
@@ -18,6 +18,6 @@ export default function NotFound() {
       }}>
         {t('notFound.back') || '返回首頁'}
       </Link>
-    </div>
+    </main>
   );
 }

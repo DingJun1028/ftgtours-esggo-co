@@ -34,7 +34,7 @@ export default function CtaForm({ ctaTitle, ctaSub, features }) {
         setStatus('error');
         setErrorMsg(data.error || t('contact.submitFailed'));
       }
-    } catch (err) {
+    } catch {
       setStatus('error');
       setErrorMsg(t('contact.networkError'));
     }
@@ -126,8 +126,17 @@ export default function CtaForm({ ctaTitle, ctaSub, features }) {
           <button type="submit" disabled={status === 'sending'} className="flex-1 bg-ftg-orange text-white px-8 py-3.5 rounded-full font-semibold text-sm md:text-base hover:bg-orange-600 transition-colors disabled:opacity-50 shadow-lg shadow-orange-200">
             {status === 'sending' ? t('contact.submitting') : t('contact.submitBtn')}
           </button>
-          <a href="/files/ftg-tours-brochure.pdf" target="_blank" rel="noopener noreferrer" className="flex-1 border-2 border-ftg-forest text-ftg-forest px-8 py-3.5 rounded-full font-semibold text-sm md:text-base hover:bg-ftg-forest hover:text-white transition-colors text-center">
-            {t('contact.downloadBtn')}
+          {/* 5T-Trustworthy: 這裡原本是一個指向 public 底下某 PDF 的下載連結，
+              但那個目錄從不存在。線上該 URL 命中 SPA fallback，回 200 卻帶
+              Content-Type: text/html —— 訪客按下載會拿到一個壞掉的檔案，而不是簡介。
+              與其放一個死連結（5T-Transparent：不要假裝有），不如給一個確定能
+              送達的動作：直接寄信索取簡介。
+              若日後真的產出 PDF，把檔案放進 public/ 對應目錄再換回下載連結。 */}
+          <a
+            href={`mailto:hello@ftgtours.com?subject=${encodeURIComponent(t('contact.brochureSubject'))}`}
+            className="flex-1 border-2 border-ftg-forest text-ftg-forest px-8 py-3.5 rounded-full font-semibold text-sm md:text-base hover:bg-ftg-forest hover:text-white transition-colors text-center"
+          >
+            {t('contact.requestBrochureBtn')}
           </a>
         </div>
       </form>

@@ -72,7 +72,7 @@ export default function EsgImpactNote() {
   }));
 
   // 2. Design — 6 icon cards
-  const designIcons = ['compass', '🧩', 'clipboard', '✍️', '🔄', 'star'];
+  const designIcons = ['compass', 'puzzle', 'clipboard', 'pencil', 'refresh', 'star'];
   const designCards = [1, 2, 3, 4, 5, 6].map((n) => ({
     icon: designIcons[n - 1],
     title: t(`impactNote.design${n}Title`),
@@ -80,7 +80,7 @@ export default function EsgImpactNote() {
   }));
 
   // 3. Target — 5 icon cards
-  const targetIcons = ['📑', '🏷️', 'users', '🗂️', 'users'];
+  const targetIcons = ['clipboard', 'tag', 'users', 'folder', 'users'];
   const targetCards = [1, 2, 3, 4, 5].map((n) => ({
     icon: targetIcons[n - 1],
     title: t(`impactNote.target${n}Title`),
@@ -186,7 +186,9 @@ export default function EsgImpactNote() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
             {leaveCards.map((c, i) => (
               <div key={i} className="bg-ftg-cream rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow flex items-start gap-4 h-full">
-                <span className="text-ftg-green text-2xl leading-none shrink-0">✓</span>
+                <span className="text-ftg-green shrink-0">
+                  <FTGIcon name="check" size={24} />
+                </span>
                 <div>
                   <h3 className="text-lg font-bold text-ftg-forest mb-1 leading-snug">{c.title}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">{c.desc}</p>
