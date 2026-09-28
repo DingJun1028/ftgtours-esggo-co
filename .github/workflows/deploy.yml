@@ -10,6 +10,13 @@ on:
       - 'package.json'
       - 'vite.config.*'
       - 'tailwind.config.*'
+      # postcss.config.js 決定 Tailwind/PostCSS 這條處理鏈 —— 實測把它改壞
+      # (`pnpm run build` 直接 exit 1) 且改動會改變產出的 CSS 內容 (30,433B)，
+      # 但它先前不在 paths 內：改它不會部署，設定靜默停在線上舊版。
+      - 'postcss.config.js'
+      # 依賴樹本身就是部署產物的一部分：lockfile 換版本等於換掉線上跑的程式。
+      # 注意 cache-dependency-path 那行不算，它只影響 cache 命中不影響觸發。
+      - 'pnpm-lock.yaml'
       # 部署腳本自身的變更必須能觸發部署，否則改了 deploy.yml 只會靜默不生效
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
