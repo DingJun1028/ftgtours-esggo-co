@@ -16,12 +16,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Setup Node BEFORE pnpm. This job previously had no setup-node at all
-      #    and ran corepack against whatever the runner image happened to ship
-      #    (Node 20) — pnpm 11.x requires Node >= 22.13 because it imports
-      #    node:sqlite, so the job failed with ERR_UNKNOWN_BUILTIN_MODULE.
-      #    That is the same class of failure ci-cd.yml hit in a22f699. Pinning
-      #    Node here makes the job independent of the runner default.
+      # 2. Install pnpm FIRST, before setup-node. Two hard constraints, both learned
+      #    the hard way here:
+      #    (a) pnpm 11.x declares engines.node >=22.13 (its store/index imports
+      #        node:sqlite, absent in Node 20). Without an explicit setup-node this
+      #        job inherits whatever the runner image ships and dies with
+      #        ERR_UNKNOWN_BUILTIN_MODULE — the same class of failure ci-cd.yml hit
+      #        in a22f699.
+      #    (b) setup-node's `cache: pnpm` resolves the store dir by invoking pnpm,
+      #        so pnpm must already be on PATH or setup-node itself aborts with
+      #        "Unable to locate executable file: pnpm". corepack enable in a
+      #        *later* step is too late. Hence pnpm/action-setup goes first, the
+      #        same ordering deploy.yml and ci-cd.yml already use successfully.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          # Pin the exact version to match packageManager: pnpm@11.15.1. A bare
+          # major can resolve to a version whose lockfileVersion mismatches
+          # pnpm-lock.yaml, which breaks `pnpm install --frozen-lockfile`.
+          version: 11.15.1
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -29,12 +43,6 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
           cache-dependency-path: pnpm-lock.yaml
-
-      # 3. Install dependencies (pin pnpm to match deploy.yml; a bare major can
-      #    resolve to a version whose lockfileVersion mismatches pnpm-lock.yaml,
-      #    which breaks `pnpm install --frozen-lockfile`)
-      - name: Enable pnpm via corepack
-        run: corepack enable pnpm && corepack prepare pnpm@11.15.1 --activate && pnpm --version
 
       # 4. Install dependencies
       - name: Install dependencies
