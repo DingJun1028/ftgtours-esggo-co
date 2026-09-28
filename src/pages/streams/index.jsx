@@ -19,12 +19,19 @@ export default function Streams() {
     <div className="min-h-screen pt-20 bg-ftg-deepgreen text-ftg-cream">
       {/* Hero */}
       <section className="py-16 px-4 text-center">
-        <h1 className="text-4xl font-bold text-ftg-cream">
-          {/* 中文頁並列中英，英文頁不重複顯示 "Six Streams / Six Streams" */}
+        <h1 className="text-4xl font-bold text-ftg-cream text-balance">
+          {/* 中文頁並列中英，英文頁不重複顯示 "Six Streams / Six Streams"。
+              text-balance 避免手機版把 "Streams" 孤零零丟到第二行。 */}
           {en ? streamsPage.titleEn : `${streamsPage.title} / ${streamsPage.titleEn}`}
         </h1>
         <p className="mt-4 text-lg text-ftg-cream max-w-3xl mx-auto text-balance">
-          {en ? streamsPage.subEn : streamsPage.sub}
+          {en ? streamsPage.subPrefixEn : streamsPage.subPrefix}
+          {streams.map((s, i) => (
+            <span key={s.id}>
+              <span className="whitespace-nowrap">{pickLang(s, lang)}</span>
+              {i < streams.length - 1 ? (en ? streamsPage.sepEn : streamsPage.sep) : null}
+            </span>
+          ))}
         </p>
       </section>
 
