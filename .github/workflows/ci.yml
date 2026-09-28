@@ -16,6 +16,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2. Setup Node BEFORE pnpm. This job previously had no setup-node at all
+      #    and ran corepack against whatever the runner image happened to ship
+      #    (Node 20) — pnpm 11.x requires Node >= 22.13 because it imports
+      #    node:sqlite, so the job failed with ERR_UNKNOWN_BUILTIN_MODULE.
+      #    That is the same class of failure ci-cd.yml hit in a22f699. Pinning
+      #    Node here makes the job independent of the runner default.
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          # pnpm 11 requires Node >= 22.13 (it imports node:sqlite).
+          node-version: '22'
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
+
       # 3. Install dependencies (pin pnpm to match deploy.yml; a bare major can
       #    resolve to a version whose lockfileVersion mismatches pnpm-lock.yaml,
       #    which breaks `pnpm install --frozen-lockfile`)
