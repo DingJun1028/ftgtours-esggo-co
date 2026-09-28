@@ -21,7 +21,7 @@ export default function Navbar() {
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center min-h-[44px] min-w-[44px]">
             <img src="/images/logo.webp" alt="塾趣旅遊 FTG TOURS" className="h-10 md:h-14 w-auto" />
           </Link>
 
@@ -54,13 +54,13 @@ export default function Navbar() {
                   視覺字級不變（text-xs），只把點擊區撐高。 */}
               <button
                 onClick={() => setLang('zh')}
-                className={`px-3 min-h-[44px] inline-flex items-center transition-colors ${lang === 'zh' ? 'bg-ftg-green text-white' : 'text-gray-600 hover:bg-ftg-sand'}`}
+                className={`px-3 min-h-[44px] min-w-[44px] inline-flex items-center justify-center transition-colors ${lang === 'zh' ? 'bg-ftg-green text-white' : 'text-gray-600 hover:bg-ftg-sand'}`}
               >
                 {t('lang.zh')}
               </button>
               <button
                 onClick={() => setLang('en')}
-                className={`px-3 min-h-[44px] inline-flex items-center transition-colors ${lang === 'en' ? 'bg-ftg-green text-white' : 'text-gray-600 hover:bg-ftg-sand'}`}
+                className={`px-3 min-h-[44px] min-w-[44px] inline-flex items-center justify-center transition-colors ${lang === 'en' ? 'bg-ftg-green text-white' : 'text-gray-600 hover:bg-ftg-sand'}`}
               >
                 {t('lang.en')}
               </button>
