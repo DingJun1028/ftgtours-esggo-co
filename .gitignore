@@ -30,3 +30,21 @@ test-results
 npm-debug.log*
 pnpm-debug.log*
 yarn-error.log*
+
+# 5T-Trustworthy: 私鑰與憑證檔案。專案內沒有任何流程需要把金鑰
+# 放進版控，過去 .gitignore 只擋 .env，等於「金鑰放進 repo 也不會被擋」。
+# 一旦進 Git 歷史，刪檔不等於憑證失效，仍須 rotation。
+id_rsa
+id_rsa*
+id_ed25519*
+id_ecdsa*
+*.pem
+*.key
+*.pfx
+*.p12
+*.keystore
+
+# 本機專屬的維運腳本：內含環境綁定的 IP / 路徑，且需要私鑰才能跑。
+# 通用腳本仍照常版控（scripts/ 下的 design-token 稽核檔已在追蹤中）。
+scripts/verify_streams.local.py
+scripts/*.local.py

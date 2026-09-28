@@ -1,11 +1,18 @@
 import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
-import { useLanguage } from '../i18n/LanguageContext';
 import FTGIcon from '../components/FTGIcon';
 import CtaForm from '../components/CtaForm';
 
 export default function JourneyDesign() {
-  const { t } = useLanguage();
+  // 5T-Tangible: 本頁為全繁中硬編，英文介面下此頁仍顯示中文，是全站唯一
+  // 未做語系切換的頁面。原先存在 `const { t } = useLanguage();` 但從未使用
+  // （oxlint no-unused-vars 警告），為避免誤以為已完成 i18n 接入而移除。
+  //
+  // 這段註解不寫行數：行數會隨註解自身增減而自我失效（上一版寫「144 行」
+  // 實際已是 147，且數字包含註解本身，屬於無法長期成立的自我引用）。
+  //
+  // 待補：將本頁文案抽入 translations.js 的 journeyDesign 命名空間。
+  // 注意 journeyDesign 命名空間目前尚未存在於 translations.js 的 zh/en。
   usePageSeo({
     title: '了解墾趣旅程設計 | FTG TOURS',
     description: '從需求訪談到成果交付，墾趣如何為企業設計兼顧員工福祉、團隊凝聚與永續行動的旅程。',

@@ -12,6 +12,7 @@ import ExecutiveRetreat from './pages/executive-retreat';
 import EsgImpactNote from './pages/esg-impact-note';
 import Contact from './pages/contact';
 import JourneyDesign from './pages/JourneyDesign';
+import Streams from './pages/streams';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path="/esg-impact-note" element={<EsgImpactNote />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/journey-design" element={<JourneyDesign />} />
+              <Route path="/streams" element={<Streams />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
