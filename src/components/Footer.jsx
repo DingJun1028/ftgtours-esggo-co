@@ -18,10 +18,10 @@ export default function Footer() {
           <div>
             <h4 className="text-base font-semibold mb-3 md:mb-4">{t('footer.corpPrograms')}</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#/corporate-travel" className="text-gray-300 hover:text-white transition-colors inline-flex items-center min-h-[44px] px-2 -mx-2">{t('products.corpTravel')}</a></li>
-              <li><a href="#/family-day" className="text-gray-300 hover:text-white transition-colors inline-flex items-center min-h-[44px] px-2 -mx-2">{t('products.familyDay')}</a></li>
-              <li><a href="#/esg-team-day" className="text-gray-300 hover:text-white transition-colors inline-flex items-center min-h-[44px] px-2 -mx-2">{t('products.esgTeamDay')}</a></li>
-              <li><a href="#/wellbeing-retreat" className="text-gray-300 hover:text-white transition-colors inline-flex items-center min-h-[44px] px-2 -mx-2">{t('products.wellbeing')}</a></li>
+              <li><a href="#/corporate-travel" className="text-gray-300 hover:text-white transition-colors inline-flex items-center min-h-[44px] min-w-[44px] px-2 -mx-2">{t('products.corpTravel')}</a></li>
+              <li><a href="#/family-day" className="text-gray-300 hover:text-white transition-colors inline-flex items-center min-h-[44px] min-w-[44px] px-2 -mx-2">{t('products.familyDay')}</a></li>
+              <li><a href="#/esg-team-day" className="text-gray-300 hover:text-white transition-colors inline-flex items-center min-h-[44px] min-w-[44px] px-2 -mx-2">{t('products.esgTeamDay')}</a></li>
+              <li><a href="#/wellbeing-retreat" className="text-gray-300 hover:text-white transition-colors inline-flex items-center min-h-[44px] min-w-[44px] px-2 -mx-2">{t('products.wellbeing')}</a></li>
             </ul>
           </div>
 
@@ -29,8 +29,8 @@ export default function Footer() {
           <div>
             <h4 className="text-base font-semibold mb-3 md:mb-4">{t('footer.advancedPrograms')}</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#/executive-retreat" className="text-gray-300 hover:text-white transition-colors inline-flex items-center min-h-[44px] px-2 -mx-2">{t('products.executive')}</a></li>
-              <li><a href="#/esg-impact-note" className="text-gray-300 hover:text-white transition-colors inline-flex items-center min-h-[44px] px-2 -mx-2">{t('products.impactNote')}</a></li>
+              <li><a href="#/executive-retreat" className="text-gray-300 hover:text-white transition-colors inline-flex items-center min-h-[44px] min-w-[44px] px-2 -mx-2">{t('products.executive')}</a></li>
+              <li><a href="#/esg-impact-note" className="text-gray-300 hover:text-white transition-colors inline-flex items-center min-h-[44px] min-w-[44px] px-2 -mx-2">{t('products.impactNote')}</a></li>
             </ul>
           </div>
 
@@ -58,8 +58,8 @@ export default function Footer() {
               <p>&copy; 2026 FTG TOURS 塾趣旅遊. {t('footer.rights')}</p>
             </div>
             <div className="space-x-4">
-              <a href="#/" className="hover:text-white transition-colors inline-flex items-center min-h-[44px] px-2 -mx-2">{t('footer.privacy')}</a>
-              <a href="#/" className="hover:text-white transition-colors inline-flex items-center min-h-[44px] px-2 -mx-2">{t('footer.terms')}</a>
+              <a href="#/" className="hover:text-white transition-colors inline-flex items-center min-h-[44px] min-w-[44px] px-2 -mx-2">{t('footer.privacy')}</a>
+              <a href="#/" className="hover:text-white transition-colors inline-flex items-center min-h-[44px] min-w-[44px] px-2 -mx-2">{t('footer.terms')}</a>
             </div>
           </div>
         </div>

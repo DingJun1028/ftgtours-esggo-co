@@ -31,7 +31,7 @@ export default function Navbar() {
               {t('nav.home')}
             </Link>
             <div className="relative group">
-              <button className="px-3 py-2 min-h-[44px] inline-flex items-center rounded-md text-sm font-medium text-gray-700 hover:text-ftg-green">
+              <button className="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center rounded-md text-sm font-medium text-gray-700 hover:text-ftg-green">
                 {t('nav.products')}
                 <svg className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -66,7 +66,7 @@ export default function Navbar() {
               </button>
             </div>
 
-            <a href="#/contact" className="bg-ftg-orange text-white px-5 py-2 min-h-[44px] inline-flex items-center rounded-full text-sm font-medium hover:bg-orange-600 transition-colors ml-2 shadow-sm">
+            <a href="#/contact" className="bg-ftg-orange text-white px-5 py-2 min-h-[44px] min-w-[44px] inline-flex items-center rounded-full text-sm font-medium hover:bg-orange-600 transition-colors ml-2 shadow-sm">
               {t('nav.contact')}
             </a>
           </div>
@@ -119,8 +119,8 @@ export default function Navbar() {
               <span className="text-sm text-gray-500">{t('lang.label')}：</span>
               <div className="flex border border-gray-200 rounded-full overflow-hidden">
                 {/* 5T-Tangible: 觸控區 >= 44px。py-1.5 只有 32px。 */}
-                <button onClick={() => setLang('zh')} className={`px-3 min-h-[44px] inline-flex items-center text-sm font-medium ${lang === 'zh' ? 'bg-ftg-green text-white' : 'text-gray-600'}`}>{t('lang.zh')}</button>
-                <button onClick={() => setLang('en')} className={`px-3 min-h-[44px] inline-flex items-center text-sm font-medium ${lang === 'en' ? 'bg-ftg-green text-white' : 'text-gray-600'}`}>{t('lang.en')}</button>
+                <button onClick={() => setLang('zh')} className={`px-3 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium ${lang === 'zh' ? 'bg-ftg-green text-white' : 'text-gray-600'}`}>{t('lang.zh')}</button>
+                <button onClick={() => setLang('en')} className={`px-3 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium ${lang === 'en' ? 'bg-ftg-green text-white' : 'text-gray-600'}`}>{t('lang.en')}</button>
               </div>
             </div>
 

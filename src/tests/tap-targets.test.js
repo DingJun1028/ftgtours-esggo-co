@@ -78,8 +78,35 @@ describe('WCAG 2.5.8 觸控目標 >= 44px', () => {
 
   it.skipIf(!hasCss)('觸控區 class 已被 Tailwind 編譯進 CSS 產物', () => {
     // Tailwind 會把 [44px] 編譯成 .min-h-\[44px\]{min-height:44px}
-    const rule = '.min-h-\\[44px\\]{min-height:44px}';
-    expect(css).toContain(rule);
+    for (const rule of ['.min-h-\\[44px\\]{min-height:44px}', '.min-w-\\[44px\\]{min-width:44px}']) {
+      expect(css).toContain(rule);
+    }
+  });
+
+  // 5T-Transparent：本專案先前連續三輪「修一個 → 實測又找到一個」，
+  // 根因是只擋「完全沒宣告」，擋不住「只宣告 min-h 卻漏 min-w」。
+  // WCAG 2.5.8 同時要求兩個軸都達標，故此處強制成對。
+  it('min-h-[44px] 與 min-w-[44px] 必須成對出現（單獨宣告視為未完成）', () => {
+    const lone = [];
+    for (const f of files) {
+      const src = fs.readFileSync(f, 'utf8');
+      const re = /className="([^"]*)"/g;
+      let m;
+      while ((m = re.exec(src))) {
+        const c = m[1];
+        const hasH = c.includes('min-h-[44px]');
+        const hasW = c.includes('min-w-[44px]');
+        if (hasH !== hasW) {
+          const line = src.slice(0, m.index).split('\n').length;
+          lone.push(`${f}:${line} has min-h=${hasH} min-w=${hasW} -> "${c.slice(0, 70)}"`);
+        }
+      }
+    }
+    if (lone.length) {
+      console.log('\n以下只宣告單一軸，WCAG 2.5.8 要求寬高都 >= 44px：');
+      for (const l of lone) console.log('  ' + l);
+    }
+    expect(lone).toEqual([]);
   });
 
   it('原始碼中觸控區宣告數 >= 20（防止誤刪批次修正）', () => {
