@@ -1,3 +1,9 @@
+# 5T-Trustworthy: 專案統一使用 pnpm（package.json 宣告 packageManager: pnpm@11.15.1）。
+# 殘留的 package-lock.json 會讓依賴樹分岔（實測 209 vs 268 個套件），造成
+# CI 驗證的樹與實際部署的樹不同，且讓 Dependabot 警報重複計數，故明確忽略。
+package-lock.json
+yarn.lock
+
 node_modules
 dist
 worker/.wrangler
