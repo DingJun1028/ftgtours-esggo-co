@@ -8,6 +8,13 @@ export const translations = {
       desc: '您要找的旅程頁面可能已移動或網址有誤',
       back: '返回首頁',
     },
+    // 5T-Tangible: Hero 元件使用此命名空間。t() 對缺鍵會原樣回傳 key 字串
+    // (見 LanguageContext.jsx)，缺命名空間會讓畫面直接顯示 'hero.title'。
+    hero: {
+      title: '走進自然，創造更有意義的旅程',
+      subtitle: '墾趣結合戶外導覽、旅行服務與在地連結，為企業設計兼顧員工身心健康、團隊連結、環境友善與地方價值的旅程',
+      ctaButton: '立即洽詢方案',
+    },
     nav: {
       home: '首頁',
       products: '企業戶外客製專案',
@@ -270,7 +277,6 @@ export const translations = {
       submitFailed: '送出失敗，請稍後再試',
       networkError: '網路錯誤，請稍後再試',
       formTitle: '洽詢表單',
-      successMsg: '感謝您的洽詢，我們已收到您的訊息，將盡快與您聯繫！',
       failPrefix: '送出失敗：',
       sending: '送出中…',
       submitBtn: '送出洽詢',
@@ -544,7 +550,6 @@ export const translations = {
       provide2: '專業戶外引導與天候備案，安全與體能差異都顧及',
       provide3: '以引導式團隊對話，讓員工福祉成效可被看見',
       provide4: '交付照片、問卷與 Impact Note 等可留下來的成果素材',
-      leaveTitle: '旅程可以留下什麼？',
       modulesTitle: '六大服務模組',
       mod1: '需求診斷：企業訪談、員工狀態盤點',
       mod2: '場域與路線：森林、步道、地方場域',
@@ -905,6 +910,12 @@ export const translations = {
   },
 
   en: {
+    // 5T-Tangible: namespace consumed by src/components/Hero.jsx.
+    hero: {
+      title: 'Step into nature, create more meaningful journeys',
+      subtitle: 'FTG TOURS blends outdoor guiding, travel services and local connections to design journeys that care for employee wellbeing, team bonding, environmental friendliness and local value.',
+      ctaButton: 'Contact Us',
+    },
     nav: {
       home: 'Home',
       products: 'Custom Outdoor Programs',
@@ -1162,7 +1173,6 @@ export const translations = {
       submitFailed: 'Submission failed, please try again later',
       networkError: 'Network error, please try again later',
       formTitle: 'Inquiry Form',
-      successMsg: 'Thank you for your inquiry. We have received your message and will contact you soon!',
       failPrefix: 'Submission failed: ',
       sending: 'Sending…',
       submitBtn: 'Submit Inquiry',
@@ -1368,7 +1378,6 @@ export const translations = {
       provide2: 'Professional outdoor facilitation & weather backup; safety and fitness differences covered',
       provide3: 'Guided team dialogue makes employee wellbeing outcomes visible',
       provide4: 'Deliver photos, surveys and Impact Note as lasting outcome materials',
-      leaveTitle: 'What a journey can leave behind',
       modulesTitle: 'Six service modules',
       mod1: 'Needs diagnosis: company interview, employee state review',
       mod2: 'Venue & route: forest, trail, local sites',
