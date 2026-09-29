@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Serif+TC:wght@400;600;700&display=swap');
+/* 5T-Traceable: 原本是 Google Fonts 遠端 @import，序列阻塞且在台港常抓不到。
+   改為本地 @font-face 子集（Vite 會內聯到 bundle 頂端），見 src/fonts.css 的說明。 */
+@import './fonts.css';
 
 @tailwind base;
 @tailwind components;

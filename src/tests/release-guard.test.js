@@ -80,3 +80,73 @@ describe('翻譯鍵對稱 (5T-Trustworthy)', () => {
     expect(zh).toEqual(en);
   });
 });
+
+// 5T-Trustworthy: 自架字型子集的守衛。
+// 背景：本站字型改為「依實際用字硬子集」後，體積從 Google Fonts 的 17.6MB / 366 檔
+// 降到 734KB / 2 檔。代價是新增文案若用到子集沒有的字，該字會掉回系統字型——
+// 這在畫面上很難察覺，所以在此變成可攔截的失敗。
+describe('自架字型子集 (5T-Trustworthy)', () => {
+  const FONT_DIR = path.join(ROOT, 'public', 'fonts');
+  const cp = (ch) => `U+${ch.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}`;
+
+  // 掃描範圍對齊 scripts/build-fonts.py 的 SCAN（此處排除 dist/node_modules）。
+  function scanForHan() {
+    const files = [...walk(SRC)];
+    for (const extra of ['index.html', 'public']) {
+      const p = path.join(ROOT, extra);
+      if (fs.existsSync(p) && fs.statSync(p).isDirectory()) files.push(...walk(p));
+      else if (fs.existsSync(p)) files.push(p);
+    }
+    const han = new Set();
+    for (const f of files) {
+      if (f.includes(`${path.sep}node_modules${path.sep}`)) continue;
+      // 測試檔不會被渲染，其用字不影響字型需求；否則把中文斷言訊息
+      // 寫進測試檔就會反向改變字型子集需求，形成自我糾纏。
+      if (f.includes(`${path.sep}tests${path.sep}`)) continue;
+      for (const m of fs.readFileSync(f, 'utf8').match(/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/g) || []) {
+        han.add(m);
+      }
+    }
+    return han;
+  }
+
+  it('字型實體檔存在且非空', () => {
+    for (const f of ['noto-serif-tc.woff2', 'inter-latin.woff2']) {
+      const p = path.join(FONT_DIR, f);
+      expect(fs.existsSync(p), `${f} 不存在`).toBe(true);
+      expect(fs.statSync(p).size, `${f} 是空檔或過小`).toBeGreaterThan(1024);
+    }
+  });
+
+  it('子集涵蓋全站用到的每一個漢字', () => {
+    const manifest = JSON.parse(fs.readFileSync(path.join(SRC, 'font-subset-manifest.json'), 'utf8'));
+    const covered = new Set(manifest.fonts['noto-serif-tc'].codepoints.split(' '));
+    const han = scanForHan();
+    const missing = [...han].filter((c) => !covered.has(cp(c)));
+    expect(
+      missing,
+      `${missing.length} 個字不在 Noto Serif TC 子集內，會掉回系統字型：${missing.join('')}\n` +
+        '修法：.fontenv/Scripts/python.exe scripts/build-fonts.py'
+    ).toEqual([]);
+  });
+
+  it('index.css 不再引用 Google Fonts（@import 會序列阻塞）', () => {
+    const css = fs.readFileSync(path.join(SRC, 'index.css'), 'utf8');
+    expect(css).not.toContain('fonts.googleapis.com');
+  });
+
+  it('fonts.css 為兩個字型各宣告一次 @font-face', () => {
+    const css = fs.readFileSync(path.join(SRC, 'fonts.css'), 'utf8');
+    expect((css.match(/@font-face/g) || []).length).toBe(2);
+    expect(css).toContain("'Noto Serif TC'");
+    expect(css).toContain("'Inter'");
+  });
+
+  it('index.html 以 preload 預載字型，且帶 crossorigin', () => {
+    const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+    for (const f of ['noto-serif-tc', 'inter-latin']) {
+      const re = new RegExp(`<link rel="preload" href="/fonts/${f}\\.woff2"[^>]*crossorigin`);
+      expect(html, `缺少 ${f}.woff2 的 preload 或 crossorigin`).toMatch(re);
+    }
+  });
+});

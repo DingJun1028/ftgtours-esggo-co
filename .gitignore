@@ -48,3 +48,10 @@ id_ecdsa*
 # 通用腳本仍照常版控（scripts/ 下的 design-token 稽核檔已在追蹤中）。
 scripts/verify_streams.local.py
 scripts/*.local.py
+
+# 5T-Trustworthy: scripts/build-fonts.py 下載的字型「源檔」快取。
+# Noto Serif CJK TC 變數字型單檔 54MB，Inter 1MB；public/fonts/ 裡的成品
+# （約 734KB）才是要進版控的。放進版控會讓 repo 憑空多 55MB。
+.font-cache/
+.fontenv/
+
