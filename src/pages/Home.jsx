@@ -28,7 +28,7 @@ export default function Home() {
             <section className="relative h-screen flex items-center justify-center bg-ftg-forest overflow-hidden">
               <img
                 src="/images/hero-banner.webp"
-                alt="FTG TOURS 塾趣旅遊 企業員工旅遊戶外旅程橫幅"
+                alt="FTG TOURS 墾趣旅遊 企業員工旅遊戶外旅程橫幅"
                 className="absolute inset-0 w-full h-full object-cover"
                 fetchPriority="high"
                 decoding="async"
@@ -62,11 +62,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. 為什麼是塾趣 */}
+      {/* 2. 為什麼是墾趣 */}
       <section id="esg-section" className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
-            <h2 className="section-title">為什麼是塾趣</h2>
+            <h2 className="section-title">為什麼是墾趣</h2>
             <p className="section-subtitle">五大優勢，讓旅程與眾不同</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
@@ -122,7 +122,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. 塾趣的旅程特色 */}
+      {/* 3. 墾趣的旅程特色 */}
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
@@ -149,7 +149,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. 塾趣如何讓企業旅程更完整 */}
+      {/* 4. 墾趣如何讓企業旅程更完整 */}
       <section className="section-padding bg-ftg-sand">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
@@ -237,11 +237,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. 從需求到成行，塾趣陪你一起完成 */}
+      {/* 7. 從需求到成行，墾趣陪你一起完成 */}
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
-            <h2 className="section-title">從需求到成行，塾趣陪你一起完成</h2>
+            <h2 className="section-title">從需求到成行，墾趣陪你一起完成</h2>
             <p className="section-subtitle">五個步驟，從需求到完成</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">

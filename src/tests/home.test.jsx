@@ -6,11 +6,11 @@ import Home from '../pages/Home';
 import { LanguageProvider } from '../i18n/LanguageContext';
 
 // 5T-Trustworthy: 品牌字以碼位鎖定，不靠肉眼比對。
-// 塾 = U+587E 是正確品牌字；墾 U+58BE / 壾 U+58FE / 聖 U+8056 都是歷史錯字。
-// 這個 repo 長期在「墳趣」「塾趣」之間漂移過（見 skill P1/P54），
+// 墾 = U+58BE 是正確品牌字（2026-09-30 品牌主確認）；塾 U+587E / 壾 U+58FE / 聖 U+8056 都是歷史錯字。
+// 這個 repo 長期在「墳趣」「墾趣」之間漂移過（見 skill P1/P54），
 // 所以測試必須用碼位斷言 —— 人眼與 patch 的 fuzzy match 都不夠可靠。
-const BRAND = String.fromCodePoint(0x587e); // 塾
-const WRONG = [0x58be, 0x58fe, 0x8056, 0x58ba, 0x8fb7].map((c) => String.fromCodePoint(c));
+const BRAND = String.fromCodePoint(0x58be); // 墾
+const WRONG = [0x587e, 0x58fe, 0x8056, 0x58ba, 0x8fb7].map((c) => String.fromCodePoint(c));
 
 // Render <Home /> (which needs router + i18n context) into a real DOM node.
 // Uses react-dom directly so the suite needs no extra dev dependency.
@@ -61,7 +61,7 @@ describe('FTG Journey - Home Page', () => {
   });
 
   // 5T-Trustworthy: 整頁不得出現任何歷史錯字。
-  it('uses the correct brand codepoint U+587E throughout the page', () => {
+  it('uses the correct brand codepoint U+58BE throughout the page', () => {
     const text = rendered.container.textContent;
     expect(text).toContain(BRAND);
     for (const w of WRONG) {

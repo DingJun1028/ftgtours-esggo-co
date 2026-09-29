@@ -20,7 +20,7 @@ function walk(dir, out = []) {
 
 // 這個 repo 刻意把「歷史錯字」寫進測試作為 WRONG 清單，
 // 掃描時要排除 src/tests/ 與註解，否則會自我誤報。
-const WRONG_BRAND = [0x58be, 0x58fe, 0x8056, 0x58ba, 0x8fb7].map((c) => String.fromCodePoint(c));
+const WRONG_BRAND = [0x587e, 0x58fe, 0x8056, 0x58ba, 0x8fb7].map((c) => String.fromCodePoint(c));
 
 describe('品牌碼位 (5T-Trustworthy)', () => {
   it('no source file renders a historical wrong brand char', () => {
@@ -42,8 +42,8 @@ describe('品牌碼位 (5T-Trustworthy)', () => {
     expect(offenders).toEqual([]);
   });
 
-  it('the correct brand char U+587E is actually present', () => {
-    const ken = String.fromCodePoint(0x587e);
+  it('the correct brand char U+58BE is actually present', () => {
+    const ken = String.fromCodePoint(0x58be);
     const files = walk(SRC).filter((f) => !f.includes(`${path.sep}tests${path.sep}`));
     const hits = files.filter((f) => fs.readFileSync(f, 'utf8').includes(ken));
     expect(hits.length).toBeGreaterThan(0);

@@ -9,7 +9,7 @@ export default function Streams() {
 
   usePageSeo({
     // usePageSeo 會自動補上 ` | ${BRAND}`（見 utils/seo.js:16），
-    // 這裡再自行加一次會變成 "X | FTG TOURS | FTG TOURS 塾趣旅遊"。
+    // 這裡再自行加一次會變成 "X | FTG TOURS | FTG TOURS 墾趣旅遊"。
     title: en ? streamsPage.titleEn : streamsPage.title,
     description: en ? streamsPage.metaDescEn : streamsPage.metaDesc,
     path: '/streams',

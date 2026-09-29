@@ -12,7 +12,7 @@ export default function Contact() {
     title: t('contact.title'),
     description: t('contact.metaDesc'),
     path: '/contact',
-    keywords: ['聯絡', '洽詢', '企業方案', 'FTG TOURS', '塾趣旅遊'],
+    keywords: ['聯絡', '洽詢', '企業方案', 'FTG TOURS', '墾趣旅遊'],
   });
 
   // 載入 reCAPTCHA v3 script
