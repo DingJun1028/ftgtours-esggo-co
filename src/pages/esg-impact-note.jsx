@@ -6,15 +6,15 @@ import FTGIcon from '../components/FTGIcon';
 
 // 嚴格照資料夾原始順序：子網頁-ESG Impact Note (13張)
 const noteImages = [
-  { src: '/images/esg-impact-note/ESG Impact Note-ESG行動亮點.webp', tKey: 'impactNote.note1' },
-  { src: '/images/esg-impact-note/ESG Impact Note-參與者回饋與感受.webp', tKey: 'impactNote.note2' },
-  { src: '/images/esg-impact-note/ESG Impact Note-地方及環境貢獻.webp', tKey: 'impactNote.note3' },
-  { src: '/images/esg-impact-note/ESG Impact Note-旅程與活動全貌.webp', tKey: 'impactNote.note4' },
+  { src: '/images/esg-impact-note/ESG-Impact-Note-ESG行動亮點.webp', tKey: 'impactNote.note1' },
+  { src: '/images/esg-impact-note/ESG-Impact-Note-參與者回饋與感受.webp', tKey: 'impactNote.note2' },
+  { src: '/images/esg-impact-note/ESG-Impact-Note-地方及環境貢獻.webp', tKey: 'impactNote.note3' },
+  { src: '/images/esg-impact-note/ESG-Impact-Note-旅程與活動全貌.webp', tKey: 'impactNote.note4' },
 ];
 
 const resultImages = [
   { src: '/images/esg-impact-note/ESG成果內容-地方共好與社會價值.webp', tKey: 'impactNote.res1' },
-  { src: '/images/esg-impact-note/成果內容-ESG／SDGs 對應整理.webp', tKey: 'impactNote.res2' },
+  { src: '/images/esg-impact-note/成果內容-ESG-SDGs-對應整理.webp', tKey: 'impactNote.res2' },
   { src: '/images/esg-impact-note/成果內容-參與人次與投入紀錄.webp', tKey: 'impactNote.res3' },
   { src: '/images/esg-impact-note/成果內容-員工回饋與影像故事.webp', tKey: 'impactNote.res4' },
   { src: '/images/esg-impact-note/成果內容-後續改善與行動建議.webp', tKey: 'impactNote.res5' },
@@ -121,7 +121,7 @@ export default function EsgImpactNote() {
   return (
     <div>
       <section className="subpage-hero">
-        <img src="/images/esg-impact-note/ESG Impact Note-頁首大橫幅.webp" alt={t('products.impactNote')} className="subpage-hero__img" loading="lazy" />
+        <img src="/images/esg-impact-note/ESG-Impact-Note-頁首大橫幅.webp" alt={t('products.impactNote')} className="subpage-hero__img" loading="lazy" />
         <div className="subpage-hero__overlay"></div>
         <div className="subpage-hero__dim"></div>
         <div className="subpage-hero__content">

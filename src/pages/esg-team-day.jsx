@@ -6,9 +6,9 @@ import FTGIcon from '../components/FTGIcon';
 
 // 嚴格照資料夾原始順序：子網頁-ESG戶外團隊日 (10張)
 const teamImages = [
-  { src: '/images/esg-team-day/ESG 戶外團隊-走進自然.webp', tKey: 'esgTeamDay.imgTeam1' },
-  { src: '/images/esg-team-day/team day-團隊共創.webp', tKey: 'esgTeamDay.imgTeam2' },
-  { src: '/images/esg-team-day/team day-連結地方與環境.webp', tKey: 'esgTeamDay.imgTeam3' },
+  { src: '/images/esg-team-day/ESG-戶外團隊-走進自然.webp', tKey: 'esgTeamDay.imgTeam1' },
+  { src: '/images/esg-team-day/team-day-團隊共創.webp', tKey: 'esgTeamDay.imgTeam2' },
+  { src: '/images/esg-team-day/team-day-連結地方與環境.webp', tKey: 'esgTeamDay.imgTeam3' },
 ];
 
 const expImages = [
@@ -120,7 +120,7 @@ export default function EsgTeamDay() {
     <div>
       {/* 頁首 Hero：保留原有 subpage-hero 區塊 */}
       <section className="subpage-hero">
-        <img src="/images/esg-team-day/team day-頁首大橫幅.webp" alt={t('products.esgTeamDay')} className="subpage-hero__img" loading="lazy" />
+        <img src="/images/esg-team-day/team-day-頁首大橫幅.webp" alt={t('products.esgTeamDay')} className="subpage-hero__img" loading="lazy" />
         <div className="subpage-hero__overlay"></div>
         <div className="subpage-hero__dim"></div>
         <div className="subpage-hero__content">

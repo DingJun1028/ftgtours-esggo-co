@@ -12,10 +12,10 @@ const travelImages = [
 ];
 
 const valueImages = [
-  { src: '/images/corporate-travel/可延伸加值服務-串接 Team Day／Wellbeing Retreat.webp', tKey: 'corporateTravel.imgVal1' },
+  { src: '/images/corporate-travel/可延伸加值服務-串接-Team-Day-Wellbeing-Retreat.webp', tKey: 'corporateTravel.imgVal1' },
   { src: '/images/corporate-travel/可延伸加值服務-年度企業活動規劃.webp', tKey: 'corporateTravel.imgVal2' },
-  { src: '/images/corporate-travel/可延伸的加值服務-Basic Impact Summary.webp', tKey: 'corporateTravel.imgVal3' },
-  { src: '/images/corporate-travel/可延伸的加值服務-ESG Impact Note.webp', tKey: 'corporateTravel.imgVal4' },
+  { src: '/images/corporate-travel/可延伸的加值服務-Basic-Impact-Summary.webp', tKey: 'corporateTravel.imgVal3' },
+  { src: '/images/corporate-travel/可延伸的加值服務-ESG-Impact-Note.webp', tKey: 'corporateTravel.imgVal4' },
 ];
 
 const expImages = [

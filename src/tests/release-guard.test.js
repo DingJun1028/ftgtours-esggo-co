@@ -103,7 +103,17 @@ describe('自架字型子集 (5T-Trustworthy)', () => {
       // 測試檔不會被渲染，其用字不影響字型需求；否則把中文斷言訊息
       // 寫進測試檔就會反向改變字型子集需求，形成自我糾纏。
       if (f.includes(`${path.sep}tests${path.sep}`)) continue;
-      for (const m of fs.readFileSync(f, 'utf8').match(/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/g) || []) {
+      let text = fs.readFileSync(f, 'utf8');
+      // HTML/JS/CSS 註解同樣不會被渲染。若不排除，則任何解釋性註解裡的一個生僻字
+      // 都會強迫擴充字型子集，等於讓註解決定線上字型包大小。
+      if (/\.(html|jsx?|tsx?|css)$/.test(f)) {
+        text = text
+          .replace(/<!--[\s\S]*?-->/g, '')  // HTML 註解
+          .replace(/\/\*[\s\S]*?\*\//g, '')  // 區塊註解
+          .replace(/^\s*\/\/.*$/gm, '')      // 行內註解
+          .replace(/\/\/.*$/gm, (m) => (m.includes('://') ? m : '')); // 保留 URL 的 //
+      }
+      for (const m of text.match(/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/g) || []) {
         han.add(m);
       }
     }
@@ -148,5 +158,72 @@ describe('自架字型子集 (5T-Trustworthy)', () => {
       const re = new RegExp(`<link rel="preload" href="/fonts/${f}\\.woff2"[^>]*crossorigin`);
       expect(html, `缺少 ${f}.woff2 的 preload 或 crossorigin`).toMatch(re);
     }
+  });
+});
+
+// 5T-Trustworthy: 圖片路徑的 URL-safety 守衛。
+// 線上實測證據：檔名含空格者回 HTTP 200 但 Content-Type 是 text/html，
+// 內容為 SPA 首頁（`<!doctype html>`）——因為 nginx 匹配不到檔案就落到
+// `try_files $uri $uri/ /index.html`。**只看狀態碼會誤判為成功。**
+describe('圖片路徑 URL-safety (5T-Trustworthy)', () => {
+  // 半形空格 / 全形空格 / 全形斜線 U+FF0F
+  const BAD_PATH = /[ 　／]/;
+  const IMG_REF = /['"`](\/images\/[^'"`]+?\.(?:webp|png|jpe?g|svg|avif))['"`]/g;
+
+  function referencedImages() {
+    const out = [];
+    for (const f of [...walk(SRC), path.join(ROOT, 'index.html')]) {
+      if (f.includes(`${path.sep}tests${path.sep}`)) continue;
+      const text = fs.readFileSync(f, 'utf8');
+      for (const m of text.matchAll(IMG_REF)) out.push({ file: f, url: m[1] });
+    }
+    return out;
+  }
+
+  it('被引用的圖片路徑不含空格與全形斜線', () => {
+    const offenders = referencedImages()
+      .filter((r) => BAD_PATH.test(r.url))
+      .map((r) => `${path.relative(ROOT, r.file)} -> ${r.url}`);
+    expect(offenders, '含空格/全形斜線的圖片路徑在線上會回 SPA 首頁而非圖片').toEqual([]);
+  });
+
+  it('每個被引用的圖片在 public/ 都有對應實體檔', () => {
+    const missing = referencedImages()
+      .filter((r) => !fs.existsSync(path.join(ROOT, 'public', r.url.replace(/^\//, ''))))
+      .map((r) => r.url);
+    expect(missing, '這些引用在 public/ 找不到檔案').toEqual([]);
+  });
+});
+
+// 5T-Tangible: 社群分享必須有可解析的 og:image。
+// 實測線上 /images/logo.webp 回 Content-Type: image/webp，而 Facebook / LinkedIn /
+// LINE 的 OG 解析器多數不支援 webp → 分享連結會無圖。故 og:image 必須指向 PNG/JPEG，
+// 且同一個 meta name 不得重複宣告（重複時不同解析器取的欄位不一致，難以預測）。
+describe('Open Graph 分享圖', () => {
+  const html = () => fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+
+  it('og:image 指向 PNG 且有實際對應檔案', () => {
+    const m = html().match(/<meta\s+property="og:image"\s+content="([^"]+)"/);
+    expect(m, '找不到 og:image meta').toBeTruthy();
+    expect(m[1], 'og:image 必須是 .png/.jpg —— webp 多數 OG 解析器不支援').toMatch(/\.(png|jpe?g)$/i);
+
+    const local = path.join(ROOT, 'public', new URL(m[1]).pathname.replace(/^\//, ''));
+    expect(fs.existsSync(local), `og:image 指向的檔案不存在: ${local}`).toBe(true);
+  });
+
+  it('og:image 尺寸宣告為 OG 建議的 1200×630', () => {
+    expect(html()).toMatch(/<meta\s+property="og:image:width"\s+content="1200"\s*\/?>/);
+    expect(html()).toMatch(/<meta\s+property="og:image:height"\s+content="630"\s*\/?>/);
+  });
+
+  it('同一個 OG/Twitter meta 只宣告一次', () => {
+    const counts = {};
+    for (const m of html().matchAll(/<meta\s+(?:property|name)="((?:og|twitter):[a-z:]+)"/g)) {
+      counts[m[1]] = (counts[m[1]] || 0) + 1;
+    }
+    const dupes = Object.entries(counts)
+      .filter(([, n]) => n > 1)
+      .map(([k, n]) => `${k} 出現 ${n} 次`);
+    expect(dupes, '重複的 OG meta 會讓不同解析器取到不一致的欄位').toEqual([]);
   });
 });
