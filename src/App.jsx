@@ -13,6 +13,9 @@ import EsgImpactNote from './pages/esg-impact-note';
 import Contact from './pages/contact';
 import JourneyDesign from './pages/JourneyDesign';
 import Streams from './pages/streams';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+import About from './pages/About';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -34,6 +37,9 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/journey-design" element={<JourneyDesign />} />
               <Route path="/streams" element={<Streams />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/about" element={<About />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

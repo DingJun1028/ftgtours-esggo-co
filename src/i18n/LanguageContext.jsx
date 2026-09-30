@@ -21,10 +21,16 @@ export function LanguageProvider({ children }) {
     }
   }, [lang]);
 
-  // t(key) 支援巢狀 key，如 t('home.heroTitle')
-  const t = (key) => {
+  // t(key, params) 支援巢狀 key，如 t('home.heroTitle')
+  // 5T-Traceable: params 可代入 {placeholder}，讓隱私權政策/服務條款直接
+  // 引用 src/data/company.js 的法定主體資料，而不是在翻譯字串裡再寫一份
+  // （重複寫死正是先前聯絡資訊與登記資料不符的根因）。
+  // 既有呼叫只傳 key，行為完全不變。
+  const t = (key, params) => {
     const dict = translations[lang] || translations.zh;
-    return key.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), dict) ?? key;
+    const raw = key.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), dict) ?? key;
+    if (!params || typeof raw !== 'string') return raw;
+    return raw.replace(/\{(\w+)\}/g, (m, name) => (params[name] !== undefined ? params[name] : m));
   };
 
   return (

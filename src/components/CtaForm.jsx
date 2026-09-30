@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+// 5T-Trustworthy: 索取簡報的寄信目標自 SSOT 讀取，避免寄到不存在的信箱。
+import { COMPANY } from '../data/company';
 
 export default function CtaForm({ ctaTitle, ctaSub, features }) {
   const { t } = useLanguage();
@@ -79,27 +81,27 @@ export default function CtaForm({ ctaTitle, ctaSub, features }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
           <div>
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formCompany')}</label>
-            <input name="company" value={form.company} onChange={handleChange} required placeholder={t('contact.formCompanyPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm" />
+            <input name="company" value={form.company} onChange={handleChange} required placeholder={t('contact.formCompanyPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
           </div>
           <div>
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formContact')}</label>
-            <input name="contact_name" value={form.contact_name} onChange={handleChange} required placeholder={t('contact.formContactPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm" />
+            <input name="contact_name" value={form.contact_name} onChange={handleChange} required placeholder={t('contact.formContactPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
           </div>
           <div>
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formEmail')}</label>
-            <input name="email" type="email" value={form.email} onChange={handleChange} required placeholder={t('contact.formEmailPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm" />
+            <input name="email" type="email" value={form.email} onChange={handleChange} required placeholder={t('contact.formEmailPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
           </div>
           <div>
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formPhone')}</label>
-            <input name="phone" value={form.phone} onChange={handleChange} placeholder={t('contact.formPhonePlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm" />
+            <input name="phone" value={form.phone} onChange={handleChange} placeholder={t('contact.formPhonePlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
           </div>
           <div>
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formParticipants')}</label>
-            <input name="participants" value={form.participants} onChange={handleChange} placeholder={t('contact.formParticipantsPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm" />
+            <input name="participants" value={form.participants} onChange={handleChange} placeholder={t('contact.formParticipantsPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
           </div>
           <div>
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formActivityType')}</label>
-            <select name="activity_type" value={form.activity_type} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm">
+            <select name="activity_type" value={form.activity_type} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base">
               <option value="">{t('contact.formSelectOption')}</option>
               <option value="corporate-travel">{t('products.corpTravel')}</option>
               <option value="family-day">{t('products.familyDay')}</option>
@@ -112,11 +114,11 @@ export default function CtaForm({ ctaTitle, ctaSub, features }) {
           </div>
           <div>
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formDate')}</label>
-            <input name="preferred_date" type="date" value={form.preferred_date} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm" />
+            <input name="preferred_date" type="date" value={form.preferred_date} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
           </div>
           <div>
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formMessage')}</label>
-            <input name="message" value={form.message} onChange={handleChange} placeholder={t('contact.formMessagePlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-sm" />
+            <input name="message" value={form.message} onChange={handleChange} placeholder={t('contact.formMessagePlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
           </div>
         </div>
 
@@ -133,7 +135,7 @@ export default function CtaForm({ ctaTitle, ctaSub, features }) {
               送達的動作：直接寄信索取簡介。
               若日後真的產出 PDF，把檔案放進 public/ 對應目錄再換回下載連結。 */}
           <a
-            href={`mailto:hello@ftgtours.com?subject=${encodeURIComponent(t('contact.brochureSubject'))}`}
+            href={`mailto:${COMPANY.email}?subject=${encodeURIComponent(t('contact.brochureSubject'))}`}
             className="flex-1 border-2 border-ftg-forest text-ftg-forest px-8 py-3.5 rounded-full font-semibold text-sm md:text-base hover:bg-ftg-forest hover:text-white transition-colors text-center"
           >
             {t('contact.requestBrochureBtn')}

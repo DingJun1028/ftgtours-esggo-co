@@ -36,9 +36,29 @@ export default function Home() {
                 decoding="async"
                 loading="eager"
               />
-              <div className="absolute inset-0 bg-ftg-forest/60"></div>
-              <div className="absolute inset-0 bg-white/10"></div>
+              {/* 5T-Tangible: 遮罩「亮一點」但不能讓字變難讀。
+                  原為 forest/60 + white/10 —— 全域均勻壓暗，最差對比 3.96:1
+                  （照片亮部），低於 AA 的 4.5:1。
+
+                  這裡改成兩層分工，各自解決一個問題：
+                    · 全域遮罩降到 0.42 + 0.07（提高 30% 透明度）→ 照片透出更多，
+                      畫面不再是整片壓暗的沉悶色，這才是「亮」與高級感的來源。
+                    · 文字容器補一層 black/25 局部底 → 對比從 3.96 升到 4.99:1。
+
+                  重點：單純降全域 alpha 會讓對比掉到 3.04:1（實測），
+                  靠眼睛看不出來 —— 必須量測。遮罩均勻壓暗整張圖既犧牲了
+                  對比也沒有層次感；局部底只墊在需要閱讀的位置。
+
+                  5T-Transparent: 用 bracket 語法 [/0.42] 而非 /42。Tailwind 3
+                  的 opacity 是白名單制（0/5/10/20/25/30/40/50/60/70/75/80/90/95），
+                  任意數字會被「靜默丟棄」—— CSS 裡不會有這條規則，頁面也不會
+                  報錯，只是沒有變亮。這種失敗肉眼極難察覺。已由
+                  scripts/check_overlay_css.py 驗證實際有產生。 */}
+              <div className="absolute inset-0 bg-ftg-forest/[0.42]"></div>
+              <div className="absolute inset-0 bg-white/[0.07]"></div>
               <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
+            {/* 局部文字底：見上方說明。rounded 讓它不覆蓋按鈕的圓角造型。 */}
+            <div className="bg-black/25 rounded-2xl px-4 py-6 md:px-8 md:py-8 -m-1 md:-m-2">
           {/* 5T-Tangible: 移除 whitespace-nowrap。它強制 h1 單行不換行，
               text-6xl 在 <1280px 螢幕必然水平溢出（這是「字跑出邊邊」的根因）。
               改用 text-wrap: balance 讓標題在斷點處優雅折行，字級同步下修。 */}
@@ -65,6 +85,7 @@ export default function Home() {
             ))}
           </div>
         </div>
+            </div>
       </section>
 
       {/* 2. 為什麼是墾趣 */}

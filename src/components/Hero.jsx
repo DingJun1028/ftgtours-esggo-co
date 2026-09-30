@@ -10,13 +10,31 @@ export default function Hero() {
       className="relative min-h-[48vh] sm:min-h-[54vh] md:min-h-[60vh] lg:min-h-[64vh] max-h-[700px] flex items-end bg-cover bg-center" 
       style={{ backgroundImage: "url('/images/hero-banner.webp')" }}
     >
-      {/* Hero 漸層 (Left → Right) */}
-      <div className="absolute inset-0 bg-ftg-sunlight/80"></div>
+      {/* 5T-Tangible: 遮罩「亮一點」但不能讓字變糊。
+          原為 sunlight/80 —— 全域均勻壓亮，最差對比 6.22:1（照片暗部）。
+
+          改成兩層分工：
+            · 全域遮罩降到 /56（提高 30% 透明度）→ 照片透出更多，畫面更亮。
+            · Desktop 文字區補 cream/80 局部底 → 對比升到 9.19:1。
+
+          為什麼需要局部底：這裡的字是 text-ftg-forest（深綠）壓在亮黃遮罩上，
+          是「亮底深字」，與其他頁面的「暗底白字」相反。實測單純把 alpha 降到
+          /56，照片暗部會掉到 3.76:1（僅大字可過）—— 副標 text-lg 不是大字，
+          會不合格。靠眼睛看不出來，必須量測。
+
+          Mobile 版文字在 bg-ftg-sunlight 實色卡片裡（下方），本來就不受
+          全域遮罩影響，因此不需加局部底。
+
+          5T-Transparent: 全域遮罩用 bracket 語法 [/0.56] 而非 /56 ——
+          Tailwind 3 的 opacity 是白名單制，任意數字會被「靜默丟棄」：
+          CSS 不產生這條規則，頁面也不報錯，只是沒有變亮。已由
+          scripts/check_overlay_css.py 驗證實際有產生。 */}
+      <div className="absolute inset-0 bg-ftg-sunlight/[0.56]"></div>
 
       {/* Desktop Layout */}
       <div className="hidden sm:flex relative z-10 w-full max-w-7xl mx-auto pl-8 xl:pl-16 pb-16">
         {/* 左側文字 (靠左, 寬度 480-560px) */}
-        <div className="text-left max-w-md xl:max-w-lg">
+        <div className="text-left max-w-md xl:max-w-lg bg-ftg-cream/80 rounded-2xl px-6 py-6 xl:px-8 xl:py-7">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-ftg-forest mb-6 leading-tight">
             {t('hero.title')}
           </h1>

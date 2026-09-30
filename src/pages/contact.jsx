@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
 import { useLanguage } from '../i18n/LanguageContext';
+// 5T-Trustworthy: 聯絡資訊自 SSOT 讀取，與隱私權政策揭露的資料蒐集者一致。
+import { COMPANY } from '../data/company';
 
 // reCAPTCHA v3 Site Key（由使用者提供，注入於 Vite env 或下方常數）
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || 'REPLACE_WITH_YOUR_V3_SITE_KEY';
@@ -90,7 +92,7 @@ export default function Contact() {
     }
   };
 
-  const inputCls = 'w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition';
+  const inputCls = 'w-full px-4 py-3 text-base rounded-xl border border-gray-300 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition';
   const labelCls = 'block text-sm font-semibold text-ftg-forest mb-2';
 
   return (
@@ -110,15 +112,15 @@ export default function Contact() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mb-12">
             <div className="rounded-2xl bg-white shadow-lg p-8">
               <h3 className="text-lg font-bold text-ftg-green mb-2">{t('contact.phone')}</h3>
-              <p className="text-gray-700">886 2 7743 1006</p>
+              <p className="text-gray-700">{COMPANY.phone}</p>
             </div>
             <div className="rounded-2xl bg-white shadow-lg p-8">
               <h3 className="text-lg font-bold text-ftg-green mb-2">{t('contact.email')}</h3>
-              <p className="text-gray-700">hello@ftgtours.com</p>
+              <p className="text-gray-700">{COMPANY.email}</p>
             </div>
             <div className="rounded-2xl bg-white shadow-lg p-8">
               <h3 className="text-lg font-bold text-ftg-green mb-2">{t('contact.address')}</h3>
-              <p className="text-gray-700">台北市中山區</p>
+              <p className="text-gray-700">{COMPANY.address}</p>
             </div>
           </div>
 

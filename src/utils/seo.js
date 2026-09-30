@@ -1,4 +1,8 @@
 import { useEffect } from 'react';
+// 5T-Trustworthy: 結構化資料（JSON-LD）會被 Google 讀取並顯示在搜尋結果，
+// 屬於對外公開的法律聲明。電話/地址必須與隱私權政策揭露的資料蒐集者一致，
+// 否則政策頁與搜尋結果互相矛盾。單一真實來源 = src/data/company.js。
+import { COMPANY } from '../data/company';
 
 const SITE_URL = 'https://ftgtours.esggo.co';
 const BRAND = 'FTG TOURS 墾趣旅遊';
@@ -58,14 +62,16 @@ export const organizationJsonLd = {
     {
       '@type': 'ContactPoint',
       contactType: 'customer service',
-      telephone: '+886-2-7743-1006',
-      email: 'hello@ftgtours.com',
+      telephone: COMPANY.phone,
+      email: COMPANY.email,
     },
   ],
   address: {
     '@type': 'PostalAddress',
-    addressLocality: '台北市',
-    addressRegion: '中山區',
+    streetAddress: COMPANY.street,
+    addressLocality: COMPANY.city,
+    addressRegion: COMPANY.district,
+    postalCode: COMPANY.postalCode,
     addressCountry: 'TW',
   },
   sameAs: ['https://ftgtours.esggo.co'],
@@ -79,11 +85,13 @@ export const localBusinessJsonLd = (service = 'ESG Outdoor Wellbeing Travel') =>
   description: DEFAULT_DESCRIPTION,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: '台北市',
-    addressRegion: '中山區',
+    streetAddress: COMPANY.street,
+    addressLocality: COMPANY.city,
+    addressRegion: COMPANY.district,
+    postalCode: COMPANY.postalCode,
     addressCountry: 'TW',
   },
-  telephone: '+886-2-7743-1006',
+  telephone: COMPANY.phone,
   serviceType: service,
 });
 

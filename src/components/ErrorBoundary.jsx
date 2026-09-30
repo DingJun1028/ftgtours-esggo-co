@@ -58,12 +58,13 @@ export default class ErrorBoundary extends React.Component {
             >
               重新載入
             </button>
-            <a
-              href="#/"
+            <button
+              type="button"
+              onClick={() => { window.location.href = '/'; }}
               className="px-6 py-3 rounded-full border border-ftg-forest text-ftg-forest text-sm font-medium hover:bg-ftg-forest hover:text-white transition-colors"
             >
               返回首頁
-            </a>
+            </button>
           </div>
         </div>
       </div>

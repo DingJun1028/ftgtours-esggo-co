@@ -1,7 +1,7 @@
 // 六流體系資料 —— 本檔為文案的唯一真實來源 (SSOT)
 //
 // 5T-Transparent: 刻意不放進 src/i18n/translations.js。
-// 這個 repo 其他頁面用 t('wellbeing.xxx')，但那���的前提是「文案只存在
+// 這個 repo 其他頁面用 t('wellbeing.xxx')，但那成立的前提是「文案只存在
 // translations.js 一處」。六流的文案本來就以 title/titleEn 成對存在本檔，
 // 若再複製一份進 translations.js，就會產生兩個真實來源 —— 正是本季修掉
 // 的 no-dupe-key 靜默覆蓋同一類風險（改了一處、忘了另一處，譯文默默不同步）。

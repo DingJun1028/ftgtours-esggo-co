@@ -24,7 +24,10 @@ export default function JourneyDesign() {
     <div>
       {/* Hero */}
       <section className="relative bg-ftg-forest text-white py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-ftg-forest/95"></div>
+        {/* 5T-Tangible: 原本這裡有一層 bg-ftg-forest/95 遮罩，疊在下方同色的
+            bg-ftg-forest 實色底上。實測疊完顏色完全不變（rgb(26,58,46) →
+            rgb(26,58,46)），是純冗餘層：對「畫面變亮」毫無貢獻，卻讓維護者
+            誤以為有加深效果而去調它。已移除，實際對比維持 12.44:1。 */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* 5T-Tangible: 觸控區 >= 44px（WCAG 2.5.8）。text-sm 單行只有 ~24px，
               用 -my-2 抵銷 padding，視覺位置不變。 */}
@@ -77,7 +80,7 @@ export default function JourneyDesign() {
               { num: 1, icon: 'clipboard', title: '需求理解與訪談', desc: '深入了解企業文化、目標、團隊狀態與預算期待透過訪談找出真正重要的核心需求' },
               { num: 2, icon: 'map', title: '行程提案與規劃', desc: '依需求設計最合適的行程方案，包含場地選擇、活動設計、交通住宿整合' },
               { num: 3, icon: 'users', title: '細節確認與溝通', desc: '與企業端逐一確認每個環節，包含人數調整、特殊需求、風險評估與應急預案' },
-              { num: 4, icon: 'navigation', title: '專業執行與現場帶領', desc: '專業领队與活動引導人員現場執行，確保活動流暢、安全、達到預期效果' },
+              { num: 4, icon: 'navigation', title: '專業執行與現場帶領', desc: '專業領隊與活動引導人員現場執行，確保活動流暢、安全、達到預期效果' },
               { num: 5, icon: 'award', title: '成果整理與回饋', desc: '活動後的回饋收集、照片整理、影響力摘要，讓旅程價值延續到組織內部' },
             ].map((step, i) => (
               <div key={i} className="flex gap-6 mb-8 last:mb-0">

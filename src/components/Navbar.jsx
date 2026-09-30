@@ -89,7 +89,10 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Navigation */}
-        <div className={`lg:hidden overflow-hidden transition-all duration-300 ${mobileOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
+        {/* 5T-Tangible：原本 max-h-[600px] / max-h-96 是硬性像素高度，
+            英文標籤較長、字級放大或視窗較矮時，選單底部項目會被裁在框外
+            且無法捲動到 → 等同手機掉項目。改為視口相對高度 + 可捲動。 */}
+        <div className={`lg:hidden transition-all duration-300 ${mobileOpen ? 'max-h-[80vh] opacity-100 overflow-y-auto overscroll-contain' : 'max-h-0 opacity-0 overflow-hidden'}`}>
           <div className="pb-4 pt-2 border-t border-gray-100">
             <Link to="/" className="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-ftg-green hover:bg-ftg-sand" onClick={() => setMobileOpen(false)}>
               {t('nav.home')}
@@ -103,7 +106,7 @@ export default function Navbar() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              <div className={`overflow-hidden transition-all duration-300 ${mobileProducts ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+              <div className={`transition-all duration-300 ${mobileProducts ? 'max-h-[60vh] opacity-100 overflow-y-auto' : 'max-h-0 opacity-0 overflow-hidden'}`}>
                 <div className="pl-4 py-1">
                   {productLinks.map(link => (
                     <Link key={link.path} to={link.path} className={`block px-4 py-2.5 min-h-[44px] inline-flex items-center rounded-lg text-sm ${location.pathname === link.path ? 'text-ftg-green bg-ftg-sand font-semibold' : 'text-gray-600 hover:text-ftg-green hover:bg-ftg-sand'}`} onClick={() => setMobileOpen(false)}>
