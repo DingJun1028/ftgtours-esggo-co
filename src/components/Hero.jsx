@@ -4,12 +4,14 @@ export default function Hero() {
   const { t } = useLanguage();
 
   return (
+    // 5T-Tangible: 原本 sm:min-h-screen 在桌機過高（且手機 100vh 被網址列吃掉）。
+    // 改成有上限的 vh 階梯，橫幅比例固定。
     <section 
-      className="relative min-h-[60vh] sm:min-h-screen flex items-end bg-cover bg-center" 
+      className="relative min-h-[48vh] sm:min-h-[54vh] md:min-h-[60vh] lg:min-h-[64vh] max-h-[700px] flex items-end bg-cover bg-center" 
       style={{ backgroundImage: "url('/images/hero-banner.webp')" }}
     >
       {/* Hero 漸層 (Left → Right) */}
-      <div className="absolute inset-0 bg-gradient-to-r from-ftg-sunlight via-ftg-sunlight/70 to-transparent"></div>
+      <div className="absolute inset-0 bg-ftg-sunlight/80"></div>
 
       {/* Desktop Layout */}
       <div className="hidden sm:flex relative z-10 w-full max-w-7xl mx-auto pl-8 xl:pl-16 pb-16">

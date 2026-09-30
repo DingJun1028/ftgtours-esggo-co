@@ -38,8 +38,8 @@ describe('FTG Journey - Home Page', () => {
     rendered = renderHome();
   });
 
-  it('renders the full-height hero section', () => {
-    const heroSection = rendered.container.querySelector('section[class*="h-screen"]');
+  it('renders the responsive hero section with a capped height', () => {
+    const heroSection = rendered.container.querySelector('section[class*="min-h-[52vh]"]');
     expect(heroSection).not.toBeNull();
   });
 
@@ -50,13 +50,13 @@ describe('FTG Journey - Home Page', () => {
   });
 
   it('renders the brand hero banner image', () => {
-    const heroImg = rendered.container.querySelector('section[class*="h-screen"] img');
+    const heroImg = rendered.container.querySelector('section[class*="min-h-[52vh]"] img');
     expect(heroImg).not.toBeNull();
     expect(heroImg.getAttribute('alt')).toContain(`${BRAND}趣旅遊`);
   });
 
   it('exposes no untranslated translation keys in the hero', () => {
-    const hero = rendered.container.querySelector('section[class*="h-screen"]');
+    const hero = rendered.container.querySelector('section[class*="min-h-[52vh]"]');
     expect(hero.textContent).not.toMatch(/\b(home|nav|footer)\.[a-zA-Z]/);
   });
 

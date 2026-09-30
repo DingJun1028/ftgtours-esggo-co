@@ -25,7 +25,9 @@ export default function Home() {
   return (
     <div>
       {/* 1. Hero Section */}
-            <section className="relative h-screen flex items-center justify-center bg-ftg-forest overflow-hidden">
+            {/* 5T-Tangible: 原本 h-screen(100vh) 在桌機過高、且手機 100vh 會被網址列吃掉
+                改成 min-h-[clamp()] — 小螢 56vh、桌機 72vh 上限，橫幅比例固定不失控 */}
+            <section className="relative flex items-center justify-center bg-ftg-forest overflow-hidden min-h-[52vh] sm:min-h-[58vh] md:min-h-[64vh] lg:min-h-[68vh] max-h-[760px] py-16 sm:py-20 md:py-24">
               <img
                 src="/images/hero-banner.webp"
                 alt="FTG TOURS 墾趣旅遊 企業員工旅遊戶外旅程橫幅"
@@ -34,10 +36,13 @@ export default function Home() {
                 decoding="async"
                 loading="eager"
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-ftg-forest/60 via-ftg-green/40 to-ftg-leaf/30"></div>
+              <div className="absolute inset-0 bg-ftg-forest/60"></div>
               <div className="absolute inset-0 bg-white/10"></div>
               <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 font-serif leading-tight whitespace-nowrap">
+          {/* 5T-Tangible: 移除 whitespace-nowrap。它強制 h1 單行不換行，
+              text-6xl 在 <1280px 螢幕必然水平溢出（這是「字跑出邊邊」的根因）。
+              改用 text-wrap: balance 讓標題在斷點處優雅折行，字級同步下修。 */}
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 font-serif leading-tight text-balance break-words px-2">
             {t('home.heroTitle')}
           </h1>
           <p className="text-base md:text-lg lg:text-xl mb-6 md:mb-8 text-gray-100 max-w-3xl mx-auto leading-relaxed">
@@ -51,11 +56,11 @@ export default function Home() {
               {t('home.designBtn')}
             </Link>
           </div>
-          {/* 4 Feature Tags */}
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            {['自然體驗', '在地連結', '團隊共融', '永續行動'].map((tag, i) => (
-              <span key={i} className="px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full text-sm font-medium border border-white/20">
-                {tag}
+          {/* 4 Feature Tags — 5T-Tangible: 改走 t()，原本硬編中文在英文版會漏字 */}
+          <div className="mt-6 sm:mt-8 flex flex-wrap justify-center gap-2 sm:gap-3">
+            {[1, 2, 3, 4].map((i) => (
+              <span key={i} className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/15 backdrop-blur-sm rounded-full text-xs sm:text-sm font-medium border border-white/20 whitespace-nowrap">
+                {t(`home.heroTag${i}`)}
               </span>
             ))}
           </div>
@@ -71,11 +76,11 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
             {[
-              { icon: 'mountain', title: '深耕戶外生活的品牌經驗', desc: '多年戶外導覽與旅遊經營經驗。' },
-              { icon: 'map', title: '戶外路線與難度設計', desc: '依據需求規劃最適合的旅程難度。' },
-              { icon: 'clipboard', title: '完整的旅行專業執行', desc: '合法旅行社、保險、交通一站式。' },
-              { icon: 'users', title: '與地方共同完成旅程', desc: '在地夥伴合作，共創地方價值。' },
-              { icon: 'sustainable', title: '讓永續成為旅程中的實際行動', desc: 'ESG Impact Note 成果摘要。' },
+              { icon: 'mountain', title: '深耕戶外生活的品牌經驗', desc: '多年戶外導覽與旅遊經營經驗' },
+              { icon: 'map', title: '戶外路線與難度設計', desc: '依據需求規劃最適合的旅程難度' },
+              { icon: 'clipboard', title: '完整的旅行專業執行', desc: '合法旅行社、保險、交通一站式' },
+              { icon: 'users', title: '與地方共同完成旅程', desc: '在地夥伴合作，共創地方價值' },
+              { icon: 'sustainable', title: '讓永續成為旅程中的實際行動', desc: 'ESG Impact Note 成果摘要' },
             ].map((item, i) => (
               <div key={i} className="text-center">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-ftg-green/10 flex items-center justify-center">
@@ -131,11 +136,11 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {[
-              { icon: 'leaf', title: '自然慢行', desc: '大自然是最好的教室。' },
-              { icon: 'utensils', title: '地方餐食', desc: '品嚐在地好味。' },
-              { icon: 'users', title: '親子共學', desc: '寓教於樂。' },
-              { icon: 'star', title: '團隊互動', desc: '互動遊戲分組競賽。' },
-              { icon: 'sustainable', title: '永續行動', desc: '親近淨山淨灘。' },
+              { icon: 'leaf', title: '自然慢行', desc: '大自然是最好的教室' },
+              { icon: 'utensils', title: '地方餐食', desc: '品嚐在地好味' },
+              { icon: 'users', title: '親子共學', desc: '寓教於樂' },
+              { icon: 'star', title: '團隊互動', desc: '互動遊戲分組競賽' },
+              { icon: 'sustainable', title: '永續行動', desc: '親近淨山淨灘' },
             ].map((item, i) => (
               <div key={i} className="text-center p-6 rounded-2xl bg-ftg-sand hover:shadow-lg transition-shadow">
                 <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-ftg-green/10 flex items-center justify-center">
@@ -158,11 +163,11 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {[
-              { icon: 'users', title: '需求了解與策略設計', desc: '了解企業文化、目標與期待。' },
-              { icon: 'link', title: '在地資源與專業整合', desc: '在地資源與專業整合。' },
-              { icon: 'shield', title: '安全與風險管理', desc: '安全與風險管理。' },
-              { icon: 'heart', title: '暖心關懷與細節管理', desc: '暖心關懷與細節管理。' },
-              { icon: 'star', title: '成效追蹤與後續鏈接', desc: '成效追蹤與後續鏈接。' },
+              { icon: 'users', title: '需求了解與策略設計', desc: '了解企業文化、目標與期待' },
+              { icon: 'link', title: '在地資源與專業整合', desc: '在地資源與專業整合' },
+              { icon: 'shield', title: '安全與風險管理', desc: '安全與風險管理' },
+              { icon: 'heart', title: '暖心關懷與細節管理', desc: '暖心關懷與細節管理' },
+              { icon: 'star', title: '成效追蹤與後續鏈接', desc: '成效追蹤與後續鏈接' },
             ].map((item, i) => (
               <div key={i} className="text-center">
                 <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-ftg-green text-white flex items-center justify-center shadow-lg">
@@ -246,11 +251,11 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {[
-              { icon: 'compass', title: '需求了解與諮詢', desc: '深入了解企業需求。' },
-              { icon: 'map', title: '行程提案與精選', desc: '依需求精選行程。' },
-              { icon: 'users', title: '細節規劃與確認', desc: '細節規劃與確認。' },
-              { icon: 'navigation', title: '安心出遊與執行', desc: '安心出遊與執行。' },
-              { icon: 'clipboard', title: '成果整理與延伸', desc: '成果整理與延伸。' },
+              { icon: 'compass', title: '需求了解與諮詢', desc: '深入了解企業需求' },
+              { icon: 'map', title: '行程提案與精選', desc: '依需求精選行程' },
+              { icon: 'users', title: '細節規劃與確認', desc: '細節規劃與確認' },
+              { icon: 'navigation', title: '安心出遊與執行', desc: '安心出遊與執行' },
+              { icon: 'clipboard', title: '成果整理與延伸', desc: '成果整理與延伸' },
             ].map((item, i) => (
               <div key={i} className="text-center">
                 <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-ftg-green text-white flex items-center justify-center shadow-lg">
@@ -303,9 +308,9 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { title: 'ESG Impact Note', desc: '彙整旅程亮點。' },
-              { title: '年度活動規劃', desc: '整合年度旅遊活動。' },
-              { title: '新聞報導與資源整合', desc: '提供 ESG 題材。' },
+              { title: 'ESG Impact Note', desc: '彙整旅程亮點' },
+              { title: '年度活動規劃', desc: '整合年度旅遊活動' },
+              { title: '新聞報導與資源整合', desc: '提供 ESG 題材' },
             ].map((item, i) => (
               <div key={i} className="bg-ftg-sand rounded-2xl p-6 hover:shadow-lg transition-shadow">
                 <h3 className="font-bold text-ftg-forest mb-2">{item.title}</h3>

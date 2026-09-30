@@ -55,3 +55,20 @@ scripts/*.local.py
 .font-cache/
 .fontenv/
 
+
+# 部署暫存目錄（不進版控）
+.deploy-stage/
+
+# 本地備份/暫存（不進版控）
+.src-backup-*/
+.src-pregradient-*/
+.img-backup-*/
+__pycache__/
+*.pyc
+scripts/.*-audit.json
+scripts/.*-diff.json
+ux_*.png
+ux*.txt
+ex.txt
+i404.txt
+r404.txt

@@ -79,7 +79,7 @@ function PhotoCard({ src, title, desc }) {
   return (
     <figure className="relative overflow-hidden rounded-2xl shadow-lg group">
       <img src={src} alt={title} className="w-full h-60 sm:h-72 object-cover transition-transform group-hover:scale-105" loading="lazy" />
-      <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 sm:p-5">
+      <figcaption className="absolute inset-x-0 bottom-0 bg-black/70 p-4 sm:p-5">
         <h3 className="text-white text-base sm:text-lg font-bold leading-snug">{title}</h3>
         <p className="text-gray-200 text-xs sm:text-sm mt-1">{desc}</p>
       </figcaption>

@@ -10,7 +10,7 @@ export default function NotFound() {
         {t('notFound.title') || '找不到這個頁面'}
       </h1>
       <p style={{ color: '#5b6b7b', maxWidth: 420, marginBottom: 24 }}>
-        {t('notFound.desc') || '您要找的旅程頁面可能已移動或網址有誤。'}
+        {t('notFound.desc') || '您要找的旅程頁面可能已移動或網址有誤'}
       </p>
       <Link to="/" style={{
         background: '#c9a24b', color: '#1a1205', padding: '12px 28px',

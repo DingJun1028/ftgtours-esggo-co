@@ -45,7 +45,7 @@
     @apply absolute inset-0 w-full h-full object-cover;
   }
   .subpage-hero__overlay {
-      @apply absolute inset-0 bg-gradient-to-br from-ftg-forest/60 via-ftg-green/40 to-ftg-leaf/30;
+      @apply absolute inset-0 bg-ftg-forest/60;
     }
     .subpage-hero__dim {
       @apply absolute inset-0 bg-white/10;

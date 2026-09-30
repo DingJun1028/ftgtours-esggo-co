@@ -40,6 +40,11 @@ export const translations = {
       h1: 'ESG 戶外健康旅遊方案',
       heroTitle: '走進自然，創造更有意義的旅程',
       heroSub: '墾趣結合戶外導覽、旅行服務與在地連結，為企業設計兼顧員工身心健康、團隊連結、環境友善與地方價值的旅程',
+      // 5T-Tangible: 首頁 hero 下方 4 個標籤原本硬編在 JSX 裡，切英文會漏字
+      heroTag1: '自然體驗',
+      heroTag2: '在地連結',
+      heroTag3: '團隊共融',
+      heroTag4: '永續行動',
       metaDesc: '墾趣結合戶外導覽、旅行服務與在地連結，為企業設計兼顧員工身心健康、團隊連結、環境友善與地方價值的旅程',
       exploreBtn: '探索企業方案',
       designBtn: '了解墾趣旅程設計',
@@ -945,6 +950,11 @@ export const translations = {
       h1: 'ESG Outdoor Wellbeing Travel',
       heroTitle: 'Step into nature, create more meaningful journeys',
       heroSub: 'FTG TOURS blends outdoor guiding, travel services and local connections to design journeys that care for employee wellbeing, team bonding, environmental friendliness and local value.',
+      // 5T-Tangible: 對應 zh 的 heroTag1-4（首頁 hero 四個標籤）
+      heroTag1: 'Nature',
+      heroTag2: 'Local ties',
+      heroTag3: 'Team bonding',
+      heroTag4: 'Sustainability',
       metaDesc: 'FTG TOURS blends outdoor guiding, travel services and local connections to design journeys that care for employee wellbeing, team bonding, environmental friendliness and local value.',
       exploreBtn: 'Explore Corporate Programs',
       designBtn: 'Learn About FTG Journey Design',

@@ -15,7 +15,7 @@ export default function JourneyDesign() {
   // 注意 journeyDesign 命名空間目前尚未存在於 translations.js 的 zh/en。
   usePageSeo({
     title: '了解墾趣旅程設計 | FTG TOURS',
-    description: '從需求訪談到成果交付，墾趣如何為企業設計兼顧員工福祉、團隊凝聚與永續行動的旅程。',
+    description: '從需求訪談到成果交付，墾趣如何為企業設計兼顧員工福祉、團隊凝聚與永續行動的旅程',
     path: '/journey-design',
     keywords: ['旅程設計', '企業旅遊規劃', '客製化行程', 'ESG 旅程'],
   });
@@ -24,7 +24,7 @@ export default function JourneyDesign() {
     <div>
       {/* Hero */}
       <section className="relative bg-ftg-forest text-white py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-ftg-forest via-ftg-green/90 to-ftg-forest"></div>
+        <div className="absolute inset-0 bg-ftg-forest/95"></div>
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* 5T-Tangible: 觸控區 >= 44px（WCAG 2.5.8）。text-sm 單行只有 ~24px，
               用 -my-2 抵銷 padding，視覺位置不變。 */}
@@ -49,9 +49,9 @@ export default function JourneyDesign() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { icon: 'leaf', title: '自然為師', desc: '我們相信自然是最好的教室。走進山林與海岸，讓參與者在真實情境中學習、感受、連結。' },
-              { icon: 'users', title: '以人為本', desc: '旅程設計的出發點是人——理解團隊狀態、尊重個體差異、創造有溫度的共同體驗。' },
-              { icon: 'sustainable', title: '永續行動', desc: '把 ESG 精神融入每個環節，讓旅程不只是消耗，而是對地方、環境與社會的投資。' },
+              { icon: 'leaf', title: '自然為師', desc: '我們相信自然是最好的教室走進山林與海岸，讓參與者在真實情境中學習、感受、連結' },
+              { icon: 'users', title: '以人為本', desc: '旅程設計的出發點是人——理解團隊狀態、尊重個體差異、創造有溫度的共同體驗' },
+              { icon: 'sustainable', title: '永續行動', desc: '把 ESG 精神融入每個環節，讓旅程不只是消耗，而是對地方、環境與社會的投資' },
             ].map((item, i) => (
               <div key={i} className="text-center p-6 bg-ftg-sand rounded-2xl">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-ftg-green/10 flex items-center justify-center">
@@ -74,11 +74,11 @@ export default function JourneyDesign() {
           </div>
           <div className="max-w-4xl mx-auto">
             {[
-              { num: 1, icon: 'clipboard', title: '需求理解與訪談', desc: '深入了解企業文化、目標、團隊狀態與預算期待。透過訪談找出真正重要的核心需求。' },
-              { num: 2, icon: 'map', title: '行程提案與規劃', desc: '依需求設計最合適的行程方案，包含場地選擇、活動設計、交通住宿整合。' },
-              { num: 3, icon: 'users', title: '細節確認與溝通', desc: '與企業端逐一確認每個環節，包含人數調整、特殊需求、風險評估與應急預案。' },
-              { num: 4, icon: 'navigation', title: '專業執行與現場帶領', desc: '專業领队與活動引導人員現場執行，確保活動流暢、安全、達到預期效果。' },
-              { num: 5, icon: 'award', title: '成果整理與回饋', desc: '活動後的回饋收集、照片整理、影響力摘要，讓旅程價值延續到組織內部。' },
+              { num: 1, icon: 'clipboard', title: '需求理解與訪談', desc: '深入了解企業文化、目標、團隊狀態與預算期待透過訪談找出真正重要的核心需求' },
+              { num: 2, icon: 'map', title: '行程提案與規劃', desc: '依需求設計最合適的行程方案，包含場地選擇、活動設計、交通住宿整合' },
+              { num: 3, icon: 'users', title: '細節確認與溝通', desc: '與企業端逐一確認每個環節，包含人數調整、特殊需求、風險評估與應急預案' },
+              { num: 4, icon: 'navigation', title: '專業執行與現場帶領', desc: '專業领队與活動引導人員現場執行，確保活動流暢、安全、達到預期效果' },
+              { num: 5, icon: 'award', title: '成果整理與回饋', desc: '活動後的回饋收集、照片整理、影響力摘要，讓旅程價值延續到組織內部' },
             ].map((step, i) => (
               <div key={i} className="flex gap-6 mb-8 last:mb-0">
                 <div className="flex-shrink-0">
@@ -109,11 +109,11 @@ export default function JourneyDesign() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {[
-              { icon: 'mountain', title: '深耕戶外經驗', desc: '多年戶外導覽與旅遊經營經驗。' },
-              { icon: 'compass', title: '專業路線設計', desc: '依據需求規劃最適合的旅程難度。' },
-              { icon: 'shield', title: '完整旅行服務', desc: '合法旅行社、保險、交通一站式。' },
-              { icon: 'link', title: '在地夥伴合作', desc: '在地夥伴合作，共創地方價值。' },
-              { icon: 'sustainable', title: '永續行動實踐', desc: 'ESG Impact Note 成果摘要。' },
+              { icon: 'mountain', title: '深耕戶外經驗', desc: '多年戶外導覽與旅遊經營經驗' },
+              { icon: 'compass', title: '專業路線設計', desc: '依據需求規劃最適合的旅程難度' },
+              { icon: 'shield', title: '完整旅行服務', desc: '合法旅行社、保險、交通一站式' },
+              { icon: 'link', title: '在地夥伴合作', desc: '在地夥伴合作，共創地方價值' },
+              { icon: 'sustainable', title: '永續行動實踐', desc: 'ESG Impact Note 成果摘要' },
             ].map((item, i) => (
               <div key={i} className="text-center p-4">
                 <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-ftg-green/10 flex items-center justify-center">
