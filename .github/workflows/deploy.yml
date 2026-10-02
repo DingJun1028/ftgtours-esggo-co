@@ -158,3 +158,44 @@ jobs:
 
           [ "$origin_rc" = "0" ] || { echo "::error::來源端驗證失敗，站點未正確部署"; exit 1; }
           echo "來源端驗證通過（公開網域 403 不影響判定）"
+
+      - name: Live render gate (browser)
+        run: |
+          # 5T-Trackable: HTTP 200 + 檔案大小 + bundle 存在，都不能證明 React
+          # 真的渲染出來。本案是 HashRouter + nginx SPA fallback，任何字串路徑
+          # 都回 200（含不存在的路徑）。故以真實 Chromium 對來源端逐條路由
+          # × desktop/mobile 渲染實測。
+          #
+          # 為何對 127.0.0.1 而非公開網域：GitHub Actions runner 位於 datacenter
+          # IP，Cloudflare 一律回 403（見上方 Verify 步驟的實測記錄）。對來源端
+          # 渲染判的是「部署的東西能不能用」，這正是部署該驗的；公開網域可達性
+          # 另由獨立的 ping 監控負責，兩者不混為一談。
+          set -uo pipefail
+          # 注意：runner 端不需裝 Chromium —— 渲染發生在 VPS 上。
+          # 在這裡裝只會浪費數分鐘 CI 時間，且掩蓋真正的失敗點。
+          scp -q scripts/verify_live_render.py vps:/tmp/verify_live_render.py
+          ssh vps 'bash -s' <<'REMOTE3'
+          set -uo pipefail
+          # PEP 668：系統 Python 為 externally-managed，直接 pip install 會被拒
+          # （externally-managed-environment）。必須用獨立 venv，不能 --break-system-packages。
+          VENV=/tmp/ftg-verify-venv
+          [ -x "$VENV/bin/python" ] || python3 -m venv "$VENV" 2>/dev/null || {
+            echo "::error::來源端無法建立 venv（需 python3-venv）"; exit 1; }
+          "$VENV/bin/pip" install --quiet --upgrade pip >/dev/null 2>&1 || true
+          "$VENV/bin/pip" install --quiet playwright || {
+            echo "::error::來源端無法安裝 playwright"; exit 1; }
+          "$VENV/bin/playwright" install --with-deps chromium >/dev/null 2>&1 || \
+            "$VENV/bin/playwright" install chromium
+          # 部署帳號未必能讀到 dist/，此時比對會自動跳過（腳本已處理）。
+          # 走 8899 專用 vhost（/etc/nginx/conf.d/ftg-verify.conf，僅綁
+          # 127.0.0.1，不對外開放）。不能用 http://127.0.0.1:80 —— 該 port
+          # 的預設 vhost 是 AI Station，實測會渲染到錯的站。
+          # 也刻意不用 --host-header：Chromium 禁止腳本覆寫 Host header。
+          "$VENV/bin/python" /tmp/verify_live_render.py \
+            --base http://127.0.0.1:8899
+          rc=$?
+          rm -f /tmp/verify_live_render.py
+          exit $rc
+          REMOTE3
+          [ "$?" = "0" ] || { echo "::error::線上渲染實測失敗，部署判定不通過"; exit 1; }
+          echo "線上渲染實測通過"

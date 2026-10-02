@@ -118,10 +118,28 @@ PROBE_JS = """() => {
 }"""
 
 
+HOST_HEADER = None  # 由 main 依 --host-header 設定，供 fetch() 使用
+
+
 def fetch(url, timeout=60):
-    req = urllib.request.Request(url, headers={"User-Agent": UA_DESKTOP,
-                                               "Cache-Control": "no-cache"})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
+    headers = {"User-Agent": UA_DESKTOP, "Cache-Control": "no-cache"}
+    # 對 127.0.0.1 取站點內容時必須帶 Host，否則 nginx 會回預設 vhost，
+    # 拿到的是別的站（或 404），preflight 會誤判成「找不到 bundle 引用」。
+    if HOST_HEADER and url.startswith(
+            ("http://127.0.0.1", "https://127.0.0.1",
+             "http://localhost", "https://localhost")):
+        headers["Host"] = HOST_HEADER
+    req = urllib.request.Request(url, headers=headers)
+    # CI 路徑會指向 VPS 本機 nginx，其憑證非公共 CA 簽發。
+    # 這裡只影響「抓 HTML 確認 bundle 引用」這一步，TLS 身分由後續
+    # TLS 驗證等級（--tls-allow-selfsigned）另行把關。
+    ctx = None
+    if url.startswith("https://127.0.0.1") or url.startswith("https://localhost"):
+        import ssl
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+    with urllib.request.urlopen(req, timeout=timeout, context=ctx) as r:
         return r.read().decode("utf-8", "replace")
 
 
@@ -160,8 +178,16 @@ def main():
                     help="只做路由分流檢查，不啟動瀏覽器")
     ap.add_argument("--allow-no-browser", action="store_true",
                     help="無 Chromium 時降級為警告而非失敗")
+    ap.add_argument("--tls-allow-selfsigned", action="store_true",
+                    help="允許自簽憑證（CI 對 VPS 本機 nginx 驗證時需要）")
+    ap.add_argument("--host-header", default=None,
+                    help="覆寫 Host header（僅用於 urllib preflight；"
+                         "瀏覽器層 Chromium 禁止覆寫 Host，請改用 "
+                         "http://localhost:<port> + nginx 預設 vhost）")
     args = ap.parse_args()
     base = args.base.rstrip("/")
+    global HOST_HEADER
+    HOST_HEADER = args.host_header
 
     print("=" * 74)
     print(f"線上渲染實證 — {base}")
@@ -209,6 +235,12 @@ def main():
     print()
 
     browser = None
+    ctx_kw = {}
+    if args.tls_allow_selfsigned:
+        ctx_kw["ignore_https_errors"] = True
+    # 刻意不在這裡設 extra_http_headers={"Host": ...}：
+    # Chromium 禁止腳本覆寫 Host header，帶了會直接 ERR_INVALID_ARGUMENT。
+    # 要指定 vhost 請用 http://localhost:<port> 搭配 nginx 預設 vhost。
     try:
         browser = pw.chromium.launch(**launch)
         for vp_name, cfg in VIEWPORTS.items():
@@ -219,7 +251,7 @@ def main():
                 viewport={"width": cfg["width"], "height": cfg["height"]},
                 is_mobile=cfg["mobile"], has_touch=cfg["mobile"],
                 user_agent=UA_MOBILE if cfg["mobile"] else UA_DESKTOP,
-                locale="zh-TW",
+                locale="zh-TW", **ctx_kw,
             )
             page = ctx.new_page()
             for route in all_routes:
@@ -276,7 +308,7 @@ def main():
         # 那會把腳本缺陷誤報成站點缺陷，必須先切語系。
         ctx_en = browser.new_context(
             viewport={"width": 1440, "height": 900}, locale="en-US",
-            user_agent=UA_DESKTOP,
+            user_agent=UA_DESKTOP, **ctx_kw,
         )
         ctx_en.add_init_script("window.localStorage.setItem('ftg_lang','en')")
         page_en = ctx_en.new_page()
