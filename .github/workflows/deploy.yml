@@ -50,6 +50,9 @@ jobs:
       - name: Install deps
         run: pnpm install --frozen-lockfile
 
+      - name: Audit encoding damage
+        run: pnpm run audit:encoding
+
       - name: Build
         run: pnpm run build
 

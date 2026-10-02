@@ -58,6 +58,13 @@ jobs:
       - name: Audit design tokens
         run: pnpm run audit:tokens
 
+      # 5c. Encoding damage gate: U+FFFD means bytes were already lost, so a
+      # build stays "green" while shipping corrupted text (the exact failure
+      # this repo already hit). Placed BEFORE build on purpose — corrupted
+      # source must never reach the bundler, let alone production.
+      - name: Audit encoding damage
+        run: pnpm run audit:encoding
+
       # 6. Run build
       - name: Run build
         run: pnpm run build
