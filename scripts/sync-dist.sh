@@ -44,10 +44,17 @@ copied = missing = 0
 for r in sorted(refs):
     src = os.path.join(dist, r.lstrip('/'))
     if not os.path.isfile(src):
+        # 原本是 continue：不記錯、不中止，繼續部署。
+        # 那會送出一個「圖片 404 但部署顯示成功」的站點，正是本腳本
+        # 註解明確要避免的情況。缺檔必須中止。
         print('  ! dist 缺檔:', r); missing += 1; continue
     dst = os.path.join(stage, r.lstrip('/'))
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     shutil.copy2(src, dst); copied += 1
+
+if missing:
+    print('  ! 有 %d 個被引用的圖片在 dist 中不存在 — 中止部署' % missing)
+    sys.exit(1)
 
 # 社群分享圖（og:image）
 for extra in ['og-image.png']:
@@ -62,11 +69,35 @@ for sub in ['assets', 'fonts']:
         shutil.copytree(d, os.path.join(stage, sub), dirs_exist_ok=True)
 shutil.copy2(os.path.join(dist, 'index.html'), os.path.join(stage, 'index.html'))
 
+# 根目錄靜態檔：這些不在 assets/ 下，但線上 index.html 會引用（例如
+# favicon.svg），且 Cloudflare 自訂網域驗證靠根目錄的 CNAME。
+# 漏掉它們會被遠端 rsync 的 --delete 刪除，造成 favicon 404、robots.txt
+# 消失、CNAME 消失導致網域驗證失效。dist 沒有就跳過（不製造空檔）。
+for extra in ['favicon.svg', 'icons.svg', 'robots.txt', 'CNAME',
+              'sitemap.xml']:
+    s = os.path.join(dist, extra)
+    if os.path.isfile(s):
+        shutil.copy2(s, os.path.join(stage, extra)); copied += 1
+    else:
+        print('  ~ dist 無此檔（略過）:', extra)
+
+# seo/ 目錄同樣在根目錄層級，非引用式資源但屬線上檔案。
+d = os.path.join(dist, 'seo')
+if os.path.isdir(d):
+    shutil.copytree(d, os.path.join(stage, 'seo'), dirs_exist_ok=True)
+
 # 引用數與實際複製數必須一致——不一致代表正則漏抓或 dist 沒建置完，
 # 那種情況下寧可部署失敗也不要靜默送出缺圖的站點。
-if copied != len(refs) + 1:  # +1 = og-image.png
-    print('  ! 引用 %d 條，實際複製 %d 個（期望 %d）— 中止部署'
-          % (len(refs), copied, len(refs) + 1))
+# 期望值 = 引用圖 + og-image.png + 實際複製的根目錄靜態檔數。
+STATIC_FILES = ['favicon.svg', 'icons.svg', 'robots.txt', 'CNAME',
+                'sitemap.xml']
+n_static = sum(1 for e in STATIC_FILES
+               if os.path.isfile(os.path.join(dist, e)))
+expected = len(refs) + 1 + n_static   # +1 = og-image.png
+if copied != expected:
+    print('  ! 引用 %d 條 + og-image + %d 個根目錄靜態檔 = 期望 %d，'
+          '實際複製 %d — 中止部署'
+          % (len(refs), n_static, expected, copied))
     sys.exit(1)
 
 # 「數字自洽」擋不住「掃描範圍本身就不對」。所以再加一道絕對下限：
