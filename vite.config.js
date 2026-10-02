@@ -25,7 +25,19 @@ export default defineConfig({
         url: 'https://ftgtours.esggo.co',
       },
     },
-    // 5T-Trustworthy: 必須排除本專案在用的備份/暫存目錄前綴。
+    // 5T-Trustworthy: 測試必須 fail-closed，不能靠「運氣好」通過。
+    //
+    // 實測事故（本輪調整）：連續 8 次 pnpm run test:run 耗時落在
+    // 12.4s – 73s，波動 6 倍。此時若沿用 vitest 預設 5s testTimeout，
+    // 冷啟動那幾次會整批報紅 —— 紅燈與產品行為無關，純粹是 CI/本機
+    // 負載尖峰。這種 flaky 閘比沒有閘更危險：開發者會學會重跑，
+    // 於是真正的迴歸也被一起重跑掉。
+    //
+    // 30s 是實測上界的 2.5 倍餘裕：足以吸收負載尖峰，又仍會抓到真正
+    // 死結（無限期等待），不會把 hang 變成通過。
+    testTimeout: 30000,
+    hookTimeout: 30000,
+    teardownTimeout: 10000,
     // 實測事故：專案根目錄有 .src-backup-*/ .src-pregradient-*/ .img-backup-*/
     // 這類備份時，vitest 的預設 glob 會把它們裡的 *.test.js 一併收進來，
     // 導致「10 failed | 5 passed」的紅燈，而這些測試壓根沒有跟本次改動有關。

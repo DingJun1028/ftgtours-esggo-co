@@ -44,7 +44,7 @@ describe('iOS Safari 縮放防線', () => {
           // 用空白包住，避免 text-sm 誤中 text-smaller 之類
           const re = new RegExp('(^|\\s)' + tw + '(\\s|$)');
           if (re.test(cls) && px < MIN_PX) {
-            const tag = (L.match(/<(input|select|textarea)\b/) || [, 'control'])[1];
+            const tag = (L.match(/<(input|select|textarea)\b/) || [undefined, 'control'])[1];
             offenders.push(
               `${path.relative(SRC, f)}:${i + 1} <${tag}> ${tw}=${px}px < ${MIN_PX}px`
             );

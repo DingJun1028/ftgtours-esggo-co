@@ -12,7 +12,6 @@
  *   8. 殘留 gradient class
  */
 import { spawn } from 'node:child_process';
-import http from 'node:http';
 import net from 'node:net';
 import os from 'node:os';
 import path from 'node:path';

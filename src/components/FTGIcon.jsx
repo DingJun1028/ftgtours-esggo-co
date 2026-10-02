@@ -3,7 +3,7 @@
  * Elegant line icons, 24x24 viewBox, stroke-based
  * Style: High-end, minimalist, non-flamboyant
  */
-export const FTG_ICONS = {
+const FTG_ICONS = {
   // Design & Planning
   compass: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
