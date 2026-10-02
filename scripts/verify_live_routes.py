@@ -14,7 +14,7 @@
 因此正確做法：從線上 HTML 取出實際 bundle 檔名，抓下該 bundle，
 用反引號形態比對路由清單，並明確區分「找到 / 沒找到」兩種輸出。
 
-exit 0 = 全部路由都在線上 bundle 內 / 1 = 有路由缺���
+exit 0 = 全部路由都在線上 bundle 內 / 1 = 有路由缺失
 """
 import re
 import sys

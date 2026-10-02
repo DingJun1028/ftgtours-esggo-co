@@ -45,7 +45,10 @@ def main() -> int:
         print("WARN: dist/assets 有 %d 個 bundle，部署前應清空重建：" % len(bundles))
         for b in bundles:
             print("      %s" % b.name)
-    text = "\n".join(b.read_text(encoding="utf-8", errors="replace") for b in bundles)
+    # 5T-Trustworthy：嚴格解碼。舊版 errors="replace" 會把 bundle 裡的壞位元組
+    # 換成 U+FFFD；若 REQUIRED 錨點本身碰到那個位置，就會「假報 FAIL」，
+    # 而部署無從分辨是真缺字元還是解碼損毀。解碼失敗必須讓它炸出來。
+    text = "\n".join(b.read_text(encoding="utf-8") for b in bundles)
     print("驗證對象: %s (%d 檔, %d bytes)" % (", ".join(b.name for b in bundles), len(bundles), len(text)))
     print("")
 

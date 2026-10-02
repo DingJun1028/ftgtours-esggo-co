@@ -33,7 +33,11 @@ def collect_references() -> set[str]:
     for f in files:
         if not f.is_file():
             continue
-        text = f.read_text(encoding="utf-8", errors="ignore")
+        # 5T-Trustworthy：嚴格解碼。舊版 errors="ignore" 會讓壞位元組直接消失，
+        # 這個迴圈收集到的引用會是「殘缺的真值」；下游會依這些引用
+        # 搬檔並改寫原始碼，一個被截斷的 /images/ 路徑就足以造成圖片 404。
+        # 壞位元組必須讓它炸出來。
+        text = f.read_text(encoding="utf-8")
         for m in re.finditer(r"['\"](/images/[^'\"]+?\.(?:webp|png|jpg|jpeg|svg|avif))['\"]", text):
             refs.add(m.group(1))
     return refs

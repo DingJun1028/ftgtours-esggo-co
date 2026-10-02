@@ -254,11 +254,16 @@ def main():
                 locale="zh-TW", **ctx_kw,
             )
             page = ctx.new_page()
+            # 5T-Trustworthy：listener 必須在迴圈外綁一次。
+            # 舊版在 for 迴圈內 page.on()，每條路由多綁一對 handler；又因為
+            # errs 每輪重新賦值成新 list，早期的 handler 仍寫進已被丟棄的舊
+            # list，錯誤被吞掉且數量失真（實測 14 條路由只有第 1 條看得到
+            # JS_ERR）。現在 errs 全程同一個物件，只 clear() 不重新賦值。
+            errs: list[str] = []
+            page.on("pageerror", lambda e: errs.append(str(e)[:200]))
+            page.on("console", lambda m: errs.append(m.text[:200])
+                    if m.type == "error" else None)
             for route in all_routes:
-                errs = []
-                page.on("pageerror", lambda e: errs.append(str(e)[:200]))
-                page.on("console", lambda m: errs.append(m.text[:200])
-                        if m.type == "error" else None)
                 errs.clear()
                 page.goto(f"{base}/#{route}", wait_until="networkidle", timeout=45000)
                 page.wait_for_timeout(500)

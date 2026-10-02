@@ -105,7 +105,10 @@ def _class_used_in_code(cls: str) -> bool:
     src_dir = ROOT / "src"
     # 去掉 /* ... */ 與 // ... 後再找，才不會被說明註解誤判為「仍在使用」
     for f in src_dir.rglob("*.jsx"):
-        raw = f.read_text(encoding="utf-8", errors="ignore")
+        # 5T-Trustworthy：嚴格解碼。舊版 errors="ignore" 會讓壞位元組直接消失，
+        # 這個檢查器的用途正是「找出仍殘留的樣式」，用殘缺的文字去找殘留
+        # 等於關掉了自己。壞位元組必須讓它炸出來。
+        raw = f.read_text(encoding="utf-8")
         stripped = _re.sub(r"/\*.*?\*/", "", raw, flags=_re.S)
         stripped = _re.sub(r"(?m)^\s*//.*$", "", stripped)
         for m in _re.findall(r"className=[\"']([^\"']*)[\"']", stripped):

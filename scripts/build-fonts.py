@@ -62,8 +62,13 @@ def site_text() -> str:
             if any(part in {"node_modules", "dist", ".font-cache", "tests"} for part in p.parts):
                 # tests/ 不渲染，其用字不該影響字型子集（與 release-guard 的品牌碼位測試一致）
                 continue
+            # 5T-Trustworthy：嚴格解碼，壞位元組立刻報錯而非無聲丟棄。
+            # 舊版 errors="ignore" 會讓壞位元組消失 → 字型子集漏字 → 線上豆腐字，
+            # 而且全程無任何錯誤訊息。先修好檔案，再來跑這裡。
+            # 注意：UnicodeDecodeError 刻意不放進 except —— 那是損毀訊號，
+            # 必須讓它炸出來，不能和真正的 I/O 錯誤一起被 continue 吃掉。
             try:
-                chunks.append(p.read_text(encoding="utf-8", errors="ignore"))
+                chunks.append(p.read_text(encoding="utf-8"))
             except OSError:
                 continue
     return "\n".join(chunks)
