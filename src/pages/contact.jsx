@@ -9,7 +9,7 @@ import { COMPANY } from '../data/company';
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || 'REPLACE_WITH_YOUR_V3_SITE_KEY';
 
 export default function Contact() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   usePageSeo({
     title: t('contact.title'),
     description: t('contact.metaDesc'),
@@ -120,7 +120,7 @@ export default function Contact() {
             </div>
             <div className="rounded-2xl bg-white shadow-lg p-8">
               <h3 className="text-lg font-bold text-ftg-green mb-2">{t('contact.address')}</h3>
-              <p className="text-gray-700">{COMPANY.address}</p>
+              <p className="text-gray-700">{lang === 'en' ? COMPANY.addressEn : COMPANY.address}</p>
             </div>
           </div>
 
@@ -141,7 +141,7 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* honeypot 防垃圾：視覺隱藏，bot 自動填寫會被擋 */}
               <div className="absolute left-[-9999px] top-[-9999px] w-px h-px overflow-hidden" aria-hidden="true">
-                <label htmlFor="hp-field">請勿填寫此欄</label>
+                <label htmlFor="hp-field" className="sr-only">{t('contact.hpLabel')}</label>
                 <input
                   id="hp-field"
                   name="hp"

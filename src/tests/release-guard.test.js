@@ -81,6 +81,74 @@ describe('翻譯鍵對稱 (5T-Trustworthy)', () => {
   });
 });
 
+// 5T-Transparent: 英文版不得殘留繁中。
+// 背景：使用者回報「中英翻譯也是會突然出現不該出現的狀況 英文版 還是繁體中文」。
+// 已查到的兩類成因：
+//   (a) en 字典某個 key 的「值」仍是中文 —— key 在 ≠ 已翻譯；
+//   (b) 元件整段硬編碼中文、完全沒接 t()（ErrorBoundary 就是這一類，
+//       平時看不到、觸發錯誤時整頁中文）。
+// 「翻譯鍵對稱」只擋得住 key 缺漏，擋不住上面兩種，所以另立這道 gate。
+describe('英文版無中文殘留 (5T-Transparent)', () => {
+  const CJK = /[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/;
+  // 語言切換器按鈕本來就要顯示「繁中」——那是給英文訪客看的語言名稱，
+  // 不是漏翻。同理品牌名 / 證照號碼等法定中文維持原樣。
+  const ALLOW = new Set(['lang.zh']);
+
+  function collect(node, path = '', out = []) {
+    if (typeof node === 'string') {
+      if (CJK.test(node) && !ALLOW.has(path)) out.push(`${path} → ${node}`);
+      return out;
+    }
+    if (Array.isArray(node)) {
+      node.forEach((v, i) => collect(v, `${path}[${i}]`, out));
+      return out;
+    }
+    if (node && typeof node === 'object') {
+      for (const [k, v] of Object.entries(node)) collect(v, path ? `${path}.${k}` : k, out);
+    }
+    return out;
+  }
+
+  it('en 字典沒有未翻譯的中文值', () => {
+    const hits = collect(translations.en);
+    expect(
+      hits,
+      `${hits.length} 個 en 值仍是中文，切英文版會看到繁中：\n  ${hits.join('\n  ')}`
+    ).toEqual([]);
+  });
+
+  it('ErrorBoundary 四段文案在 zh/en 皆存在且非空', () => {
+    // class 元件取不到 hook 的 t()，因此它自己讀 translations[lang]。
+    // 這裡守住「兩邊都在」，否則會靜默落到 FALLBACK 而無人察覺。
+    for (const lang of ['zh', 'en']) {
+      const eb = translations[lang].errorBoundary;
+      expect(eb, `${lang} 缺 errorBoundary 命名空間`).toBeTruthy();
+      for (const k of ['title', 'body', 'retry', 'home']) {
+        expect(typeof eb[k], `${lang}.errorBoundary.${k} 應為字串`).toBe('string');
+        expect(eb[k].length, `${lang}.errorBoundary.${k} 為空字串`).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it('ErrorBoundary 原始碼已無硬編碼中文文案', () => {
+    // 確保文案真的搬進字典了，而不是「字典有了但元件還寫死中文」。
+    const src = fs.readFileSync(path.join(SRC, 'components', 'ErrorBoundary.jsx'), 'utf8');
+    const body = src
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/^\s*\/\/.*$/gm, '');
+    const hits = (body.match(/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]+/g) || []);
+    // FALLBACK.zh 是刻意的中文備援（僅在字典缺 key 時才會用到），
+    // 故只允許它出現在 FALLBACK 區塊內。
+    const afterFallback = body.slice(body.indexOf('export default class'));
+    const outside = (afterFallback.match(/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]+/g) || []);
+    expect(
+      outside,
+      `render() 之後仍有硬編碼中文：${outside.join(' ')}`
+    ).toEqual([]);
+    expect(hits.length).toBeGreaterThan(0); // FALLBACK.zh 仍在，屬預期
+  });
+});
+
 // 5T-Trustworthy: 自架字型子集的守衛。
 // 背景：本站字型改為「依實際用字硬子集」後，體積從 Google Fonts 的 17.6MB / 366 檔
 // 降到 734KB / 2 檔。代價是新增文案若用到子集沒有的字，該字會掉回系統字型——

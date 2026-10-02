@@ -30,6 +30,12 @@ export const COMPANY = {
   district: '三重區',
   street: '興德路123之11號10樓',
   address: '24158 新北市三重區興德路123之11號10樓',
+  // 5T-Tangible: 英文版的地址。實測事故：address 只有中文版，Footer 直接
+  // 印 COMPANY.address，導致切英文後頁尾仍是一整串繁中（13 條路由每頁都
+  // 出現，是全站最顯眼的殘留）。
+  // 這裡只做「同一個地址的英文排版」，不是另一個地址：郵遞區號、城市、
+  // 區、路名、樓層全部對應上面同一組欄位。國際郵件請以英文版為準。
+  addressEn: '10F, No. 123-11, Xingde Rd., Sanchong District, New Taipei City 24158, Taiwan',
   phone: '02-8512-3099',
   fax: '02-8512-3089',
   email: 'service@ftg-tours.com.tw',

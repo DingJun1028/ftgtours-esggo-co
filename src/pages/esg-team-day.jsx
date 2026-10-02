@@ -121,8 +121,6 @@ export default function EsgTeamDay() {
       {/* 頁首 Hero：保留原有 subpage-hero 區塊 */}
       <section className="subpage-hero">
         <img src="/images/esg-team-day/team-day-頁首大橫幅.webp" alt={t('products.esgTeamDay')} className="subpage-hero__img" loading="lazy" />
-        <div className="subpage-hero__overlay"></div>
-        <div className="subpage-hero__dim"></div>
         <div className="subpage-hero__content">
           <Link to="/" className="text-ftg-orange hover:underline mb-4 inline-block font-medium inline-flex items-center min-h-[44px] min-w-[44px] -my-2">{t('nav.backHome')}</Link>
           <h1 className="subpage-hero__title">{t('products.esgTeamDay')}</h1>

@@ -10,7 +10,7 @@ import { COMPANY, POLICY_EFFECTIVE_DATE } from '../data/company';
 // 且 Google 依其隱私權政策可能將資料用於廣告用途。
 
 export default function Privacy() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   usePageSeo({
     title: t('privacy.title'),
     description: t('privacy.metaDesc'),
@@ -43,7 +43,7 @@ export default function Privacy() {
               <li>{t('privacy.companyName')}：{COMPANY.legalName}</li>
               <li>{t('privacy.taxId')}：{COMPANY.taxId}</li>
               <li>{t('privacy.representative')}：{COMPANY.representative}</li>
-              <li>{t('privacy.address')}：{COMPANY.address}</li>
+              <li>{t('privacy.address')}：{lang === 'en' ? COMPANY.addressEn : COMPANY.address}</li>
               <li>{t('privacy.phone')}：{COMPANY.phone}</li>
               <li>{t('privacy.email')}：{COMPANY.email}</li>
               <li>{t('privacy.licenseNo')}：{COMPANY.licenseNo}</li>
@@ -109,7 +109,7 @@ export default function Privacy() {
           <div className="bg-ftg-sand rounded-2xl p-6 md:p-8 mt-10">
             <p className="text-sm text-gray-700 leading-relaxed">
               {t('privacy.contactUs')}：{COMPANY.legalName}（{t('privacy.taxId')} {COMPANY.taxId}）<br />
-              {t('privacy.address')}：{COMPANY.address}<br />
+              {t('privacy.address')}：{lang === 'en' ? COMPANY.addressEn : COMPANY.address}<br />
               {t('privacy.phone')}：{COMPANY.phone}　{t('privacy.email')}：{COMPANY.email}
             </p>
           </div>

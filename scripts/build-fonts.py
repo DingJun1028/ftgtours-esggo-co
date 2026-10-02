@@ -148,7 +148,13 @@ def main() -> int:
             "axes": meta["axes"],
             # 以單一空白分隔字串存放，而非 JSON 陣列：875 個碼位用陣列會讓
             # 存檔清單膨脹成 1100 行；測試仍可 .split(' ') 逐一比對。
-            "codepoints": " ".join(cps),
+            #
+            # 5T-Trustworthy: 這裡必須是「產出的 .woff2 實際含有的碼位」，
+            # 而不是來源字型的全部碼位。差異是實質的：若記錄來源全部碼位，
+            # 測試會對任何用字都通過，等於把字型子集檢查整個廢掉 ——
+            # 子集沒某個字時，該字會掉回系統字型，正是這個欄位要擋的。
+            # 讀的是 out（產出），不是 src（來源）。
+            "codepoints": " ".join(codepoints(out)),
         }
         print(f"    → {out.stat().st_size:,} bytes")
 

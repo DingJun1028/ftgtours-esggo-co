@@ -4,6 +4,15 @@ import { useLanguage } from '../i18n/LanguageContext';
 import FTGIcon from '../components/FTGIcon';
 import CtaForm from '../components/CtaForm';
 
+// 5T-Traceable: 卡片文案改由 t('home.*List') 供應（字典已有正體與英文），
+// icon 是純裝飾且不參與翻譯，故留在這裡以索引對應，不進字典。
+const ADVANTAGE_ICONS = ['mountain', 'map', 'clipboard', 'users', 'sustainable'];
+const FEATURE_ICONS = ['leaf', 'utensils', 'users', 'star', 'sustainable'];
+const PROCESS_ICONS = ['users', 'link', 'shield', 'heart', 'star'];
+const MOMENT_ICONS = ['sun', 'users', 'star', 'heart', 'award'];
+const STEP_ICONS = ['compass', 'map', 'users', 'navigation', 'clipboard'];
+const SAFETY_ICONS = ['heart', 'navigation', 'shield', 'award', 'users', 'leaf'];
+
 export default function Home() {
   const { t } = useLanguage();
   usePageSeo({
@@ -36,29 +45,29 @@ export default function Home() {
                 decoding="async"
                 loading="eager"
               />
-              {/* 5T-Tangible: 遮罩「亮一點」但不能讓字變難讀。
-                  原為 forest/60 + white/10 —— 全域均勻壓暗，最差對比 3.96:1
-                  （照片亮部），低於 AA 的 4.5:1。
+              {/* 5T-Tangible（2026-10-02 修正）：拿掉外圍遮罩，照片保持明亮。
+                                使用者要求「拿掉外圍的遮罩 讓他明亮」「只要一層 照片保持明亮
+                                再用一個方框 遮罩 當成字體的背景」。
 
-                  這裡改成兩層分工，各自解決一個問題：
-                    · 全域遮罩降到 0.42 + 0.07（提高 30% 透明度）→ 照片透出更多，
-                      畫面不再是整片壓暗的沉悶色，這才是「亮」與高級感的來源。
-                    · 文字容器補一層 black/25 局部底 → 對比從 3.96 升到 4.99:1。
+                                原狀態是「兩層全域遮罩（forest/0.42 + white/0.07）+ black/25
+                                文字方框」，等於三層。歷史上的 forest/0.42 是為了救對比，
+                                但它把整張照片壓成沉悶色 —— 正好是使用者不要的結果。
 
-                  重點：單純降全域 alpha 會讓對比掉到 3.04:1（實測），
-                  靠眼睛看不出來 —— 必須量測。遮罩均勻壓暗整張圖既犧牲了
-                  對比也沒有層次感；局部底只墊在需要閱讀的位置。
+                                現在改為零層全域遮罩 + 唯一一層文字方框。代價是方框必須
+                                自己扛下全部對比責任（實測，照片亮/中/暗三種情境取最差）：
+                                    black/25 → 2.57:1  ❌ 不合格
+                                    black/45 → 4.46:1  ❌ 差一點（副標 gray-100 不是大字）
+                                    black/50 → 5.24:1  ✅ AA 通過  ← 採用
+                                這是為什麼 alpha 從 25 直接跳到 50：不是為了「更暗好看」，
+                                而是因為外層已無遮罩墊底，方框是唯一的對比來源。
 
-                  5T-Transparent: 用 bracket 語法 [/0.42] 而非 /42。Tailwind 3
-                  的 opacity 是白名單制（0/5/10/20/25/30/40/50/60/70/75/80/90/95），
-                  任意數字會被「靜默丟棄」—— CSS 裡不會有這條規則，頁面也不會
-                  報錯，只是沒有變亮。這種失敗肉眼極難察覺。已由
-                  scripts/check_overlay_css.py 驗證實際有產生。 */}
-              <div className="absolute inset-0 bg-ftg-forest/[0.42]"></div>
-              <div className="absolute inset-0 bg-white/[0.07]"></div>
-              <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
-            {/* 局部文字底：見上方說明。rounded 讓它不覆蓋按鈕的圓角造型。 */}
-            <div className="bg-black/25 rounded-2xl px-4 py-6 md:px-8 md:py-8 -m-1 md:-m-2">
+                                5T-Transparent: 沒有遮罩不等於沒有處理。Tailwind 3 的 opacity
+                                是白名單制，black/50 在白名單內，不會被靜默丟棄；仍由
+                                scripts/check_overlay_css.py 驗證實際有產生規則。 */}
+                            <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
+                          {/* 唯一的遮罩：文字方框。照片在其餘面積完全無濾鏡，保持原始亮度。
+                              rounded 讓它不覆蓋按鈕的圓角造型。 */}
+                          <div className="bg-black/50 rounded-2xl px-4 py-6 md:px-8 md:py-8 -m-1 md:-m-2">
           {/* 5T-Tangible: 移除 whitespace-nowrap。它強制 h1 單行不換行，
               text-6xl 在 <1280px 螢幕必然水平溢出（這是「字跑出邊邊」的根因）。
               改用 text-wrap: balance 讓標題在斷點處優雅折行，字級同步下修。 */}
@@ -92,23 +101,17 @@ export default function Home() {
       <section id="esg-section" className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
-            <h2 className="section-title">為什麼是墾趣</h2>
-            <p className="section-subtitle">五大優勢，讓旅程與眾不同</p>
+            <h2 className="section-title">{t('home.whyTitle')}</h2>
+            <p className="section-subtitle">{t('home.whySub')}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
-            {[
-              { icon: 'mountain', title: '深耕戶外生活的品牌經驗', desc: '多年戶外導覽與旅遊經營經驗' },
-              { icon: 'map', title: '戶外路線與難度設計', desc: '依據需求規劃最適合的旅程難度' },
-              { icon: 'clipboard', title: '完整的旅行專業執行', desc: '合法旅行社、保險、交通一站式' },
-              { icon: 'users', title: '與地方共同完成旅程', desc: '在地夥伴合作，共創地方價值' },
-              { icon: 'sustainable', title: '讓永續成為旅程中的實際行動', desc: 'ESG Impact Note 成果摘要' },
-            ].map((item, i) => (
+            {t('home.advantageList').map((a, i) => (
               <div key={i} className="text-center">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-ftg-green/10 flex items-center justify-center">
-                  <FTGIcon name={item.icon} size={32} className="text-ftg-green" />
+                  <FTGIcon name={ADVANTAGE_ICONS[i % ADVANTAGE_ICONS.length]} size={32} className="text-ftg-green" />
                 </div>
-                <h3 className="font-bold text-ftg-forest mb-2 text-sm">{item.title}</h3>
-                <p className="text-gray-600 text-xs">{item.desc}</p>
+                <h3 className="font-bold text-ftg-forest mb-2 text-sm">{a.title}</h3>
+                <p className="text-gray-600 text-xs">{a.desc}</p>
               </div>
             ))}
           </div>
@@ -153,22 +156,16 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
             <h2 className="section-title">{t('home.featuresTitle')}</h2>
-            <p className="section-subtitle">五大特色，讓旅程與眾不同</p>
+            <p className="section-subtitle">{t('home.featuresSub')}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {[
-              { icon: 'leaf', title: '自然慢行', desc: '大自然是最好的教室' },
-              { icon: 'utensils', title: '地方餐食', desc: '品嚐在地好味' },
-              { icon: 'users', title: '親子共學', desc: '寓教於樂' },
-              { icon: 'star', title: '團隊互動', desc: '互動遊戲分組競賽' },
-              { icon: 'sustainable', title: '永續行動', desc: '親近淨山淨灘' },
-            ].map((item, i) => (
+            {t('home.featureList').map((f, i) => (
               <div key={i} className="text-center p-6 rounded-2xl bg-ftg-sand hover:shadow-lg transition-shadow">
                 <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-ftg-green/10 flex items-center justify-center">
-                  <FTGIcon name={item.icon} size={28} className="text-ftg-green" />
+                  <FTGIcon name={FEATURE_ICONS[i % FEATURE_ICONS.length]} size={28} className="text-ftg-green" />
                 </div>
-                <h3 className="font-bold text-ftg-forest mb-2 text-sm">{item.title}</h3>
-                <p className="text-gray-600 text-xs">{item.desc}</p>
+                <h3 className="font-bold text-ftg-forest mb-2 text-sm">{f.title}</h3>
+                <p className="text-gray-600 text-xs">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -180,25 +177,19 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
             <h2 className="section-title">{t('home.processTitle')}</h2>
-            <p className="section-subtitle">五步驟，讓企業旅程更完整</p>
+            <p className="section-subtitle">{t('home.processSub')}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {[
-              { icon: 'users', title: '需求了解與策略設計', desc: '了解企業文化、目標與期待' },
-              { icon: 'link', title: '在地資源與專業整合', desc: '在地資源與專業整合' },
-              { icon: 'shield', title: '安全與風險管理', desc: '安全與風險管理' },
-              { icon: 'heart', title: '暖心關懷與細節管理', desc: '暖心關懷與細節管理' },
-              { icon: 'star', title: '成效追蹤與後續鏈接', desc: '成效追蹤與後續鏈接' },
-            ].map((item, i) => (
+            {t('home.processList').map((p, i) => (
               <div key={i} className="text-center">
                 <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-ftg-green text-white flex items-center justify-center shadow-lg">
-                  <FTGIcon name={item.icon} size={24} className="text-white" />
+                  <FTGIcon name={PROCESS_ICONS[i % PROCESS_ICONS.length]} size={24} className="text-white" />
                 </div>
                 <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-ftg-forest text-white flex items-center justify-center text-xs font-bold">
                   {i + 1}
                 </div>
-                <h3 className="font-bold text-ftg-forest mb-2 text-sm">{item.title}</h3>
-                <p className="text-gray-600 text-xs">{item.desc}</p>
+                <h3 className="font-bold text-ftg-forest mb-2 text-sm">{p.title}</h3>
+                <p className="text-gray-600 text-xs">{p.desc}</p>
               </div>
             ))}
           </div>
@@ -226,7 +217,7 @@ export default function Home() {
                   <p className="text-gray-600 text-sm mb-4 leading-relaxed">{product.desc}</p>
                   <span className="text-ftg-green font-semibold flex items-center text-sm group-hover:translate-x-2 transition-transform">
                     {t('home.learnMore')}
-                    <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="ml-1.5 h-6 w-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </span>
@@ -241,22 +232,16 @@ export default function Home() {
       <section className="section-padding bg-ftg-sand">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
-            <h2 className="section-title">適合這些企業時刻</h2>
-            <p className="section-subtitle">五個常見的企業情境</p>
+            <h2 className="section-title">{t('home.momentsTitle')}</h2>
+            <p className="section-subtitle">{t('home.momentsSub')}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {[
-              { icon: 'sun', title: '年度員工旅遊' },
-              { icon: 'users', title: '家庭日' },
-              { icon: 'star', title: '部門同樂' },
-              { icon: 'heart', title: '身心平衡與福利活動' },
-              { icon: 'award', title: '高階主管共識鏈接' },
-            ].map((item, i) => (
+            {t('home.momentList').map((m, i) => (
               <div key={i} className="text-center p-6 rounded-2xl bg-white hover:shadow-lg transition-shadow">
                 <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-ftg-green/10 flex items-center justify-center">
-                  <FTGIcon name={item.icon} size={28} className="text-ftg-green" />
+                  <FTGIcon name={MOMENT_ICONS[i % MOMENT_ICONS.length]} size={28} className="text-ftg-green" />
                 </div>
-                <h3 className="font-bold text-ftg-forest text-sm">{item.title}</h3>
+                <h3 className="font-bold text-ftg-forest text-sm">{m.title}</h3>
               </div>
             ))}
           </div>
@@ -267,26 +252,20 @@ export default function Home() {
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
-            <h2 className="section-title">從需求到成行，墾趣陪你一起完成</h2>
-            <p className="section-subtitle">五個步驟，從需求到完成</p>
+            <h2 className="section-title">{t('home.stepsTitle')}</h2>
+            <p className="section-subtitle">{t('home.stepsSub')}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {[
-              { icon: 'compass', title: '需求了解與諮詢', desc: '深入了解企業需求' },
-              { icon: 'map', title: '行程提案與精選', desc: '依需求精選行程' },
-              { icon: 'users', title: '細節規劃與確認', desc: '細節規劃與確認' },
-              { icon: 'navigation', title: '安心出遊與執行', desc: '安心出遊與執行' },
-              { icon: 'clipboard', title: '成果整理與延伸', desc: '成果整理與延伸' },
-            ].map((item, i) => (
+            {t('home.stepList').map((s, i) => (
               <div key={i} className="text-center">
                 <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-ftg-green text-white flex items-center justify-center shadow-lg">
-                  <FTGIcon name={item.icon} size={24} className="text-white" />
+                  <FTGIcon name={STEP_ICONS[i % STEP_ICONS.length]} size={24} className="text-white" />
                 </div>
                 <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-ftg-forest text-white flex items-center justify-center text-xs font-bold">
                   {i + 1}
                 </div>
-                <h3 className="font-bold text-ftg-forest mb-2 text-sm">{item.title}</h3>
-                <p className="text-gray-600 text-xs">{item.desc}</p>
+                <h3 className="font-bold text-ftg-forest mb-2 text-sm">{s.title}</h3>
+                <p className="text-gray-600 text-xs">{s.desc}</p>
               </div>
             ))}
           </div>
@@ -298,22 +277,15 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
             <h2 className="section-title">{t('home.safetyTitle')}</h2>
-            <p className="section-subtitle">六大安全保障，放心走進自然</p>
+            <p className="section-subtitle">{t('home.safetySub')}</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-            {[
-              { icon: 'heart', title: '安全第一' },
-              { icon: 'navigation', title: '交通報險安排' },
-              { icon: 'shield', title: '旅遊保險完善' },
-              { icon: 'award', title: '戶外專業帶領' },
-              { icon: 'users', title: '在地夥伴合作' },
-              { icon: 'leaf', title: 'ESG Impact Note' },
-            ].map((item, i) => (
+            {t('home.safetyList').map((s, i) => (
               <div key={i} className="text-center p-4">
                 <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-ftg-green/10 flex items-center justify-center">
-                  <FTGIcon name={item.icon} size={24} className="text-ftg-green" />
+                  <FTGIcon name={SAFETY_ICONS[i % SAFETY_ICONS.length]} size={24} className="text-ftg-green" />
                 </div>
-                <p className="text-sm font-medium text-ftg-forest">{item.title}</p>
+                <p className="text-sm font-medium text-ftg-forest">{s.title}</p>
               </div>
             ))}
           </div>
@@ -324,18 +296,14 @@ export default function Home() {
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
-            <h2 className="section-title">讓旅程留下值得分享的成果</h2>
-            <p className="section-subtitle">三種成果延伸</p>
+            <h2 className="section-title">{t('home.resultsTitle')}</h2>
+            <p className="section-subtitle">{t('home.resultsSub')}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {[
-              { title: 'ESG Impact Note', desc: '彙整旅程亮點' },
-              { title: '年度活動規劃', desc: '整合年度旅遊活動' },
-              { title: '新聞報導與資源整合', desc: '提供 ESG 題材' },
-            ].map((item, i) => (
+            {t('home.resultList').map((r, i) => (
               <div key={i} className="bg-ftg-sand rounded-2xl p-6 hover:shadow-lg transition-shadow">
-                <h3 className="font-bold text-ftg-forest mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm">{item.desc}</p>
+                <h3 className="font-bold text-ftg-forest mb-2">{r.title}</h3>
+                <p className="text-gray-600 text-sm">{r.desc}</p>
               </div>
             ))}
           </div>

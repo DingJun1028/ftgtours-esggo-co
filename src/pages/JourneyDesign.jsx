@@ -1,24 +1,54 @@
 import { Link } from 'react-router-dom';
 import { usePageSeo } from '../utils/seo';
+import { useLanguage } from '../i18n/LanguageContext';
 import FTGIcon from '../components/FTGIcon';
 import CtaForm from '../components/CtaForm';
 
+// 5T-Tangible: 本頁原本整份文案硬編繁中，英文介面下仍顯示中文。
+// 上一版註解寫著「待補：將本頁文案抽入 translations.js」但從未補上，
+// 這裡正式接入 journeyDesign 命名空間。
+//
+// 另外原本 <CtaForm /> 沒有傳任何 props，CtaForm 內的深綠抬頭帶
+// （<h3>{ctaTitle}</h3>）會渲染成空的 — 等於一整塊空白深綠區。
+// 與 About.jsx 是同一類缺陷，兩處一併補齊（修類不修例）。
+
+const VALUES = [
+  { icon: 'leaf', titleKey: 'journeyDesign.v1Title', descKey: 'journeyDesign.v1Desc' },
+  { icon: 'users', titleKey: 'journeyDesign.v2Title', descKey: 'journeyDesign.v2Desc' },
+  { icon: 'sustainable', titleKey: 'journeyDesign.v3Title', descKey: 'journeyDesign.v3Desc' },
+];
+
+const STEPS = [
+  { icon: 'clipboard', titleKey: 'journeyDesign.p1Title', descKey: 'journeyDesign.p1Desc' },
+  { icon: 'map', titleKey: 'journeyDesign.p2Title', descKey: 'journeyDesign.p2Desc' },
+  { icon: 'users', titleKey: 'journeyDesign.p3Title', descKey: 'journeyDesign.p3Desc' },
+  { icon: 'navigation', titleKey: 'journeyDesign.p4Title', descKey: 'journeyDesign.p4Desc' },
+  { icon: 'award', titleKey: 'journeyDesign.p5Title', descKey: 'journeyDesign.p5Desc' },
+];
+
+const ADVANTAGES = [
+  { icon: 'mountain', titleKey: 'journeyDesign.w1Title', descKey: 'journeyDesign.w1Desc' },
+  { icon: 'compass', titleKey: 'journeyDesign.w2Title', descKey: 'journeyDesign.w2Desc' },
+  { icon: 'shield', titleKey: 'journeyDesign.w3Title', descKey: 'journeyDesign.w3Desc' },
+  { icon: 'link', titleKey: 'journeyDesign.w4Title', descKey: 'journeyDesign.w4Desc' },
+  { icon: 'sustainable', titleKey: 'journeyDesign.w5Title', descKey: 'journeyDesign.w5Desc' },
+];
+
 export default function JourneyDesign() {
-  // 5T-Tangible: 本頁為全繁中硬編，英文介面下此頁仍顯示中文，是全站唯一
-  // 未做語系切換的頁面。原先存在 `const { t } = useLanguage();` 但從未使用
-  // （oxlint no-unused-vars 警告），為避免誤以為已完成 i18n 接入而移除。
-  //
-  // 這段註解不寫行數：行數會隨註解自身增減而自我失效（上一版寫「144 行」
-  // 實際已是 147，且數字包含註解本身，屬於無法長期成立的自我引用）。
-  //
-  // 待補：將本頁文案抽入 translations.js 的 journeyDesign 命名空間。
-  // 注意 journeyDesign 命名空間目前尚未存在於 translations.js 的 zh/en。
+  const { t } = useLanguage();
+
   usePageSeo({
-    title: '了解墾趣旅程設計 | FTG TOURS',
-    description: '從需求訪談到成果交付，墾趣如何為企業設計兼顧員工福祉、團隊凝聚與永續行動的旅程',
+    title: t('journeyDesign.metaTitle'),
+    description: t('journeyDesign.metaDesc'),
     path: '/journey-design',
-    keywords: ['旅程設計', '企業旅遊規劃', '客製化行程', 'ESG 旅程'],
+    keywords: t('journeyDesign.keywords').split(','),
   });
+
+  const ctaFeatures = [
+    t('journeyDesign.ctaFeature1'),
+    t('journeyDesign.ctaFeature2'),
+    t('journeyDesign.ctaFeature3'),
+  ];
 
   return (
     <div>
@@ -32,13 +62,13 @@ export default function JourneyDesign() {
           {/* 5T-Tangible: 觸控區 >= 44px（WCAG 2.5.8）。text-sm 單行只有 ~24px，
               用 -my-2 抵銷 padding，視覺位置不變。 */}
           <Link to="/" className="inline-flex items-center gap-2 text-ftg-orange hover:text-white transition-colors mb-6 text-sm min-h-[44px] min-w-[44px] -my-2">
-            ← 返回首頁
+            {t('journeyDesign.backHome')}
           </Link>
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 font-serif leading-tight">
-            了解墾趣旅程設計
+            {t('journeyDesign.h1')}
           </h1>
           <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
-            從需求訪談到成果交付，我們協助企業把每一次戶外活動，轉化為員工福祉、團隊凝聚與永續行動的解方。
+            {t('journeyDesign.sub')}
           </p>
         </div>
       </section>
@@ -47,21 +77,17 @@ export default function JourneyDesign() {
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="section-title">墾趣的設計理念</h2>
-            <p className="section-subtitle">每一次旅程，都是一次創造價值的機會</p>
+            <h2 className="section-title">{t('journeyDesign.valuesTitle')}</h2>
+            <p className="section-subtitle">{t('journeyDesign.valuesSub')}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { icon: 'leaf', title: '自然為師', desc: '我們相信自然是最好的教室走進山林與海岸，讓參與者在真實情境中學習、感受、連結' },
-              { icon: 'users', title: '以人為本', desc: '旅程設計的出發點是人——理解團隊狀態、尊重個體差異、創造有溫度的共同體驗' },
-              { icon: 'sustainable', title: '永續行動', desc: '把 ESG 精神融入每個環節，讓旅程不只是消耗，而是對地方、環境與社會的投資' },
-            ].map((item, i) => (
+            {VALUES.map((item, i) => (
               <div key={i} className="text-center p-6 bg-ftg-sand rounded-2xl">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-ftg-green/10 flex items-center justify-center">
                   <FTGIcon name={item.icon} size={32} className="text-ftg-green" />
                 </div>
-                <h3 className="text-xl font-bold text-ftg-forest mb-3">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+                <h3 className="text-xl font-bold text-ftg-forest mb-3">{t(item.titleKey)}</h3>
+                <p className="text-gray-600 leading-relaxed">{t(item.descKey)}</p>
               </div>
             ))}
           </div>
@@ -72,30 +98,24 @@ export default function JourneyDesign() {
       <section className="section-padding bg-ftg-sand">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="section-title">墾趣的設計流程</h2>
-            <p className="section-subtitle">五個步驟，從需求到完成</p>
+            <h2 className="section-title">{t('journeyDesign.processTitle')}</h2>
+            <p className="section-subtitle">{t('journeyDesign.processSub')}</p>
           </div>
           <div className="max-w-4xl mx-auto">
-            {[
-              { num: 1, icon: 'clipboard', title: '需求理解與訪談', desc: '深入了解企業文化、目標、團隊狀態與預算期待透過訪談找出真正重要的核心需求' },
-              { num: 2, icon: 'map', title: '行程提案與規劃', desc: '依需求設計最合適的行程方案，包含場地選擇、活動設計、交通住宿整合' },
-              { num: 3, icon: 'users', title: '細節確認與溝通', desc: '與企業端逐一確認每個環節，包含人數調整、特殊需求、風險評估與應急預案' },
-              { num: 4, icon: 'navigation', title: '專業執行與現場帶領', desc: '專業領隊與活動引導人員現場執行，確保活動流暢、安全、達到預期效果' },
-              { num: 5, icon: 'award', title: '成果整理與回饋', desc: '活動後的回饋收集、照片整理、影響力摘要，讓旅程價值延續到組織內部' },
-            ].map((step, i) => (
+            {STEPS.map((step, i) => (
               <div key={i} className="flex gap-6 mb-8 last:mb-0">
                 <div className="flex-shrink-0">
                   <div className="w-14 h-14 rounded-full bg-ftg-forest text-white flex items-center justify-center text-xl font-bold shadow-lg">
-                    {step.num}
+                    {i + 1}
                   </div>
-                  {i < 4 && <div className="w-0.5 h-full bg-ftg-green/30 mx-auto mt-2"></div>}
+                  {i < STEPS.length - 1 && <div className="w-0.5 h-full bg-ftg-green/30 mx-auto mt-2"></div>}
                 </div>
                 <div className="pb-8">
                   <div className="flex items-center gap-3 mb-2">
                     <FTGIcon name={step.icon} size={24} className="text-ftg-green" />
-                    <h3 className="text-xl font-bold text-ftg-forest">{step.title}</h3>
+                    <h3 className="text-xl font-bold text-ftg-forest">{t(step.titleKey)}</h3>
                   </div>
-                  <p className="text-gray-600 leading-relaxed">{step.desc}</p>
+                  <p className="text-gray-600 leading-relaxed">{t(step.descKey)}</p>
                 </div>
               </div>
             ))}
@@ -107,23 +127,17 @@ export default function JourneyDesign() {
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="section-title">為什麼企業選擇墾趣</h2>
-            <p className="section-subtitle">五大優勢，讓旅程與眾不同</p>
+            <h2 className="section-title">{t('journeyDesign.whyTitle')}</h2>
+            <p className="section-subtitle">{t('journeyDesign.whySub')}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {[
-              { icon: 'mountain', title: '深耕戶外經驗', desc: '多年戶外導覽與旅遊經營經驗' },
-              { icon: 'compass', title: '專業路線設計', desc: '依據需求規劃最適合的旅程難度' },
-              { icon: 'shield', title: '完整旅行服務', desc: '合法旅行社、保險、交通一站式' },
-              { icon: 'link', title: '在地夥伴合作', desc: '在地夥伴合作，共創地方價值' },
-              { icon: 'sustainable', title: '永續行動實踐', desc: 'ESG Impact Note 成果摘要' },
-            ].map((item, i) => (
+            {ADVANTAGES.map((item, i) => (
               <div key={i} className="text-center p-4">
                 <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-ftg-green/10 flex items-center justify-center">
                   <FTGIcon name={item.icon} size={24} className="text-ftg-green" />
                 </div>
-                <h3 className="font-bold text-ftg-forest mb-2 text-sm">{item.title}</h3>
-                <p className="text-gray-600 text-xs">{item.desc}</p>
+                <h3 className="font-bold text-ftg-forest mb-2 text-sm">{t(item.titleKey)}</h3>
+                <p className="text-gray-600 text-xs">{t(item.descKey)}</p>
               </div>
             ))}
           </div>
@@ -135,18 +149,22 @@ export default function JourneyDesign() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 font-serif">讓團隊旅行，不只是出遊</h2>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 font-serif">{t('journeyDesign.ctaTitle')}</h2>
               <p className="text-lg md:text-xl text-gray-200 mb-8 leading-relaxed">
-                我們協助企業把每一次戶外活動，轉化為員工福祉、團隊凝聚與永續行動的解方。
+                {t('journeyDesign.ctaSub')}
               </p>
               <div className="flex items-center gap-4 text-gray-300 text-sm">
-                <div className="flex items-center gap-2"><FTGIcon name="shield" size={20} /> 合法旅行社</div>
-                <div className="flex items-center gap-2"><FTGIcon name="award" size={20} /> 專業帶領</div>
-                <div className="flex items-center gap-2"><FTGIcon name="heart" size={20} /> 全方位保障</div>
+                <div className="flex items-center gap-2"><FTGIcon name="shield" size={20} /> {t('journeyDesign.ctaFeature1')}</div>
+                <div className="flex items-center gap-2"><FTGIcon name="award" size={20} /> {t('journeyDesign.ctaFeature2')}</div>
+                <div className="flex items-center gap-2"><FTGIcon name="heart" size={20} /> {t('journeyDesign.ctaFeature3')}</div>
               </div>
             </div>
             <div className="bg-white rounded-2xl shadow-2xl p-8 text-gray-800">
-              <CtaForm />
+              <CtaForm
+                ctaTitle={t('journeyDesign.ctaBlockTitle')}
+                ctaSub={t('journeyDesign.ctaBlockSub')}
+                features={ctaFeatures}
+              />
             </div>
           </div>
         </div>

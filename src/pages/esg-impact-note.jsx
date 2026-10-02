@@ -38,9 +38,12 @@ function PhotoCard({ src, title, desc }) {
 function IconCard({ icon, title, desc }) {
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow flex flex-col h-full">
+      {/* 5T-Tangible：這裡原本是 bg-ftg-green 底卻給 icon text-ftg-green —— 同色相疊，
+          深綠線畫在深綠圓上等於隱形（空白綠圈）。圓底既然是實色深綠，線就必須反白。
+          FTGIcon 的 className 會覆寫父層 text-white，所以要改在 icon 自身上。 */}
       <div className="w-12 h-12 rounded-full bg-ftg-green text-white flex items-center justify-center text-2xl mb-4 shrink-0">
-                  <FTGIcon name={icon} size={28} className="text-ftg-green" />
-                </div>
+        <FTGIcon name={icon} size={28} className="text-white" />
+      </div>
       <h3 className="text-lg font-bold text-ftg-forest mb-2 leading-snug">{title}</h3>
       <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>
     </div>
@@ -122,8 +125,6 @@ export default function EsgImpactNote() {
     <div>
       <section className="subpage-hero">
         <img src="/images/esg-impact-note/ESG-Impact-Note-頁首大橫幅.webp" alt={t('products.impactNote')} className="subpage-hero__img" loading="lazy" />
-        <div className="subpage-hero__overlay"></div>
-        <div className="subpage-hero__dim"></div>
         <div className="subpage-hero__content">
           <Link to="/" className="text-ftg-orange hover:underline mb-3 sm:mb-4 inline-block font-medium inline-flex items-center min-h-[44px] min-w-[44px] -my-2">{t('nav.backHome')}</Link>
           <h1 className="subpage-hero__title">{t('products.impactNote')}</h1>

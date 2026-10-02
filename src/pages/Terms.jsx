@@ -9,7 +9,7 @@ import { COMPANY, POLICY_EFFECTIVE_DATE } from '../data/company';
 // 必備事項，消費者得據以主張權益。
 
 export default function Terms() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   usePageSeo({
     title: t('terms.title'),
     description: t('terms.metaDesc'),
@@ -45,7 +45,7 @@ export default function Terms() {
               <li>{t('privacy.licenseNo')}：{COMPANY.licenseNo}</li>
               <li>{t('privacy.assuranceNo')}：{COMPANY.assuranceNo}</li>
               <li>{t('privacy.representative')}：{COMPANY.representative}</li>
-              <li>{t('privacy.address')}：{COMPANY.address}</li>
+              <li>{t('privacy.address')}：{lang === 'en' ? COMPANY.addressEn : COMPANY.address}</li>
               <li>{t('privacy.phone')}：{COMPANY.phone}　{t('terms.fax')}：{COMPANY.fax}</li>
               <li>{t('privacy.email')}：{COMPANY.email}　{t('terms.line')}：{COMPANY.lineId}</li>
             </ul>

@@ -8,6 +8,23 @@ export default defineConfig({
     environment: 'happy-dom',
     globals: true,
     setupFiles: ['./vitest.setup.js'],
+    // 5T-Trustworthy: 給 happy-dom 一個真實 origin。
+    //
+    // 實測事故：happy-dom 預設 URL 是 'about:blank'，屬 opaque origin，
+    // window.localStorage 會是 undefined（不是空物件）。而本專案的
+    // LanguageContext 與 ErrorBoundary 都要讀 localStorage（'ftg_lang'），
+    // 於是 home.test.jsx 6 個測試在 beforeEach 的 localStorage.clear()
+    // 直接 TypeError 全滅 —— 測試紅燈跟產品行為無關，純粹是測試環境
+    // 缺了一個瀏覽器本來就有的 API。
+    //
+    // 修法是補齊環境，不是改測試去 mock 掉：給一個 https origin，
+    // localStorage/sessionStorage 就會照規格運作，日後要測語系持久化
+    // 也不用再 special-case。
+    environmentOptions: {
+      happyDOM: {
+        url: 'https://ftgtours.esggo.co',
+      },
+    },
     // 5T-Trustworthy: 必須排除本專案在用的備份/暫存目錄前綴。
     // 實測事故：專案根目錄有 .src-backup-*/ .src-pregradient-*/ .img-backup-*/
     // 這類備份時，vitest 的預設 glob 會把它們裡的 *.test.js 一併收進來，

@@ -128,8 +128,6 @@ export default function ExecutiveRetreat() {
     <div>
       <section className="subpage-hero">
         <img src="/images/executive-retreat/高階主管共識-頁首橫幅.webp" alt={t('products.executive')} className="subpage-hero__img" loading="lazy" />
-        <div className="subpage-hero__overlay"></div>
-        <div className="subpage-hero__dim"></div>
         <div className="subpage-hero__content">
           <Link to="/" className="text-ftg-orange hover:underline mb-4 inline-block font-medium inline-flex items-center min-h-[44px] min-w-[44px] -my-2">{t('nav.backHome')}</Link>
           <h1 className="subpage-hero__title">{t('products.executive')}</h1>

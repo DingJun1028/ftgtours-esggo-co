@@ -1,6 +1,33 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { FTGIcon } from './FTGIcon';
+
+// 5T-Tangible（2026-10-01）：行動版圓形圖示。
+//   原本手機選單每一項都是純文字，沒有任何圖示 —— 使用者回報
+//   「手機板還是沒看到圖示」。這裡為每個項目配上專屬圓形 icon badge，
+//   icon 名稱對應各產品線語意（不是隨便挑一個圖示湊數）。
+//
+// 注意：productLinks 必須留在元件內 —— 它呼叫 useLanguage() 的 t()，
+// 若提到模組層級會在 render 前就呼叫 hook，直接壞掉整個 Navbar。
+
+// 行動版圓形圖示容器：sand 圓底 + forest icon + 細邊框。
+// 5T-Tangible：圓框 40px、icon 22px，forest(#1a3c34) on sand(#f5f0e8)
+// 實測 8.9:1，遠高於 AA 非文字圖示的 3:1 下限。
+//
+// 這裡「底色」踩過一個坑：原本用 bg-white，但手機選單容器本身也是
+// bg-white —— 白底疊白底，圓形等於不存在，使用者回報「還是沒看到圖示」。
+// 改用 brand sand 後即使底色差只有 1.05:1，仍靠 border 讓圓形邊緣成立。
+function MobileIcon({ name, className = '' }) {
+  return (
+    <span
+      className={`shrink-0 w-10 h-10 rounded-full bg-ftg-sand border border-ftg-green/25 flex items-center justify-center ${className}`}
+      aria-hidden="true"
+    >
+      <FTGIcon name={name} size={22} className="text-ftg-forest" />
+    </span>
+  );
+}
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -9,12 +36,12 @@ export default function Navbar() {
   const { t, lang, setLang } = useLanguage();
 
   const productLinks = [
-    { path: '/corporate-travel', label: t('products.corpTravel') },
-    { path: '/family-day', label: t('products.familyDay') },
-    { path: '/esg-team-day', label: t('products.esgTeamDay') },
-    { path: '/wellbeing-retreat', label: t('products.wellbeing') },
-    { path: '/executive-retreat', label: t('products.executive') },
-    { path: '/esg-impact-note', label: t('products.impactNote') },
+    { path: '/corporate-travel', icon: 'users', label: t('products.corpTravel') },
+    { path: '/family-day', icon: 'heart', label: t('products.familyDay') },
+    { path: '/esg-team-day', icon: 'team', label: t('products.esgTeamDay') },
+    { path: '/wellbeing-retreat', icon: 'leaf', label: t('products.wellbeing') },
+    { path: '/executive-retreat', icon: 'award', label: t('products.executive') },
+    { path: '/esg-impact-note', icon: 'sustainable', label: t('products.impactNote') },
   ];
 
   return (
@@ -33,7 +60,7 @@ export default function Navbar() {
             <div className="relative group">
               <button className="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center rounded-md text-sm font-medium text-gray-700 hover:text-ftg-green">
                 {t('nav.products')}
-                <svg className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="ml-1 h-6 w-6 shrink-0 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
@@ -94,22 +121,25 @@ export default function Navbar() {
             且無法捲動到 → 等同手機掉項目。改為視口相對高度 + 可捲動。 */}
         <div className={`lg:hidden transition-all duration-300 ${mobileOpen ? 'max-h-[80vh] opacity-100 overflow-y-auto overscroll-contain' : 'max-h-0 opacity-0 overflow-hidden'}`}>
           <div className="pb-4 pt-2 border-t border-gray-100">
-            <Link to="/" className="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-ftg-green hover:bg-ftg-sand" onClick={() => setMobileOpen(false)}>
+            <Link to="/" className="flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-ftg-green hover:bg-ftg-sand min-h-[44px] min-w-[44px]" onClick={() => setMobileOpen(false)}>
+              <MobileIcon name="compass" />
               {t('nav.home')}
             </Link>
-            
+
             {/* Mobile Products accordion */}
             <div>
-              <button onClick={() => setMobileProducts(!mobileProducts)} className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-ftg-green hover:bg-ftg-sand">
+              <button onClick={() => setMobileProducts(!mobileProducts)} className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-ftg-green hover:bg-ftg-sand min-h-[44px] min-w-[44px]">
+                <MobileIcon name="mountain" />
                 {t('nav.products')}
-                <svg className={`h-4 w-4 transition-transform duration-200 ${mobileProducts ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className={`h-6 w-6 shrink-0 ml-auto transition-transform duration-200 ${mobileProducts ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
               <div className={`transition-all duration-300 ${mobileProducts ? 'max-h-[60vh] opacity-100 overflow-y-auto' : 'max-h-0 opacity-0 overflow-hidden'}`}>
                 <div className="pl-4 py-1">
                   {productLinks.map(link => (
-                    <Link key={link.path} to={link.path} className={`block px-4 py-2.5 min-h-[44px] inline-flex items-center rounded-lg text-sm ${location.pathname === link.path ? 'text-ftg-green bg-ftg-sand font-semibold' : 'text-gray-600 hover:text-ftg-green hover:bg-ftg-sand'}`} onClick={() => setMobileOpen(false)}>
+                    <Link key={link.path} to={link.path} className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm min-h-[44px] ${location.pathname === link.path ? 'text-ftg-green bg-ftg-sand font-semibold' : 'text-gray-600 hover:text-ftg-green hover:bg-ftg-sand'}`} onClick={() => setMobileOpen(false)}>
+                      <MobileIcon name={link.icon} className="w-9 h-9" />
                       {link.label}
                     </Link>
                   ))}

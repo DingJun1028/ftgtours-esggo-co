@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+import FTGIcon from './FTGIcon';
 // 5T-Trustworthy: 索取簡報的寄信目標自 SSOT 讀取，避免寄到不存在的信箱。
 import { COMPANY } from '../data/company';
 
@@ -67,8 +68,8 @@ export default function CtaForm({ ctaTitle, ctaSub, features }) {
         <div className="px-6 sm:px-10 pt-6 pb-2">
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
             {features.map((f, i) => (
-              <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-ftg-cream text-ftg-forest text-xs sm:text-sm font-medium">
-                <svg className="w-3.5 h-3.5 text-ftg-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span key={i} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-ftg-cream text-ftg-forest text-xs sm:text-sm font-medium">
+                <FTGIcon name="check" size={18} className="text-ftg-green" />
                 {f}
               </span>
             ))}
@@ -79,27 +80,27 @@ export default function CtaForm({ ctaTitle, ctaSub, features }) {
       {/* Form */}
       <form onSubmit={handleSubmit} className="px-6 sm:px-10 py-8 sm:py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formCompany')}</label>
             <input name="company" value={form.company} onChange={handleChange} required placeholder={t('contact.formCompanyPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
           </div>
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formContact')}</label>
             <input name="contact_name" value={form.contact_name} onChange={handleChange} required placeholder={t('contact.formContactPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
           </div>
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formEmail')}</label>
             <input name="email" type="email" value={form.email} onChange={handleChange} required placeholder={t('contact.formEmailPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
           </div>
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formPhone')}</label>
             <input name="phone" value={form.phone} onChange={handleChange} placeholder={t('contact.formPhonePlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
           </div>
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formParticipants')}</label>
             <input name="participants" value={form.participants} onChange={handleChange} placeholder={t('contact.formParticipantsPlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
           </div>
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formActivityType')}</label>
             <select name="activity_type" value={form.activity_type} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base">
               <option value="">{t('contact.formSelectOption')}</option>
@@ -112,11 +113,11 @@ export default function CtaForm({ ctaTitle, ctaSub, features }) {
               <option value="other">{t('contact.otherOption')}</option>
             </select>
           </div>
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formDate')}</label>
-            <input name="preferred_date" type="date" value={form.preferred_date} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
+            <input name="preferred_date" type="date" value={form.preferred_date} onChange={handleChange} className="w-full min-w-0 max-w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
           </div>
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm font-semibold text-ftg-forest mb-2">{t('contact.formMessage')}</label>
             <input name="message" value={form.message} onChange={handleChange} placeholder={t('contact.formMessagePlaceholder')} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-ftg-green focus:border-ftg-green outline-none transition text-base" />
           </div>

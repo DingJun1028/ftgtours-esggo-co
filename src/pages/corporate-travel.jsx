@@ -114,8 +114,6 @@ export default function CorporateTravel() {
     <div>
       <section className="subpage-hero">
         <img src="/images/corporate-travel/企業員工旅遊-頁首大橫幅.webp" alt={t('products.corpTravel')} className="subpage-hero__img" loading="lazy" />
-        <div className="subpage-hero__overlay"></div>
-        <div className="subpage-hero__dim"></div>
         <div className="subpage-hero__content">
           <Link to="/" className="text-ftg-orange hover:underline mb-3 md:mb-4 inline-block font-medium text-sm md:text-base inline-flex items-center min-h-[44px] min-w-[44px] -my-2">{t('nav.backHome')}</Link>
           <h1 className="subpage-hero__title">{t('products.corpTravel')}</h1>
