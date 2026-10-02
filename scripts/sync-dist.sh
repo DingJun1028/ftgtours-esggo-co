@@ -17,10 +17,13 @@ STAGE="$REPO/.deploy-stage"
 SSH_TARGET="${FTG_SSH_TARGET:-esggo-vps}"
 REMOTE_DIR="${FTG_REMOTE_DIR:-/var/www/ftgtours/}"
 SSH_OPTS="${FTG_SSH_OPTS:--o ConnectTimeout=20}"
+# 線上驗收對象。與 REMOTE_DIR 分開設定，因為「部署到哪」與「驗收哪」是
+# 兩件事 —— 前者是檔案系統路徑，後者是使用者實際看到的網址。
+LIVE_URL="${FTG_LIVE_URL:-https://ftgtours.esggo.co}"
 
 [ -d "$DIST" ] || { echo "找不到 dist/，請先 npm run build" >&2; exit 1; }
 
-echo "== 1/3 依 dist 實際引用挑出要部署的檔案 =="
+echo "== 1/4 依 dist 實際引用挑出要部署的檔案 =="
 rm -rf "$STAGE"
 mkdir -p "$STAGE"
 
@@ -80,7 +83,7 @@ PY
 
 COUNT=$(find "$STAGE" -type f | wc -l | tr -d ' ')
 SIZE=$(du -sh "$STAGE" | cut -f1)
-echo "== 2/3 部署包 = $COUNT 檔 / $SIZE =="
+echo "== 2/4 部署包 = $COUNT 檔 / $SIZE =="
 
 # 為什麼用 tar 串流而不是 rsync：本機 Git-Bash 沒有 rsync（只有 tar），
 # 而遠端有。裝 Windows 版 rsync 得額外開啟 delta-transfer 等功能鍵，
@@ -90,7 +93,7 @@ echo "== 2/3 部署包 = $COUNT 檔 / $SIZE =="
 # 若把 --rsync-path 設成 sudo rsync，密碼提示會在非互動模式失敗。
 # 所以先解到 ubuntu 家目錄（可寫），再由遠端 sudo 在就地搬移。
 REMOTE_STAGE="${FTG_REMOTE_STAGE:-ftg-stage}"
-echo "== 3/3 串流解壓 → $SSH_TARGET:~\$HOME/$REMOTE_STAGE（ubuntu 可寫區）=="
+echo "== 3/4 串流解壓 → $SSH_TARGET:~\$HOME/$REMOTE_STAGE（ubuntu 可寫區）=="
 tar -czf - -C "$STAGE" . | ssh $SSH_OPTS "$SSH_TARGET" \
   "mkdir -p ~\$HOME/$REMOTE_STAGE && tar -xzf - -C ~\$HOME/$REMOTE_STAGE"
 
@@ -101,3 +104,53 @@ ssh $SSH_OPTS "$SSH_TARGET" \
 REMOTE_COUNT=$(ssh $SSH_OPTS "$SSH_TARGET" "sudo -n find '$REMOTE_DIR' -type f | wc -l" | tr -d ' ')
 echo "完成。遠端檔案數：$REMOTE_COUNT（預期 $COUNT）"
 [ "$REMOTE_COUNT" = "$COUNT" ] || { echo "  ! 遠端檔案數與部署包不符，請檢查" >&2; exit 1; }
+
+# ---------------------------------------------------------------------------
+# 第 4 段：線上渲染實證。
+#
+# 為什麼這一段必要，不是「多此一舉」：
+#   本案是 HashRouter + nginx SPA fallback，任何字串路徑都回 200，
+#   連不存在的路徑也是。遠端檔案數相符只證明「檔案送到了」，
+#   完全不證明「React 真的 render 出來」。過去「部署成功」與
+#   「線上可用」因此脫節過 —— 這正是本段存在的理由。
+#
+# 可用 --skip-verify 跳過（僅限離線準備）。
+# 正式對外發布不可跳過：未驗收不對外。
+# ---------------------------------------------------------------------------
+if [ "${SKIP_VERIFY:-0}" = "1" ] || [ "${1:-}" = "--skip-verify" ]; then
+  echo ""
+  echo "== 4/4 略過線上驗收（--skip-verify）=="
+  echo "   ! 尚未對正式域名做渲染實測，部署不等於可用。"
+  exit 0
+fi
+
+echo ""
+echo "== 4/4 線上渲染實證（$LIVE_URL）=="
+PYBIN=""
+for CAND in python3 python; do
+  if command -v "$CAND" >/dev/null 2>&1 && "$CAND" -c "import playwright" >/dev/null 2>&1; then
+    PYBIN="$CAND"; break
+  fi
+done
+if [ -z "$PYBIN" ]; then
+  # Windows 開發機的 playwright 常在 venv，不在 PATH。
+  for CAND in "$LOCALAPPDATA/Temp/pwenv/Scripts/python.exe" ".venv/Scripts/python.exe"; do
+    if [ -f "$CAND" ] && "$CAND" -c "import playwright" >/dev/null 2>&1; then
+      PYBIN="$CAND"; break
+    fi
+  done
+fi
+
+if [ -z "$PYBIN" ]; then
+  echo "  ! 找不到可用的 playwright，未能線上驗收" >&2
+  echo "    安裝：python -m pip install playwright && python -m playwright install chromium" >&2
+  exit 1
+fi
+
+if ! "$PYBIN" scripts/verify_live_render.py --base "$LIVE_URL"; then
+  echo "" >&2
+  echo "  ! 線上驗收未通過。檔案已部署，但站點不可視為可用。" >&2
+  exit 1
+fi
+echo ""
+echo "部署 + 線上驗收 全部通過。"
