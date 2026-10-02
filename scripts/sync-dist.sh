@@ -88,16 +88,20 @@ if os.path.isdir(d):
 
 # 引用數與實際複製數必須一致——不一致代表正則漏抓或 dist 沒建置完，
 # 那種情況下寧可部署失敗也不要靜默送出缺圖的站點。
-# 期望值 = 引用圖 + og-image.png + 實際複製的根目錄靜態檔數。
+# 期望值 = 引用圖 + 實際複製的 og-image + 實際複製的根目錄靜態檔數。
+# 兩者都必須與上面的複製迴圈同一條件（os.path.isfile），不可無條件 +
+# 1：dist 若真的沒有 og-image.png，無條件加會讓 expected 比實際多 1，
+# 診斷訊息會把排查方向誤導成「引用數不符」而不是「og-image 不見」。
 STATIC_FILES = ['favicon.svg', 'icons.svg', 'robots.txt', 'CNAME',
                 'sitemap.xml']
 n_static = sum(1 for e in STATIC_FILES
                if os.path.isfile(os.path.join(dist, e)))
-expected = len(refs) + 1 + n_static   # +1 = og-image.png
+n_og = 1 if os.path.isfile(os.path.join(dist, 'og-image.png')) else 0
+expected = len(refs) + n_og + n_static
 if copied != expected:
-    print('  ! 引用 %d 條 + og-image + %d 個根目錄靜態檔 = 期望 %d，'
+    print('  ! 引用 %d 條 + og-image %d + 根目錄靜態檔 %d = 期望 %d，'
           '實際複製 %d — 中止部署'
-          % (len(refs), n_static, expected, copied))
+          % (len(refs), n_og, n_static, expected, copied))
     sys.exit(1)
 
 # 「數字自洽」擋不住「掃描範圍本身就不對」。所以再加一道絕對下限：
